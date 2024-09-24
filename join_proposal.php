@@ -34,8 +34,8 @@
                 <td>".$row['name']."</td>
                 <td>".$row['description']."</td>
                 <td>".$row['status']."</td>
-                <td><a href='editjoin_propsal.php?idteam=".$row['idjoin_proposal']."'>Ubah Data</a></td>
-                <td><a href='deletejoin_proposal.php?idteam=".$row['idjoin_proposal']."'>Hapus Data</a></td>
+                <td><a href='editjoin_proposal.php?idjoin_proposal=".$row['idjoin_proposal']."'>Ubah Data</a></td>
+                <td><a href='deletejoin_proposal.php?idjoin_proposal=".$row['idjoin_proposal']."'>Hapus Data</a></td>
             </tr>";
         }
         echo "</table>";
