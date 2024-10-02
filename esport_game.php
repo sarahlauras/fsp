@@ -33,11 +33,9 @@
 
     echo "</table>";
 
-    echo "<a href='esport_insertgame.php'>Insert Game</a>";
-
-
     $mysqli->close();
         ?>
 
+    <a href='esport_insertgame.php'>Insert Game</a>
     </body>
 </html>

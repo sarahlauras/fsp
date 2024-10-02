@@ -1,25 +1,27 @@
 <?php
-    $mysqli = new mysqli("localhost", "root","","esport");
-    if($mysqli -> connect_errno) {
-        echo "Koneksi database gagal: " . $mysqli->connect_error;
-        exit();
-    }
-    if($_POST['btnSubmit']) { 
+    require_once 'classevent.php';
+
+    $event = new Event();
+    if(isset($_POST['btnSubmit'])) { 
         extract($_POST);
+        if (isset($name, $date, $description)) {
+            $arr_col = [
+                'name' => $name,
+                'date' => $date,
+                'description' => $description
+            ];
 
-        $stmt = $mysqli->prepare(
-            "INSERT INTO event(name, date, description)
-            VALUES(?,?,?)");
-        $stmt->bind_param("sss", $name, $date, $description);
-        $stmt->execute();
+            $last_id = $event->insertEvent($arr_col);
 
-        $jumlah = $stmt->affected_rows;
-        $last_id = $mysqli->insert_id;
-
-
-        $stmt->close();
+            if ($last_id) {
+                // Redirect setelah sukses
+                header("Location: esport_event.php?result=success");
+                exit();
+            }
+        }
+    }   
+    else {
+        header("Location:esport_event.php?result=error");
     }
-
-    $mysqli->close();
-    header("Location:esport_event.php?result=success");
+    
 ?>

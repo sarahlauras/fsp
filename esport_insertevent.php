@@ -10,8 +10,6 @@
             }
         }
 
-        $id = $_GET["idevent"];
-
         //koneksi database
         $mysqli = new mysqli("localhost", "root","","esport");
         if($mysqli -> connect_errno) {

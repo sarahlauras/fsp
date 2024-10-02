@@ -37,10 +37,8 @@
     
     echo "</table>";
 
-    echo "<a href='esport_insertevent.php?'>Insert Data</a>";
-
     $mysqli->close();
         ?>
-
+    <a href='esport_insertevent.php?'>Insert Data</a>
     </body>
 </html>
