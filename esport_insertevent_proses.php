@@ -14,14 +14,16 @@
             $last_id = $event->insertEvent($arr_col);
 
             if ($last_id) {
-                // Redirect setelah sukses
                 header("Location: esport_event.php?result=success");
                 exit();
+            }
+            else {
+                echo "Error";
             }
         }
     }   
     else {
-        header("Location:esport_event.php?result=error");
+        echo "Tidak ada data";
     }
     
 ?>

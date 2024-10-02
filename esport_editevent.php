@@ -4,27 +4,32 @@
 </head>
 <body>
     <?php
+
+        require_once 'classevent.php';
+        $event = new Event();
+        
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {
                 echo "Data berhasil ditambahkan.<br><br>";
             }
         }
 
+
         $id = $_GET["idevent"];
 
-        //koneksi database
-        $mysqli = new mysqli("localhost", "root","","esport");
-        if($mysqli -> connect_errno) {
-            echo "Koneksi database gagal: " . $mysqli->connect_error;
-            exit();
-        }
-        
-        $stmt = $mysqli->prepare("SELECT * FROM event WHERE idevent=?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $res = $stmt->get_result();
+        if (isset($_GET["idevent"])) {
+            $id = $_GET["idevent"];
 
-        $row = $res->fetch_assoc(); //untuk ngambil row pertama
+            $stmt = $event->getEventById($id);
+
+            if ($stmt && $stmt->num_rows > 0) {
+                $row = $stmt->fetch_assoc(); 
+            } else {
+                echo "Event tidak ditemukan.";
+            }
+        } else {
+            echo "ID event tidak ditemukan.";
+        }
 
     ?>
     <form action="esport_editevent_proses.php" method="post">

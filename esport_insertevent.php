@@ -4,22 +4,14 @@
 </head>
 <body>
     <?php
+        require_once 'classevent.php';
+        $event = new Event();
+
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {
                 echo "Data berhasil ditambahkan.<br><br>";
             }
         }
-
-        //koneksi database
-        $mysqli = new mysqli("localhost", "root","","esport");
-        if($mysqli -> connect_errno) {
-            echo "Koneksi database gagal: " . $mysqli->connect_error;
-            exit();
-        }
-        
-        $stmt = $mysqli->prepare("SELECT * FROM event");
-        $stmt->execute();
-        $res = $stmt->get_result(); #hasil dari $smt
 
     ?>
     <form action="esport_insertevent_proses.php" method="post">

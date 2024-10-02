@@ -5,15 +5,9 @@
     </head>
     <body>
         <?php 
-        $mysqli = new mysqli("localhost", "root","","esport");
-        if($mysqli -> connect_errno) {
-            echo "Koneksi database gagal: " . $mysqli->connect_error;
-            exit();
-        }
-
-        $stmt = $mysqli->prepare("SELECT * FROM event"); 
-        $stmt->execute();
-        $res = $stmt->get_result();
+        require_once 'classevent.php';
+        $event = new Event();
+        $res = $event->getAllEvent();
 
         echo "<table border='1'>";
         echo "<tr>
@@ -31,13 +25,12 @@
         <td>".$formatrilis."</td>
         <td>".$row['description']."</td>
         <td><a href='esport_editevent.php?idevent=".$row['idevent']."'>Ubah Data</a></td>
-        <td><a href='esport_deleteevent.php?idevent=".$row['idevent']."'>Hapus Data</a></td>
+        <td><a href='esport_deleteevent.php?idevent=".$row['idevent']."' onclick='return confirm(\"Apakah Anda yakin ingin menghapus event ini?\");'>Hapus Data</a></td>
         </tr>";
     }
     
     echo "</table>";
 
-    $mysqli->close();
         ?>
     <a href='esport_insertevent.php?'>Insert Data</a>
     </body>

@@ -6,32 +6,7 @@
             parent::__construct();
         }
 
-        // public function getEvent($keyword_judul, $limit=null) {
-        //     $sql = "SELECT * FROM movie WHERE judul LIKE ?";
-            
-        //     if(!is_null($offset)) {
-        //         $sql .= " LIMIT ?,?";
-        //     }
-
-        //     $stmt = $this->mysqli->prepare($sql);
-        //     $keyword = "%{$keyword_judul}%";
-        //     if(!is_null($offset)) {
-        //         $stmt->bind_param("sii", $keyword, $offset, $limit);
-        //     } else {
-        //         $stmt->bind_param("s", $keyword);
-        //     }
-
-        //     $stmt->execute();
-        //     $result = $stmt->get_result();
-        //     return $result;
-        // }
-
-        // public function getTotalData ($keyword_judul) {
-        //     $res=$this->getMovie($keyword_judul);
-        //     return $res->num_rows;
-        // }
-
-        public function insertEvent($arr_col) {
+        public function insertEvent($arr_col) { //insert
             $sql = "INSERT INTO event (name, date, description)
             VALUES (?,?,?)";
             $stmt = $this->mysqli->prepare($sql);
@@ -40,8 +15,38 @@
             return $this->mysqli->insert_id;
         }
 
-        public function getAllEvent() {
+        public function getAllEvent() { //tampil
+            $stmt = $this->mysqli->prepare("SELECT * FROM event");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result;
+        }
 
+        public function getEventById($idevent) {
+            $stmt = $this->mysqli->prepare("SELECT * FROM event WHERE idevent=?");
+            $stmt->bind_param("i", $idevent);
+            $stmt->execute();
+            return $stmt->get_result(); // Mengembalikan hasil untuk di-fetch
+        }
+
+        public function editEvent($name, $date, $description, $idevent) {
+            $stmt = $this->mysqli->prepare(
+                "UPDATE event SET name=?, date=?, description=?
+                WHERE idevent=?");
+            $stmt->bind_param("sssi", $name, $date, $description, $idevent);
+            $stmt->execute();
+            $jumlah = $stmt->affected_rows;
+            $stmt->close();
+            return $jumlah;
+        }
+
+        public function deleteEvent($idevent) {
+            $stmt = $this->mysqli->prepare("DELETE FROM event WHERE idevent=?");
+            $stmt->bind_param("i", $idevent);
+            $stmt->execute();
+            $jumlah = $stmt->affected_rows;
+            $stmt->close();
+            return $jumlah;
         }
     }
 ?>
