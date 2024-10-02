@@ -7,36 +7,34 @@
 </head>
 <body>
     <?php
-        //copas koneksi db
-        $mysqli = new mysqli("localhost", "root", "", "esport");
-        if($mysqli->connect_errno){ //kalau ada nilai selain 0, maka ada KEGAGALAN KONEKSI
-            echo "Koneksi database gagal: ".$mysqli->connect_error;
-            exit();
-        }
+        require_once 'classteam.php';
+
+        $team = new Team();
         // Ambil nilai dari form
         $idgame = $_POST['game'];
         $namegame = $_POST['name'];
+
         //BACA DARI DOLLAR POST
         if(isset($_POST['btnSubmit'])){
             extract($_POST); //auto membuat variable dengan nilai" yang sama
 
-            $stmt = $mysqli->prepare("INSERT INTO team(idgame, name) VALUES(?,?)");
-            $stmt->bind_param("is", $idgame, $namegame); //harus sama persis sama di form
-            $stmt->execute();
-            $jumlah = $stmt->affected_rows; //jumlah data yang kena dampak, affected_rows adalah properti
-            $last_id = $stmt->insert_id; //karna id auto increment
-
-            $stmt->close();
-
-            if ($stmt->affected_rows > 0) {
-                // Berhasil disimpan
-                header("Location: insertteam.php?result=success");
-            } else {
-                echo "Gagal menyimpan data.";
+            if (isset($idgame, $namegame)) {
+                $arr_col = [
+                    'idgame' => $idgame,
+                    'name' => $namegame
+                ];
+    
+                $last_id = $team->insertTeam($arr_col);
+    
+                if ($last_id) {
+                    header("Location: team.php?result=success");
+                    exit();
+                }
+                else {
+                    echo "Error";
+                }
             }
         }
-        //TUTUP KONEKSI 
-        $mysqli->close();
         //setelah semua ter-run, form auto memindahkan user ke halalman insertmovie.php
         header("Location: insertteam.php?result=success");     
                 

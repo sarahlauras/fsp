@@ -14,7 +14,6 @@
             }
         }
 
-
         $id = $_GET["idevent"];
 
         if (isset($_GET["idevent"])) {

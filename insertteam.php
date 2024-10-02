@@ -6,7 +6,11 @@
     <title>Insert Team</title>
 </head>
 <body>
-    <?php //akan mereturn saat $_GET ada dan tidak null
+    <?php 
+        require_once 'classteam.php';
+        $team = new Team();
+
+        //akan mereturn saat $_GET ada dan tidak null
         if(isset($_GET["result"])){
             if($_GET["result"] == "success"){
                 //melihat di url nya apakah ada result dan bernilai succes?
