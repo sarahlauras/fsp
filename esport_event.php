@@ -10,10 +10,6 @@
             echo "Koneksi database gagal: " . $mysqli->connect_error;
             exit();
         }
-        else{
-            echo "Koneksi database berhasil";
-            echo"<br>";
-        }
 
         $stmt = $mysqli->prepare("SELECT * FROM event"); 
         $stmt->execute();
@@ -35,13 +31,13 @@
         <td>".$formatrilis."</td>
         <td>".$row['description']."</td>
         <td><a href='esport_editevent.php?idevent=".$row['idevent']."'>Ubah Data</a></td>
-        <td><a href='esport_insertevent.php?idevent=".$row['idevent']."'>Insert Data</a></td>
         <td><a href='esport_deleteevent.php?idevent=".$row['idevent']."'>Hapus Data</a></td>
         </tr>";
     }
     
-
     echo "</table>";
+
+    echo "<a href='esport_insertevent.php?'>Insert Data</a>";
 
     $mysqli->close();
         ?>
