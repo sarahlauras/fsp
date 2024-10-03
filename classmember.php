@@ -6,26 +6,16 @@
             parent::__construct();
         }
 
-        public function doLogin($username, $password){
-            $sql = "SELECT * FROM member WHERE username =?";
-            $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param("s", $username);
+        public function getMember() { 
+            $stmt = $this->mysqli->prepare("SELECT * FROM member");
             $stmt->execute();
             $result = $stmt->get_result();
+            return $result;
+        }
 
-            if($result->num_rows>0){
-                $row = $result->fetch_assoc();
-
-                if(password_verify($password, $row['password'])){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            else{
-                return false;
-            }
+        public function getTotalData(){
+            $res = $this->getMember();
+            return $res->num_rows;
         }
 
         public function insertMember($arr_col) {
@@ -39,6 +29,25 @@
     
             return $this->mysqli->affected_rows;
         }
+        public function editMember($fname, $lname, $username, $password, $profile) {
+            $stmt = $this->mysqli->prepare(
+                "UPDATE member SET fname=?, lname=?, username=?, password=?, profile=?
+                WHERE idmember=?");
+            $stmt->bind_param("sssss", $fname, $lname, $username, $password, $profile, $idmember);
+            $stmt->execute();
+            $jumlah = $stmt->affected_rows;
+            $stmt->close();
+            return $jumlah;
+        }
+        public function deleteEvent($idevent) {
+            $stmt = $this->mysqli->prepare("DELETE FROM event WHERE idevent=?");
+            $stmt->bind_param("i", $idevent);
+            $stmt->execute();
+            $jumlah = $stmt->affected_rows;
+            $stmt->close();
+            return $jumlah;
+        }
+
         
     }
 ?>
