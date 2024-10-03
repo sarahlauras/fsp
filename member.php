@@ -27,20 +27,18 @@
         </style>
     </head>
     <body>
-        <h1>MEMBER</h1>
+        <h1>DAFTAR MEMBER</h1>
         <div id="kiri">
             <ul>
-                <li><a href="#">Daftar Member</a></li>
                 <li><a href="#">Daftar Team</a></li>
                 <li><a href="#">Daftar Game</a></li>
             </ul>
         </div>
         <div id="kanan">
-            <h2>Daftar Member</h2>
             <?php 
                 $member = new Member();
                 $totaldata = 0;
-                $perhalaman = 3;       
+                $perhalaman = 4;       
                 $currenthalaman = 1;
 
                 if(isset($_GET['offset'])) { 
@@ -48,13 +46,8 @@
                     $currenthalaman = ($_GET['offset']/$perhalaman)+1;
                 } else { $offset = 0; }
                 
-                if(isset($_GET["judul"])) {
-                    $res = $member->getMember($offset, $perhalaman);
-                    $totaldata = $member->getTotalData($_GET["judul"]);
-                } else {
-                    $res = $member->getMember($offset, $perhalaman);
-                    $totaldata = $member->getTotalData("");
-                }       
+                $res = $member->getMember($offset, $perhalaman);
+                $totaldata = $member->getTotalData();
 
                 $jumlahhalaman = ceil($totaldata/$perhalaman);
 

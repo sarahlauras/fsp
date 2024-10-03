@@ -6,11 +6,19 @@
             parent::__construct();
         }
 
-        public function getMember() { 
-            $stmt = $this->mysqli->prepare("SELECT * FROM member");
+        public function getMember($offset=null, $limit=null) { 
+            $sql = "SELECT * FROM member";
+
+            if (!is_null($offset) && !is_null($limit)) {
+                $sql .= " LIMIT ?, ?";
+            }
+            $stmt = $this->mysqli->prepare($sql);
+            if (!is_null($offset) && !is_null($limit)) {
+                $stmt->bind_param('ii', $offset, $limit);
+            }
             $stmt->execute();
-            $result = $stmt->get_result();
-            return $result;
+            $res = $stmt->get_result();
+            return $res;
         }
 
         public function getTotalData(){
@@ -39,7 +47,7 @@
             $stmt->close();
             return $jumlah;
         }
-        public function deleteEvent($idevent) {
+        public function deleteMember($idmember) {
             $stmt = $this->mysqli->prepare("DELETE FROM event WHERE idevent=?");
             $stmt->bind_param("i", $idevent);
             $stmt->execute();
