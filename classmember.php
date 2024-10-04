@@ -44,19 +44,19 @@
     
             return $this->mysqli->affected_rows;
         }
-        public function editMember($fname, $lname, $username, $password, $profile) {
+        public function editMember($fname, $lname, $username, $password, $profile, $idmember) {
             $stmt = $this->mysqli->prepare(
                 "UPDATE member SET fname=?, lname=?, username=?, password=?, profile=?
                 WHERE idmember=?");
-            $stmt->bind_param("sssss", $fname, $lname, $username, $password, $profile, $idmember);
+            $stmt->bind_param("sssssi", $fname, $lname, $username, $password, $profile, $idmember);
             $stmt->execute();
             $jumlah = $stmt->affected_rows;
             $stmt->close();
             return $jumlah;
         }
         public function deleteMember($idmember) {
-            $stmt = $this->mysqli->prepare("DELETE FROM event WHERE idevent=?");
-            $stmt->bind_param("i", $idevent);
+            $stmt = $this->mysqli->prepare("DELETE FROM member WHERE idmember=?");
+            $stmt->bind_param("i", $idmember);
             $stmt->execute();
             $jumlah = $stmt->affected_rows;
             $stmt->close();

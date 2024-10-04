@@ -38,6 +38,8 @@
         <input  type="text" id="lname" name="lname" value="<?php echo $row["lname"]; ?>"><br><br>
         <label for="username">Username: </label>
         <input type="username" name="username" value="<?php echo $row["username"]; ?>"><br><br>
+        <label for="password">Password: </label>
+        <input type="password" name="password" value="<?php echo $row["password"]; ?>"><br><br>
         <label>Profile</label>
         <select id="profile" name="profile">
             <option value="admin" <?php if($row['profile'] == "admin") echo 'selected'; ?>>Admin</option>

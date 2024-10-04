@@ -67,7 +67,7 @@
                             <td>".$row['profile']."</td>
                             <td>
                                 <a href='editmember.php?idmember=".$row['idmember']."'>Ubah Data</a> 
-                                <a href='hapusmember.php?idmember=".$row['idmember']."'>Hapus Data</a>
+                                <a href='deletemember.php?idmember=".$row['idmember']."'>Hapus Data</a>
                             </td>
                         </tr>";
                 }
