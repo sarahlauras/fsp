@@ -40,7 +40,7 @@
             }
     </style>
     <body>
-        <form method="post" action="">
+        <form method="post" action="insertevent_teams_proses.php">
             <label for="event">Pilih Event dan Team</label>
             <?php
                 $resEvent = $event->getAllEvent();
@@ -111,6 +111,8 @@ crossorigin="anonymous"></script>
                     $("tbody").append(html);
                 }
                 jumlaheventteams++;
+                eventvalue = $('#event').val("");
+                teamvalue = $('#team').val("");
             }
         });
 
@@ -118,6 +120,9 @@ crossorigin="anonymous"></script>
             console.log("remove");
             jumlaheventteams--;
             $(this).parent().parent().remove();
+            if(jumlaheventteams == 0) {
+                $("tbody").html('<tr id="noEventTeams"><td colspan="3">Belum Ada Event Teams</td></tr>');
+            }
         });
 
         $(document).ready(function() {
