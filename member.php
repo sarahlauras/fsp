@@ -78,7 +78,6 @@
                 echo "<div>Total Data: ".$totaldata."</div>";
                 echo "<a href='member.php?offset=0'>First</a>";
                 
-
                 for($i = 1; $i <= $jumlahhalaman; $i++) {
                     $off = ($i-1) * $perhalaman;
                     if($currenthalaman == $i) {                
