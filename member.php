@@ -32,6 +32,9 @@
             <ul>
                 <li><a href="#">Daftar Team</a></li>
                 <li><a href="#">Daftar Game</a></li>
+                <li><a href="#">Daftar Join Proposal</a></li>
+                <li><a href="#">Daftar Event</a></li>
+                <li><a href="#">Daftar Achievement</a></li>
             </ul>
         </div>
         <div id="kanan">

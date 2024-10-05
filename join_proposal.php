@@ -6,46 +6,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Proposal</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Movie</title>
+        <style>
+            .text_merah {
+                color: red;
+            }
+
+            #kiri {
+                display: inline-block;
+                width: 200px;
+            }
+
+            #kanan {
+                display: inline-block;
+                min-width: 800px;
+            }
+
+            body {
+                margin-left:auto;
+                margin-right:auto;
+                width: 1200px;
+            }
+        </style>
 </head>
 <body>
-    
-    <?php
-        //KONEKSI DATABASE
-        $mysqli = new mysqli("localhost", "root", "", "esport");
-        if($mysqli->connect_errno){ //kalau ada nilai selain 0, maka ada KEGAGALAN KONEKSI
-            echo "Koneksi database gagal: ".$mysqli->connect_error;
-            exit();
-        }
-        //MEMBUAT PERINTAH SELECT ALL MOVIE
-        $stmt = $mysqli->prepare("SELECT jp.idjoin_proposal, m.fname, t.name, jp.description, jp.status FROM join_proposal jp INNER JOIN
-                                  member m ON jp.idmember = m.idmember INNER JOIN team t ON jp.idteam = t.idteam"); //prepare mencegah sql injection
-        $stmt->execute(); 
-        $res = $stmt->get_result(); 
+    <h1>DAFTAR JOIN PROPOSAL</h1>
+    <div id="kiri">
+        <ul>
+            <li><a href="#">Daftar Team</a></li>
+            <li><a href="#">Daftar Game</a></li>
+            <li><a href="#">Daftar Join Proposal</a></li>
+            <li><a href="#">Daftar Event</a></li>
+            <li><a href="#">Daftar Achievement</a></li>
+        </ul>
+    </div> 
+    <div id="kanan">
+        <?php
+            $joinproposal = new JoinProposal();
+            $totaldata = 0;
+            $perhalaman = 4;       
+            $currenthalaman = 1;
 
-        //BUAT TABEL
-        echo "<table border = '1'>";
-        echo "
-        <tr>
-            <th>Member</th>
-            <th>Team</th>
-            <th>Description</th>
-            <th>Status</th>
-        </tr>";
-        while($row = $res->fetch_assoc()){
-            echo "<tr>
-                <td>".$row['fname']."</td>
-                <td>".$row['name']."</td>
-                <td>".$row['description']."</td>
-                <td>".$row['status']."</td>
-                <td><a href='editjoin_proposal.php?idjoin_proposal=".$row['idjoin_proposal']."'>Ubah Data</a></td>
-                <td><a href='deletejoin_proposal.php?idjoin_proposal=".$row['idjoin_proposal']."'>Hapus Data</a></td>
+            if(isset($_GET['offset'])) { 
+                $offset = $_GET['offset']; 
+                $currenthalaman = ($_GET['offset']/$perhalaman)+1;
+            } else { $offset = 0; }
+
+            $res = $joinproposal->getJoinProposal($offset, $perhalaman);
+            $totaldata = $joinproposal->getTotalData();
+
+            $jumlahhalaman = ceil($totaldata/$perhalaman);
+
+            //BUAT TABEL
+            echo "<table border = '1'>";
+            echo "
+            <tr>
+                <th>Member</th>
+                <th>Team</th>
+                <th>Description</th>
+                <th>Status</th>
             </tr>";
-        }
-        echo "</table>";
-        $mysqli->close();
-    ?>
+
+            while($row = $res->fetch_assoc()){
+                echo "<tr>
+                    <td>".$row['fname']."</td>
+                    <td>".$row['name']."</td>
+                    <td>".$row['description']."</td>
+                    <td>".$row['status']."</td>
+                    <td><a href='editjoin_proposal.php?idjoin_proposal=".$row['idjoin_proposal']."'>Ubah Data</a></td>
+                    <td><a href='deletejoin_proposal.php?idjoin_proposal=".$row['idjoin_proposal']."'>Hapus Data</a></td>
+                </tr>";
+            }
+            echo "</table>";
+            
+            // paging
+            echo "<div>Total Data: ".$totaldata."</div>";
+            echo "<a href='join_proposal.php?offset=0'>First</a>";
+            
+            for($i = 1; $i <= $jumlahhalaman; $i++) {
+                $off = ($i-1) * $perhalaman;
+                if($currenthalaman == $i) {                
+                    echo "<strong style='color:red'>$i</strong></a>";
+                } else {
+                    echo "<a href='join_proposal.php?offset=".$off."'>".$i."</a> ";
+                }
+            }
+            $lastOffset = ($jumlahhalaman - 1)*$perhalaman;
+            echo "<a href='join_proposal.php?offset=".$lastOffset."'>Last</a><br><br>";
+        ?>
+    </div> 
     <a href="insertjoin_proposal.php">Add New Join Proposal</a>
 </body>
 </html>

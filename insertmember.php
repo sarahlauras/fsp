@@ -33,7 +33,7 @@
             <option value="admin">Admin</option>
             <option value="member">Member</option>
         </select><br><br>
-        <input type="hidden" name="idevent" value="<?php echo $row["idevent"]; ?>">
+        
         <input type="submit" value="Submit" name="btnSubmit">
     </form>
 </body>
