@@ -52,7 +52,7 @@
                 $currenthalaman = ($_GET['offset']/$perhalaman)+1;
             } else { $offset = 0; }
 
-            $res = $joinproposal->getJoinProposal($offset, $perhalaman);
+            $res = $joinproposal->getJoinProposal(null,$offset, $perhalaman);
             $totaldata = $joinproposal->getTotalData();
 
             $jumlahhalaman = ceil($totaldata/$perhalaman);

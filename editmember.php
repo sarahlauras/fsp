@@ -4,7 +4,6 @@
 </head>
 <body>
     <?php
-
         require_once 'classmember.php';
         $member = new Member();
         

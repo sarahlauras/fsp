@@ -6,14 +6,24 @@
             parent::__construct();
         }
 
-        public function getJoinProposal($offset = null, $limit = null) {
-            $sql = "SELECT jp.idjoin_proposal, m.fname, t.name, jp.description, jp.status FROM join_proposal jp INNER JOIN
-                    member m ON jp.idmember = m.idmember INNER JOIN team t ON jp.idteam = t.idteam";
+        public function getJoinProposal($id = null, $offset = null, $limit = null) {
+            $sql = "SELECT jp.idjoin_proposal, m.fname, t.name, jp.description, jp.status 
+                    FROM join_proposal jp 
+                    INNER JOIN member m ON jp.idmember = m.idmember 
+                    INNER JOIN team t ON jp.idteam = t.idteam";
+            if (!is_null($id)) {
+                $sql .= " WHERE jp.idjoin_proposal = ?";
+            }
             if (!is_null($offset) && !is_null($limit)) {
                 $sql .= " LIMIT ?, ?";
             }
             $stmt = $this->mysqli->prepare($sql);
-            if (!is_null($offset) && !is_null($limit)) {
+        
+            if (!is_null($id) && !is_null($offset) && !is_null($limit)) {
+                $stmt->bind_param('iii', $id, $offset, $limit);
+            } elseif (!is_null($id)) {
+                $stmt->bind_param('i', $id);
+            } elseif (!is_null($offset) && !is_null($limit)) {
                 $stmt->bind_param('ii', $offset, $limit);
             }
             $stmt->execute();
@@ -32,7 +42,6 @@
             $stmt->execute();
             $res = $stmt->get_result();
             return $res;
-
         }
 
         public function getTeam(){
@@ -53,6 +62,17 @@
             $stmt->execute();
     
             return $this->mysqli->affected_rows;
+        }
+
+        public function editJoinProposal($fname, $name, $description, $idjoin_proposal){
+            $stmt = $this->mysqli->prepare("UPDATE join_proposal SET fname=?, name=?, description=?, status=?
+                                             WHERE idjoin_proposal=?");
+            $stmt->bind_param("iissi", $arr_col['fname'], $arr_col['name'], $arr_col['description'],
+                             $arr_col['status'],$arr_col['idjoin_proposal']);
+            $stmt->execute();
+            $jumlah = $stmt->affected_rows;
+            $stmt->close();
+            return $jumlah;
         }
     }
 ?>
