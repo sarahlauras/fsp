@@ -20,7 +20,7 @@
         if (isset($_GET["idjoin_proposal"])) {
             $id = $_GET["idjoin_proposal"];
 
-            $stmt = $joinproposal->getJoinProposal($id);
+            $stmt = $joinproposal->getJoinProposal($id,null, null);
 
             if ($stmt && $stmt->num_rows > 0) {
                 $row = $stmt->fetch_assoc(); 

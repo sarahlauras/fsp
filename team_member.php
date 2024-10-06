@@ -37,7 +37,9 @@
             <li><a href="#">Daftar Game</a></li>
             <li><a href="#">Daftar Join Proposal</a></li>
             <li><a href="#">Daftar Event</a></li>
+            <li><a href="#">Daftar Event Team</a></li>
             <li><a href="#">Daftar Achievement</a></li>
+            <li><a href="#">Daftar Member</a></li>
         </ul>
     </div> 
     <div id="kanan">
@@ -71,8 +73,8 @@
                     <td>".$row['fname']."</td>
                     <td>".$row['name']."</td>
                     <td>".$row['description']."</td>
-                    <td><a href='editteam_member.php?idmember=".$row['idmember']."idteam=".$row['idteam']."'>Ubah Data</a></td>
-                    <td><a href='deleteteam_member.php?idmember=".$row['idmember']."idteam=".$row['idteam']."'>Hapus Data</a></td>
+                    <td><a href='editteam_member.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'>Ubah Data</a></td>
+                    <td><a href='deleteteammember.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'>Hapus Data</a></td>
                 </tr>";
             }
             echo "</table>";

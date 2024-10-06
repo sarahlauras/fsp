@@ -5,8 +5,8 @@
         extract($_POST);
         if (isset($team, $member, $description)) {
             $arr_col = [
-                'idteam' => $member,
-                'idmember' => $team,
+                'idteam' => $team,
+                'idmember' => $member,
                 'description' => $description
                 ];
             $last_id = $team_member->insertTeamMember($arr_col);

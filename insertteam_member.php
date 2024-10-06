@@ -17,7 +17,6 @@
         }
     ?>
     <form action="insertteam_member_proses.php" method="post" enctype='multipart/form-data'>
-        
         <label for="team">Team:</label>
         <select name="team" id="team"> 
         <?php

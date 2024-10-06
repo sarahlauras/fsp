@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie</title>
+    <title>Join Proposal</title>
         <style>
             .text_merah {
                 color: red;
@@ -35,9 +35,11 @@
         <ul>
             <li><a href="#">Daftar Team</a></li>
             <li><a href="#">Daftar Game</a></li>
-            <li><a href="#">Daftar Join Proposal</a></li>
+            <li><a href="#">Daftar Team Member</a></li>
             <li><a href="#">Daftar Event</a></li>
+            <li><a href="#">Daftar Event Team</a></li>
             <li><a href="#">Daftar Achievement</a></li>
+            <li><a href="#">Daftar Member</a></li>
         </ul>
     </div> 
     <div id="kanan">
