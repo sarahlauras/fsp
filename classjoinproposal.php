@@ -7,7 +7,7 @@
         }
 
         public function getJoinProposal($id = null, $offset = null, $limit = null) {
-            $sql = "SELECT jp.idjoin_proposal, m.fname, t.name, jp.description, jp.status 
+            $sql = "SELECT * 
                     FROM join_proposal jp 
                     INNER JOIN member m ON jp.idmember = m.idmember 
                     INNER JOIN team t ON jp.idteam = t.idteam";
@@ -64,11 +64,19 @@
             return $this->mysqli->affected_rows;
         }
 
-        public function editJoinProposal($fname, $name, $description, $idjoin_proposal){
-            $stmt = $this->mysqli->prepare("UPDATE join_proposal SET fname=?, name=?, description=?, status=?
+        public function editJoinProposal($idmember, $idteam, $description, $status, $idjoin_proposal){
+            $stmt = $this->mysqli->prepare("UPDATE join_proposal SET idmember=?, idteam=?, description=?, status=?
                                              WHERE idjoin_proposal=?");
-            $stmt->bind_param("iissi", $arr_col['fname'], $arr_col['name'], $arr_col['description'],
-                             $arr_col['status'],$arr_col['idjoin_proposal']);
+            $stmt->bind_param("iissi", $idmember, $idteam, $description, $status, $idjoin_proposal);
+            $stmt->execute();
+            $jumlah = $stmt->affected_rows;
+            $stmt->close();
+            return $jumlah;
+        }
+
+        public function deleteJoinProposal($idjoin_proposal) {
+            $stmt = $this->mysqli->prepare("DELETE FROM join_proposal WHERE idjoin_proposal=?");
+            $stmt->bind_param("i", $idjoin_proposal);
             $stmt->execute();
             $jumlah = $stmt->affected_rows;
             $stmt->close();

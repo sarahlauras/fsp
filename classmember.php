@@ -26,8 +26,8 @@
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result(); 
-
         }
+
         public function getTotalData(){
             $res = $this->getMember();
             return $res->num_rows;
@@ -62,7 +62,5 @@
             $stmt->close();
             return $jumlah;
         }
-
-        
     }
 ?>

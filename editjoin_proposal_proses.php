@@ -4,8 +4,8 @@
 
     if($_POST['btnSubmit']) { 
         extract($_POST);
-        if (isset($fname, $name, $description, $idjoin_proposal)) {
-            $jumlah = $joinproposal->editJoinProposal($fname, $name, $description, $idjoin_proposal);
+        if (isset($idmember, $idteam, $description, $status, $idjoin_proposal)) {
+            $jumlah = $joinproposal->editJoinProposal($idmember, $idteam, $description, $status,$idjoin_proposal);
 
             if ($jumlah > 0) {
                 header("Location: editjoin_proposal.php?idjoin_proposal=$idjoin_proposal&result=success");

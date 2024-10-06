@@ -12,7 +12,7 @@
 
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {
-                echo "Data berhasil ditambahkan.<br><br>";
+                echo "Data berhasil diupdate.<br><br>";
             }
         }
         $id = $_GET["idjoin_proposal"];
@@ -25,18 +25,36 @@
             if ($stmt && $stmt->num_rows > 0) {
                 $row = $stmt->fetch_assoc(); 
             } else {
-                echo "Member tidak ditemukan.";
+                echo "Join Proposal tidak ditemukan.";
             }
         } else {
-            echo "ID member tidak ditemukan.";
+            echo "ID Join Proposal tidak ditemukan.";
         }
+        
+        $members = $joinproposal->getMember(); 
+        $teams = $joinproposal->getTeam(); 
+
 
     ?>
     <form action="editjoin_proposal_proses.php" method="post" enctype='multipart/form-data'>
         <label for="member">Member:</label>
-        <select name="idmember" id="member" value="<?php echo $row["fname"]; ?>"></select><br><br>
+        <select name="idmember" id="member" value="<?php echo $row['idmember']; ?>">
+            <?php
+                while ($member_row = $members->fetch_assoc()) {
+                    $selected = ($member_row['idmember'] == $row['idmember']) ? 'selected' : '';
+                    echo "<option value='" . $member_row['idmember'] . "' " . $selected . ">" . $member_row['fname'] . "</option>";
+                }
+            ?>
+        </select><br><br>
         <label for="team">Team:</label>
-        <select name="idteam" id="team" value="<?php echo $row["name"]; ?>"></select><br><br>
+        <select name="idteam" id="team" value="<?php echo $row['idteam']; ?>">
+            <?php
+                while ($team_row = $teams->fetch_assoc()) {
+                    $selected = ($team_row['idteam'] == $row['idteam']) ? 'selected' : '';
+                    echo "<option value='" . $team_row['idteam'] . "' " . $selected . ">" . $team_row['name'] . "</option>";
+                }
+            ?>
+        </select><br><br>
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" value="<?php echo $row['description']; ?>"><br><br>
         <label for="status">Status:</label>
