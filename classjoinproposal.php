@@ -32,7 +32,7 @@
         }
 
         public function getTotalData(){
-            $res = $this->getJoinProposal();
+            $res = $this->getJoinProposal(null,null,null);
             return $res->num_rows;
         }
 
