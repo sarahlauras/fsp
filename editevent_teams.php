@@ -1,9 +1,36 @@
 <?php
-    require_once ("classevent.php");
-    require_once ("classteam.php");
+    require_once ("classevent_teams.php");
+    require_once("classevent.php");
+    require_once("classteam.php");
 
+    // $idevent = isset($_GET['idevent']);
+    // $idteam = isset($_GET['idteam']);
+
+    // if (!$idevent || !$idteam) {
+    //     echo "ID event dan team tidak ditemukan.";
+    //     exit;
+    // }
+
+    $event_teams = new EventTeams();
     $event = new Event();
     $team = new Team();
+
+    // $event_team_data = $event_teams->getEventTeamById($idevent);
+
+    if (isset($_GET["idevent"]) && isset($_GET["idteam"])) {
+        $idevent = $_GET["idevent"];
+        $idteam = $_GET["idteam"];
+
+        $event_team_data = $event_teams->getEventTeamById($idevent);
+
+        if ($event_team_data && $event_team_data->num_rows > 0) {
+            $row = $event_team_data->fetch_assoc(); 
+        } else {
+            echo "Event tidak ditemukan.";
+        }
+    } else {
+        echo "ID event dan ID Team tidak ditemukan.";
+    }
 ?>
 
 <html>
@@ -48,8 +75,12 @@
                     <option value="">Pilih Event</option>
                     <?php
                         while($row = $resEvent->fetch_assoc()) {
-                            echo "<option value=".$row['idevent'].">"
-                                .$row['name']."</option>";
+                            $selected="";
+                            if ($row['idevent'] == $idevent) {
+                                $selected = 'selected';
+                            } 
+                            echo "<option value='" . $row['idevent'] . "' " . $selected . ">"
+                            . $row['name'] . "</option>";
                         }
                     ?>
             </select>
@@ -60,13 +91,17 @@
                     <option value="">Pilih Team</option>
                     <?php
                         while($row = $resTeam->fetch_assoc()) {
-                            echo "<option value=".$row['idteam'].">"
-                                .$row['name']."</option>";
+                            $selected = "";
+                            if($row['idteam'] == $idteam) {
+                                $selected = 'selected';
+                            }
+                            echo "<option value='" . $row['idteam'] . "' " . $selected . ">"
+                            . $row['name'] . "</option>";
                         }
                     ?>
             </select>
 
-            <button name="btnAddEventTeams" id="btnAddEventTeams" type="button">Tambah Event Teams</button><br><br>
+            <button name="btnEditEventTeams" id="btnEditEventTeams" type="button">Edit Event Teams</button><br><br>
 
             <table>
             <thead>
@@ -88,13 +123,12 @@ integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 crossorigin="anonymous"></script>
     <script>
         var jumlaheventteams = 0;
-        $("#btnAddEventTeams").on("click", function() {
+        $("#btnEditEventTeams").on("click", function() {
             var eventvalue = $('#event').val();
             var eventlabel = $('#event option:selected').text();
             var teamvalue = $('#team').val();
             var teamlabel = $('#team option:selected').text();
 
-            // Memastikan pengguna memilih event dan team
             if (eventvalue == "" || teamvalue == "") {
                 alert("Silakan pilih event dan team.");
                 return;

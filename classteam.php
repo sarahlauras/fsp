@@ -29,6 +29,15 @@
             return $stmt->get_result(); // Mengembalikan hasil untuk di-fetch
         }
 
+        public function getIdTeamByName($teamName) {
+            $stmt = $this->mysqli->prepare("SELECT idteam FROM team WHERE name = ?");
+            $stmt->bind_param("s", $teamName);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            return $row['idteam'];
+        }
+
         public function getGames() {
             $stmt = $this->mysqli->prepare("SELECT * FROM game");
             $stmt->execute();

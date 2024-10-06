@@ -1,6 +1,7 @@
 <?php
     echo "Sukses";
     require_once("classevent_teams.php");
+    require_once("classteam.php");
 ?>
 <html>
 <head>
@@ -12,28 +13,30 @@
 
     $event_teams = new EventTeams();
     $resevent_teams = $event_teams->getAllEventTeams();
+    $teamid = new Team();
 
     if ($resevent_teams->num_rows > 0) {
 
-    echo "<table border='1'>";
-    echo "<tr>
-            <th>Event Name</th>
-            <th>Event Date</th> 
-            <th>Team Name</th>
-            <th>Game Name</th>
-            <th>Aksi</th>
-        </tr>";
+        echo "<table border='1'>";
+        echo "<tr>
+                <th>Event Name</th>
+                <th>Event Date</th> 
+                <th>Team Name</th>
+                <th>Game Name</th>
+                <th>Aksi</th>
+            </tr>";
         
 
         while($row = $resevent_teams->fetch_assoc()) {
+            $idteam = $teamid->getIdTeamByName($row['team_name']);
             echo "<tr>
                     <td>" . $row['event_name'] . "</td>
                     <td>" . $row['event_date'] . "</td>
                     <td>" . $row['team_name'] . "</td>
                     <td>" . $row['game_name'] . "</td>
                     <td>
-                        <a href='edit.php?id=" . $row['idevent'] . "'>Edit</a> | 
-                        <a href='delete.php?id=" . $row['idevent'] . "'>Delete</a>
+                        <a href='editevent_teams.php?idevent=" . $row['idevent'] . "&idteam=" . $idteam . "'>Edit</a> 
+                        <a href='deleteevent_teams.php?id=" . $row['idevent'] . "'>Delete</a>
                     </td>
                 </tr>";
         }

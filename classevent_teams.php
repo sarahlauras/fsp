@@ -17,12 +17,12 @@
         }
 
 
-        // public function getEventById($idevent) {
-        //     $stmt = $this->mysqli->prepare("SELECT * FROM event WHERE idevent=?");
-        //     $stmt->bind_param("i", $idevent);
-        //     $stmt->execute();
-        //     return $stmt->get_result(); // Mengembalikan hasil untuk di-fetch
-        // }
+        public function getEventTeamById($idevent) {
+            $stmt = $this->mysqli->prepare("SELECT * FROM event_teams WHERE idevent = ?");
+            $stmt->bind_param("i", $idevent);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
 
         public function insertEventTeams($arr_col) { //insert
             $idevent = $arr_col['idevent'];
@@ -42,6 +42,17 @@
                 $stmt->close();
             }
             return ['success' => $success, 'last_id' => $last_insert_id];
+        }
+
+        public function editEvent($$idevent, $idteam) {
+            $stmt = $this->mysqli->prepare(
+                "UPDATE event_teams SET idevent=?, idteam=?
+                WHERE idevent=?");
+            $stmt->bind_param("iii", $idevent, $idteam, $description, $idevent);
+            $stmt->execute();
+            $jumlah = $stmt->affected_rows;
+            $stmt->close();
+            return $jumlah;
         }
     }
 ?>
