@@ -5,10 +5,10 @@
     if($_POST['btnSubmit']) { 
         extract($_POST);
         if (isset($name, $description, $date,  $idTeam)) {
-            $jumlah = $achievement->editAchievement($name, $description, $idTeam, $date );
+            $jumlah = $achievement->editAchievement($name, $description, $Date, $idTeam );
 
             if ($jumlah > 0) {
-                header("Location: esport_game.php?result=success");
+                header("Location: achievement.php?result=success");
                 exit();
             } else {
                 echo "Tidak ada perubahan.";

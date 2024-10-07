@@ -5,7 +5,11 @@
         public function __constructor() {
             parent::__construct();
         }
-
+        
+        public function getTotalData(){
+            $res = $this->getAchievement();
+            return $res->num_rows;
+        }
         public function insertAchievement($arr_col) {
             $sql = "INSERT INTO achievement (name, description, date, idteam)
             VALUES (?,?,?,?)";
@@ -15,11 +19,19 @@
             return $this->mysqli->insert_id;
         }
 
-        public function getAllAchievement() {
-            $stmt = $this->mysqli->prepare("SELECT * FROM achievement");
+        public function getAchievement($offset=null, $limit=null) { 
+            $sql = "SELECT * FROM achievement";
+
+            if (!is_null($offset) && !is_null($limit)) {
+                $sql .= " LIMIT ?, ?";
+            }
+            $stmt = $this->mysqli->prepare($sql);
+            if (!is_null($offset) && !is_null($limit)) {
+                $stmt->bind_param('ii', $offset, $limit);
+            }
             $stmt->execute();
-            $result = $stmt->get_result();
-            return $result;
+            $res = $stmt->get_result();
+            return $res;
         }
 
         public function getAchievementById($idachievement) {
@@ -29,7 +41,7 @@
             return $stmt->get_result();
         }
 
-        public function editAchievement($name, $description, $team) {
+        public function editAchievement($name, $description,$date, $team) {
             $stmt = $this->mysqli->prepare(
                 "UPDATE achievement SET name=?, description=?, date=?, idteam=?
                 WHERE idachievement=?");
