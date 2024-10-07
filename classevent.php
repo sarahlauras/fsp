@@ -15,11 +15,23 @@
             return $this->mysqli->insert_id;
         }
 
-        public function getAllEvent() { //tampil
-            $stmt = $this->mysqli->prepare("SELECT * FROM event");
+        public function getAllEvent($offset=null, $limit=null) { //tampil
+            $sql = "SELECT * FROM event";
+            if (!is_null($offset) && !is_null($limit)) {
+                $sql .= " LIMIT ? OFFSET ?";
+            }
+            $stmt = $this->mysqli->prepare($sql);
+            if (!is_null($offset) && !is_null($limit)) {
+                $stmt->bind_param("ii", $limit, $offset);
+            }
             $stmt->execute();
             $result = $stmt->get_result();
             return $result;
+        }
+
+        public function getTotalData () {
+            $res=$this->getAllEvent();
+            return $res->num_rows;
         }
 
         public function getEventById($idevent) {

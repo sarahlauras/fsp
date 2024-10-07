@@ -30,13 +30,13 @@
         <h1>DAFTAR MEMBER</h1>
         <div id="kiri">
             <ul>
-                <li><a href="#">Daftar Team</a></li>
-                <li><a href="#">Daftar Game</a></li>
-                <li><a href="#">Daftar Join Proposal</a></li>
-                <li><a href="#">Daftar Event</a></li>
-                <li><a href="#">Daftar Event Team</a></li>
-                <li><a href="#">Daftar Achievement</a></li>
-                <li><a href="#">Daftar Team Member</a></li>
+            <li><a href="team.php">Daftar Team</a></li>
+            <li><a href="esport_game.php">Daftar Game</a></li>
+            <li><a href="join_proposal.php">Daftar Join Proposal</a></li>
+            <li><a href="esport_event.php">Daftar Event</a></li>
+            <li><a href="eventteams.php">Daftar Event Team</a></li>
+            <li><a href="achievement.php">Daftar Achievement</a></li>
+            <li><a href="team_member.php">Daftar Team Member</a></li>
             </ul>
         </div>
         <div id="kanan">

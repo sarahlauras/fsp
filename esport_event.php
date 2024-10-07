@@ -7,8 +7,21 @@
         <?php 
         require_once 'classevent.php';
         $event = new Event();
-        $res = $event->getAllEvent();
 
+        $totaldata = 0;
+        $perhalaman = 4;       
+        $currenthalaman = 1;
+
+        if(isset($_GET['offset'])) { 
+            $offset = $_GET['offset']; 
+            $currenthalaman = ($_GET['offset']/$perhalaman)+1;
+        } else { $offset = 0; }
+
+        $res = $event->getAllEvent($offset, $perhalaman);
+        $totaldata = $event ->getTotalData();
+
+        $jumlahhalaman = ceil($totaldata/$perhalaman);
+        
         echo "<table border='1'>";
         echo "<tr>
             <th>Nama</th>
@@ -30,7 +43,20 @@
     }
     
     echo "</table>";
-
+    // paging
+    echo "<div>Total Data: ".$totaldata."</div>";
+    echo "<a href='esport_event.php?offset=0'>First</a>";
+    
+    for($i = 1; $i <= $jumlahhalaman; $i++) {
+        $off = ($i-1) * $perhalaman;
+        if($currenthalaman == $i) {                
+            echo "<strong style='color:red'>$i</strong></a>";
+        } else {
+            echo "<a href='esport_event.php?offset=".$off."'>".$i."</a> ";
+        }
+    }
+    $lastOffset = ($jumlahhalaman - 1)*$perhalaman;
+    echo "<a href='esport_event.php?offset=".$lastOffset."'>Last</a><br><br>";
         ?>
     <a href='esport_insertevent.php?'>Insert Data</a>
     </body>
