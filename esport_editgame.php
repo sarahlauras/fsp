@@ -4,28 +4,31 @@
 </head>
 <body>
     <?php
+        require_once 'classgame.php';
+        $game = new Game();
+        
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {
                 echo "Data berhasil ditambahkan.<br><br>";
             }
         }
 
-        //tangkap id movie dari query string
         $id = $_GET["idgame"];
 
-        //koneksi database
-        $mysqli = new mysqli("localhost", "root","","esport");
-        if($mysqli -> connect_errno) {
-            echo "Koneksi database gagal: " . $mysqli->connect_error;
-            exit();
+        if (isset($_GET["idgame"])) {
+            $id = $_GET["idgame"];
+
+            $stmt = $game->getGameById($id);
+
+            if ($stmt && $stmt->num_rows>0) {
+                $row = $stmt->fetch_assoc();
+            } else {
+                echo "Game tidak ditemukan.";
+            }
+        } else {
+            echo "ID Game tidak ditemukan.";
         }
         
-        $stmt = $mysqli->prepare("SELECT * FROM game WHERE idgame=?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $res = $stmt->get_result();
-
-        $row = $res->fetch_assoc() //untuk ngambil row pertama
 
     ?>
     <form action="esport_editgame_proses.php" method="post">

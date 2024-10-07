@@ -44,7 +44,7 @@
             return ['success' => $success, 'last_id' => $last_insert_id];
         }
 
-        public function editEvent($$idevent, $idteam) {
+        public function editEvent($idevent, $idteam) {
             $stmt = $this->mysqli->prepare(
                 "UPDATE event_teams SET idevent=?, idteam=?
                 WHERE idevent=?");

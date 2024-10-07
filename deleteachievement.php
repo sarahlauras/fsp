@@ -1,39 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Delete Achievement</title>
-</head>
-<body>
-	<?php
-    $mysqli = new mysqli("localhost", "root", "", "esport");
-    if($mysqli->connect_errno){
-        echo "Koneksi database gagal: ".$mysqli->connect_error;
-        exit();
-    }
+<?php
+    require_once 'classachievement.php';
 
-    if(isset($_GET['idachievement'])){
+    $achievement = new Achievement();
+
+    if(isset($_GET['idAchievement'])) {
         $idachievement = $_GET['idachievement'];
+        $jumlah = $achievement->deleteAchievement($idachievement);
 
-        $stmt_achievement = $mysqli->prepare("DELETE FROM achievement WHERE idachievement = ?");
-        
-        $stmt_achievement->bind_param("i", $idachievement);
-        
-        if($stmt_achievement->execute()){
-            echo "achievement berhasil dihapus.";
+        if ($jumlah > 0) {
             header("Location: achievement.php?result=success");
             exit();
         } else {
-            echo "Gagal menghapus achievement: " . $stmt->error;
+            echo "Gagal menghapus achievement.";
         }
-        
-        // Tutup statement
-        $stmt_achievement->close();
+    } else {
+            echo "ID achievement tidak ditemukan.";
     }
-    // Tutup koneksi
-    $mysqli->close();
+    
 ?>
-
-</body>
-</html>

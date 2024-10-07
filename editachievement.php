@@ -14,18 +14,19 @@
         }
         $id = $_GET["idachievement"];
 
-        $mysqli = new mysqli("localhost", "root", "", "esport");
-        if($mysqli->connect_errno){
-            echo "Koneksi database gagal: ".$mysqli->connect_error;
-            exit();
-        }
-        $stmt = $mysqli->prepare("SELECT a.idachievement, a.idteam, a.name, a.description, a.date, t.name AS team 
-                                  FROM achievement a INNER JOIN team t ON a.idteam = t.idteam WHERE a.idachievement= ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $res = $stmt->get_result();
+        if (isset($_GET["idachievement"])) {
+            $id = $_GET["idachievement"];
 
-        $row = $res->fetch_assoc();
+            $stmt = $achievement->getAchievementById($id);
+
+            if ($stmt && $stmt->num_rows>0) {
+                $row = $stmt->fetch_assoc();
+            } else {
+                echo "Achievement tidak ditemukan.";
+            }
+        } else {
+            echo "ID Achievement tidak ditemukan.";
+        }
     ?>
     <form action="editachievement_proses.php" method="post" enctype='multipart/form-data'>
         <label for="name">Achievement Name</label>
@@ -39,19 +40,7 @@
 
         <label for="Name">Team</label>
             <select name="idteam" id="team" value ="<?php echo $row['team'];?>">
-            <?php
-                $stmt_achievement = $mysqli->prepare("SELECT * FROM team");
-                $stmt_achievement->execute();
-                $result_achievement = $stmt_achievement->get_result();
-
-                while ($achievement_row = $result_achievement->fetch_assoc()) {
-                    $selected = ($achievement_row['idteam'] == $row['idteam'])? 'selected' : '';
-                    echo "<option value='".$achievement_row['idteam']."' ".$selected.">".$achievement_row['name']."</option>";
-                }
-                $stmt_achievement->close();
-            ?>
         </select>
-
         <input type="hidden" name="idachievement" value="<?php echo $row['idachievement']; ?>">
         <input type="submit" value="Submit" name="btnSubmit">
     </form>        

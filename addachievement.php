@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Achievement</title>
+<html>
+    <head>
+        <title>Insert Achievement</title>
 </head>
 <body>
     <?php
-    // Check if the insertion was successful and display a message
-    if(isset($_GET["result"])){
-        if($_GET["result"] == "success"){
-            echo "Achievement successfully added.<br><br>";
+        require_once 'classachievement.php';
+        $achievement = new Achievement();
+
+        if(isset($_GET["result"])) {    
+            if($_GET["result"] == "success") {
+                echo "Data berhasil ditambahkan.<br><br>";
+            }
         }
-    }
     ?>
 
     <form action="addachievement_proses.php" method="post" enctype='multipart/form-data'>
@@ -27,21 +26,6 @@
 
         <label for="Name">Team:</label>
             <select name="idteam" id="team">
-                <?php
-                $mysqli = new mysqli("localhost","root","","esport");
-                if($mysqli->connect_errno) {
-                    echo "Koneksi database gagal: ".$mysqli->connect_error;
-                    exit();
-                } 
-        
-                $stmt_achievement = $mysqli->prepare("SELECT idteam, name FROM team");
-                $stmt_achievement->execute();
-                $res = $stmt_achievement->get_result();
-
-                while($row = $res->fetch_assoc()) {
-                    echo "<option value='".$row['idteam']."'>".$row['name']."</option>";
-                }
-                ?>
         </select><br><br>
 
         <input type="submit" value="Submit" name="btnSubmit">

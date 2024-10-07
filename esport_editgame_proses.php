@@ -1,22 +1,24 @@
 <?php
-    $mysqli = new mysqli("localhost", "root","","esport");
-    if($mysqli -> connect_errno) {
-        echo "Koneksi database gagal: " . $mysqli->connect_error;
-        exit();
-    }
+    require_once 'classgame.php';
+    $game = new Game();
+
     if($_POST['btnSubmit']) { 
         extract($_POST);
+        if (isset($name, $description)) {
+            $jumlah = $game->editGame($name, $description, $idgame);
 
-        $stmt = $mysqli->prepare(
-            "UPDATE game SET name=?, description=?
-            WHERE idgame=?");
-        $stmt->bind_param("ssi", $name, $description, $idgame);
-        $stmt->execute();
-
-        $jumlah = $stmt->affected_rows;
-        $stmt->close();
+            if ($jumlah > 0) {
+                header("Location: esport_game.php?result=success");
+                exit();
+            } else {
+                echo "Tidak ada perubahan.";
+            }
+        } else {
+            echo "Semua field harus diisi.";
+        }
+    }  
+    
+    else {
+        echo "Tidak ada data!";
     }
-
-    $mysqli->close();
-    header("Location:esport_editgame.php?idgame=$idgame&result=success");
 ?>

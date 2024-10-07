@@ -1,32 +1,20 @@
 <?php
-    // Koneksi ke database
-    $mysqli = new mysqli("localhost", "root", "", "esport");
-    if($mysqli->connect_errno){
-        echo "Koneksi database gagal: ".$mysqli->connect_error;
-        exit();
-    }
+    require_once 'classgame.php';
 
-    if(isset($_GET['idgame'])){
+    $game = new Game();
+
+    if(isset($_GET['idgame'])) {
         $idgame = $_GET['idgame'];
+        $jumlah = $game->deleteGame($idgame);
 
-        $stmt = $mysqli->prepare("DELETE FROM game WHERE idgame = ?");
-        
-        // Bind parameter (i untuk integer)
-        $stmt->bind_param("i", $idgame);
-        
-        // Eksekusi query
-        if($stmt->execute()){
-            echo "Event berhasil dihapus.";
-            // Redirect ke halaman lain atau tampilkan pesan sukses
+        if ($jumlah > 0) {
             header("Location: esport_game.php?result=success");
             exit();
         } else {
-            echo "Gagal menghapus: " . $stmt->error;
+            echo "Gagal menghapus game.";
         }
-        
-        // Tutup statement
-        $stmt->close();
+    } else {
+            echo "ID game tidak ditemukan.";
     }
-    // Tutup koneksi
-    $mysqli->close();
+    
 ?>

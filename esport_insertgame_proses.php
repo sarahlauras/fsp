@@ -1,25 +1,28 @@
 <?php
-    $mysqli = new mysqli("localhost", "root","","esport");
-    if($mysqli -> connect_errno) {
-        echo "Koneksi database gagal: " . $mysqli->connect_error;
-        exit();
-    }
-    if($_POST['btnSubmit']) { 
+    require_once 'classgame.php';
+
+    $game = new Game();
+    if(isset($_POST['btnSubmit'])) { 
         extract($_POST);
+        if (isset($name, $description)) {
+            $arr_col = [
+                'name' => $name,
+                'description' => $description
+            ];
 
-        $stmt = $mysqli->prepare(
-            "INSERT INTO game(name, description)
-            VALUES(?,?)");
-        $stmt->bind_param("ss", $name, $description);
-        $stmt->execute();
+            $last_id = $game->insertGame($arr_col);
 
-        $jumlah = $stmt->affected_rows;
-        $last_id = $mysqli->insert_id;
-
-
-        $stmt->close();
+            if ($last_id) {
+                header("Location: esport_game.php?result=success");
+                exit();
+            }
+            else {
+                echo "Error!!";
+            }
+        }
+    }   
+    else {
+        echo "Tidak ada data!!";
     }
-
-    $mysqli->close();
-    header("Location:esport_game.php?result=success");
+    
 ?>
