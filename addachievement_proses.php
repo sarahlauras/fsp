@@ -1,15 +1,16 @@
 <?php
+
     require_once 'classachievement.php';
 
     $achievement = new Achievement();
     if(isset($_POST['btnSubmit'])) { 
         extract($_POST);
-        if (isset($name, $description, $date, $idTeam)) {
+        if (isset($name, $idteam, $date, $description)) {
             $arr_col = [
                 'name' => $name,
-                'description' => $description,
+                'idteam' => $idteam,
                 'date' => $date,
-                'team' => $idTeam
+                'description' => $description,
             ];
 
             $last_id = $achievement->insertAchievement($arr_col);
@@ -19,7 +20,7 @@
                 exit();
             }
             else {
-                echo "Error!!";
+                echo "tetot";
             }
         }
     }   

@@ -10,15 +10,22 @@
             $res = $this->getAchievement();
             return $res->num_rows;
         }
-        public function insertAchievement($arr_col) {
-            $sql = "INSERT INTO achievement (name, description, date, idteam)
-            VALUES (?,?,?,?)";
+        public function insertAchievement($arr_col){
+            $sql = "INSERT INTO achievement (idachievement, idteam, name, date, description)
+            VALUES (?,?,?,?,?)";
             $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param("ssdi", $arr_col['name'], $arr_col['description'],$arr_col['date'], $arr_col['idteam']);
+            $stmt->bind_param("iisds", $arr_col['idachievement'], $arr_col['idteam'], $arr_col['name'],$arr_col['date'], $arr_col['description']);
             $stmt->execute();
-            return $this->mysqli->insert_id;
-        }
 
+            return $this->mysqli->affected_rows;
+        }
+        public function getTeam(){
+            $sql = "SELECT idteam, name FROM team";
+            $stmt = $this->mysqli->prepare($sql);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            return $res;
+        }
         public function getAchievement($offset=null, $limit=null) { 
             $sql = "SELECT * FROM achievement";
 

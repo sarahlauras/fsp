@@ -27,7 +27,7 @@
         </style>
     </head>
     <body>
-        <h1>DAFTAR MEMBER</h1>
+        <h1>Achievement</h1>
         <div id="kiri">
             <ul>
             <li><a href="team.php">Daftar Team</a></li>
@@ -69,7 +69,7 @@
                             <td>".$row['name']."</td>
                             <td>".$row['description']."</td>
                             <td>".$row['date']."</td>
-                            <td>".$row['Team']."</td>
+                            <td>".$row['team']."</td>
                             <td>
                                 <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah Data</a> 
                                 <a href='deleteachievement.php?idachievement=".$row['idachievement']."'>Hapus Data</a>

@@ -18,15 +18,24 @@
         <label for="name">Achievement Name</label>
         <input type="text" id="name" name="name" required><br><br>
 
-        <label for="description">Description</label>
-        <input type="text" id="description" name="description" required><br><br>
+        <label for="Name">Team:</label>
+            <select name="idteam" id="team">
+            <?php
+            $resTeam = $achievement->getTeam();
+
+            while($row = $resTeam->fetch_assoc()) {
+                echo "<option value='".$row['idteam']."'>".$row['name']."</option>";
+            }
+        ?>
+        </select><br><br>
 
         <label for="Date">Date</label>
         <input type="date" id="date" name="date" required><br><br>
 
-        <label for="Name">Team:</label>
-            <select name="idteam" id="team">
-        </select><br><br>
+        <label for="description">Description</label>
+        <input type="text" id="description" name="description" required><br><br>
+
+        
 
         <input type="submit" value="Submit" name="btnSubmit">
     </form>
