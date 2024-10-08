@@ -28,12 +28,6 @@
             return $res->num_rows;
         }
 
-        // public function getEventTeamById($idevent) {
-        //     $stmt = $this->mysqli->prepare("SELECT * FROM event_teams WHERE idevent = ?");
-        //     $stmt->bind_param("i", $idevent);
-        //     $stmt->execute();
-        //     return $stmt->get_result();
-        // }
 
         public function getEventTeamById($idevent, $idteam) {
             $stmt = $this->mysqli->prepare("SELECT * FROM event_teams WHERE idevent = ? AND idteam = ?");
