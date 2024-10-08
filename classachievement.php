@@ -11,10 +11,10 @@
             return $res->num_rows;
         }
         public function insertAchievement($arr_col){
-            $sql = "INSERT INTO achievement (idachievement, idteam, name, date, description)
-            VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO achievement (idteam, name, date, description)
+            VALUES (?,?,?,?)";
             $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param("iisss", $arr_col['idachievement'], $arr_col['idteam'], $arr_col['name'],$arr_col['date'], $arr_col['description']);
+            $stmt->bind_param("isss", $arr_col['idteam'], $arr_col['name'],$arr_col['date'], $arr_col['description']);
             $stmt->execute();
 
             return $this->mysqli->affected_rows;
@@ -27,7 +27,7 @@
             return $res;
         }
         public function getAchievement($offset=null, $limit=null) { 
-            $sql = "SELECT * FROM achievement";
+            $sql = "SELECT a.*, t.name AS 'namateam' FROM achievement a INNER JOIN team t WHERE a.idteam=t.idteam";
 
             if (!is_null($offset) && !is_null($limit)) {
                 $sql .= " LIMIT ?, ?";

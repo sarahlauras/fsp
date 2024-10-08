@@ -28,7 +28,7 @@
         <div id="kiri">
             <ul>
             <li><a href="team.php">Daftar Team</a></li>
-            <li><a href="esport_game.php">Daftar Game</a></li>
+            <li><a href="member.php">Daftar Member</a></li>
             <li><a href="join_proposal.php">Daftar Join Proposal</a></li>
             <li><a href="esport_event.php">Daftar Event</a></li>
             <li><a href="eventteams.php">Daftar Event Team</a></li>

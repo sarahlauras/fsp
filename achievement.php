@@ -71,7 +71,7 @@
                             <td>".$row['name']."</td>
                             <td>".$row['description']."</td>
                             <td>".$row['date']."</td>
-                            <td>".$row['idteam']."</td>
+                            <td>".$row['namateam']."</td>
                             <td>
                                 <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah Data</a> 
                                 <a href='deleteachievement.php?idachievement=".$row['idachievement']."'>Hapus Data</a>

@@ -34,9 +34,7 @@
 
         <label for="description">Description</label>
         <input type="text" id="description" name="description" required><br><br>
-
         
-
         <input type="submit" value="Submit" name="btnSubmit">
     </form>
 </body>

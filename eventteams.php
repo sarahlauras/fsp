@@ -36,7 +36,7 @@
             <li><a href="esport_game.php">Daftar Game</a></li>
             <li><a href="join_proposal.php">Daftar Join Proposal</a></li>
             <li><a href="esport_event.php">Daftar Event</a></li>
-            <li><a href="eventteams.php">Daftar Event Team</a></li>
+            <li><a href="member.php">Daftar Member</a></li>
             <li><a href="achievement.php">Daftar Achievement</a></li>
             <li><a href="team_member.php">Daftar Team Member</a></li>
             </ul>
