@@ -1,14 +1,47 @@
 <?php
-    echo "Sukses";
     require_once("classevent_teams.php");
     require_once("classteam.php");
 ?>
 <html>
 <head>
+<title>Event Teams/title>
+        <style>
+            .text_merah {
+                color: red;
+            }
+
+            #kiri {
+                display: inline-block;
+                width: 200px;
+            }
+
+            #kanan {
+                display: inline-block;
+                min-width: 800px;
+            }
+
+            body {
+                margin-left:auto;
+                margin-right:auto;
+                width: 1200px;
+            }
+        </style>
     <title>Event Teams</title>
 </head>
 <body>
-
+<h1>Event Teams</h1>
+        <div id="kiri">
+            <ul>
+            <li><a href="team.php">Daftar Team</a></li>
+            <li><a href="esport_game.php">Daftar Game</a></li>
+            <li><a href="join_proposal.php">Daftar Join Proposal</a></li>
+            <li><a href="esport_event.php">Daftar Event</a></li>
+            <li><a href="eventteams.php">Daftar Event Team</a></li>
+            <li><a href="achievement.php">Daftar Achievement</a></li>
+            <li><a href="team_member.php">Daftar Team Member</a></li>
+            </ul>
+        </div>
+        <div id="kanan">
 <?php 
     $event_teams = new EventTeams();
         $totaldata = 0;

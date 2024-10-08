@@ -1,24 +1,21 @@
 <?php
-    require_once 'classachievement.php';
-    $achievement = new Achievement();
+require_once 'classachievement.php';
+$achievement = new Achievement();
 
-    if($_POST['btnSubmit']) { 
-        extract($_POST);
-        if (isset($name, $description, $date,  $idTeam)) {
-            $jumlah = $achievement->editAchievement($name, $description, $Date, $idTeam );
-
-            if ($jumlah > 0) {
-                header("Location: achievement.php?result=success");
-                exit();
-            } else {
-                echo "Tidak ada perubahan.";
-            }
+if(isset($_POST['btnSubmit'])) { 
+    extract($_POST);
+    if (isset($idachievement, $name, $description, $date, $idteam)) {
+        $jumlah = $achievement->editAchievement($idachievement, $name, $description, $date, $idteam);
+        if ($jumlah > 0) {
+            header("Location: achievement.php?result=success");
+            exit();
         } else {
-            echo "Semua field harus diisi.";
+            echo "Tidak ada perubahan.";
         }
-    }  
-    
-    else {
-        echo "Tidak ada data!";
+    } else {
+        echo "Semua field harus diisi.";
     }
+} else {
+    echo "Tidak ada data!";
+}
 ?>

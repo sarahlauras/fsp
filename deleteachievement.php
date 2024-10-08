@@ -3,7 +3,7 @@
 
     $achievement = new Achievement();
 
-    if(isset($_GET['idAchievement'])) {
+    if(isset($_GET['idachievement'])) {
         $idachievement = $_GET['idachievement'];
         $jumlah = $achievement->deleteAchievement($idachievement);
 

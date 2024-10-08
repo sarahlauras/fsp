@@ -69,21 +69,19 @@
             return $stmt->affected_rows; 
         }
 
-<<<<<<< Updated upstream
         public function editEvent($idevent, $idteam) {
             $stmt = $this->mysqli->prepare(
                 "UPDATE event_teams SET idevent=?, idteam=?
                 WHERE idevent=?");
             $stmt->bind_param("iii", $idevent, $idteam, $description, $idevent);
-=======
+        }
         public function deleteEventTeam($idevent, $idteam) {
             $stmt = $this->mysqli->prepare("DELETE FROM event_teams WHERE idevent=? AND idteam=?");
             $stmt->bind_param("ii", $idevent, $idteam);
->>>>>>> Stashed changes
             $stmt->execute();
             $jumlah = $stmt->affected_rows;
             $stmt->close();
             return $jumlah;
         }
-    }
+        }
 ?>

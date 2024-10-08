@@ -14,7 +14,7 @@
             $sql = "INSERT INTO achievement (idachievement, idteam, name, date, description)
             VALUES (?,?,?,?,?)";
             $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param("iisds", $arr_col['idachievement'], $arr_col['idteam'], $arr_col['name'],$arr_col['date'], $arr_col['description']);
+            $stmt->bind_param("iisss", $arr_col['idachievement'], $arr_col['idteam'], $arr_col['name'],$arr_col['date'], $arr_col['description']);
             $stmt->execute();
 
             return $this->mysqli->affected_rows;
@@ -48,11 +48,11 @@
             return $stmt->get_result();
         }
 
-        public function editAchievement($name, $description,$date, $team) {
+        public function editAchievement($name, $description,$date, $idteam, $idachievement) {
             $stmt = $this->mysqli->prepare(
                 "UPDATE achievement SET name=?, description=?, date=?, idteam=?
                 WHERE idachievement=?");
-            $stmt->bind_param("ssdi", $name, $description, $date, $idteam);
+            $stmt->bind_param("sssii", $name, $description, $date, $idteam, $idachievement);
             $stmt->execute();
             $jumlah = $stmt->affected_rows;
             $stmt->close();

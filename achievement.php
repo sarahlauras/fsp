@@ -65,11 +65,13 @@
                     </tr>";
 
                 while($row = $res->fetch_assoc()) {
+                    $formatrilis = strftime("%d %B %Y", strtotime($row['date']));
+                    $format_serial = "";
                     echo "<tr>
                             <td>".$row['name']."</td>
                             <td>".$row['description']."</td>
                             <td>".$row['date']."</td>
-                            <td>".$row['team']."</td>
+                            <td>".$row['idteam']."</td>
                             <td>
                                 <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah Data</a> 
                                 <a href='deleteachievement.php?idachievement=".$row['idachievement']."'>Hapus Data</a>

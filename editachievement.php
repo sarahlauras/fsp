@@ -1,48 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Team</title>
+    <title>Edit Achievement</title>
 </head>
 <body>
     <?php
-        if(isset($_GET["result"])){
-            if($_GET["result"] == "success"){
-                echo "Data berhasil disimpan.<br><br>";
-            } 
+        require_once 'classachievement.php';
+        $achievement = new Achievement(); 
+        
+        if(isset($_GET["result"])) {
+            if($_GET["result"] == "success") {
+                echo "Data berhasil ditambahkan.<br><br>";
+            }
         }
-        $id = $_GET["idachievement"];
 
         if (isset($_GET["idachievement"])) {
-            $id = $_GET["idachievement"];
+            $id = $_GET["idachievement"]; 
 
-            $stmt = $achievement->getAchievementById($id);
+            $stmt = $achievement->getAchievementById($id); 
 
-            if ($stmt && $stmt->num_rows>0) {
-                $row = $stmt->fetch_assoc();
+            if ($stmt && $stmt->num_rows > 0) {
+                $row = $stmt->fetch_assoc(); 
             } else {
                 echo "Achievement tidak ditemukan.";
+                exit;
             }
         } else {
             echo "ID Achievement tidak ditemukan.";
+            exit;
         }
     ?>
-    <form action="editachievement_proses.php" method="post" enctype='multipart/form-data'>
-        <label for="name">Achievement Name</label>
-        <input type="text" id="name" name="name" value ="<?php echo $row['name'];?>" required><br><br>
+    <form action="editachievement_proses.php" method="post">
+        <label for="name">Nama </label>
+        <input type="text" id="name" name="name" value="<?php echo $row["name"]; ?>"><br><br>
+        
+        <label for="description">Description </label>
+        <textarea id="description" name="description"><?php echo $row["description"]; ?></textarea><br><br>
+        
+        <label for="date">Date </label>
+        <input type="date" id="date" name="date" value="<?php echo $row["date"]; ?>"><br><br>
 
-        <label for="description">Description</label>
-        <input type="text" id="description" name="description" value ="<?php echo $row['description'];?>" required><br><br>
+        <label for="team">Team:</label>
+        <select name="idteam" id="team">
+            <?php
+            $resTeam = $achievement->getTeam();
 
-        <label for="Date">Date</label>
-        <input type="date" id="date" name="date" value ="<?php echo $row['date'];?>" required><br><br>
+            while($rowTeam = $resTeam->fetch_assoc()) {
+                $selected = ($row['idteam'] == $rowTeam['idteam']) ? 'selected' : '';
+                echo "<option value='".$rowTeam['idteam']."' $selected>".$rowTeam['name']."</option>";
+            }
+            ?>
+        </select><br><br>
 
-        <label for="Name">Team</label>
-            <select name="idteam" id="team" value ="<?php echo $row['team'];?>">
-        </select>
-        <input type="hidden" name="idachievement" value="<?php echo $row['idachievement']; ?>">
+        <input type="hidden" name="idachievement" value="<?php echo $row["idachievement"];?>"> 
+
         <input type="submit" value="Submit" name="btnSubmit">
-    </form>        
+    </form>
 </body>
 </html>
