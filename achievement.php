@@ -35,7 +35,7 @@
             <li><a href="join_proposal.php">Daftar Join Proposal</a></li>
             <li><a href="esport_event.php">Daftar Event</a></li>
             <li><a href="eventteams.php">Daftar Event Team</a></li>
-            <li><a href="achievement.php">Daftar Achievement</a></li>
+            <li><a href="member.php">Daftar Member</a></li>
             <li><a href="team_member.php">Daftar Team Member</a></li>
             </ul>
         </div>
@@ -67,10 +67,11 @@
                 while($row = $res->fetch_assoc()) {
                     $formatrilis = strftime("%d %B %Y", strtotime($row['date']));
                     $format_serial = "";
+                    $tanggal = new DateTime($row['date']);
                     echo "<tr>
                             <td>".$row['name']."</td>
                             <td>".$row['description']."</td>
-                            <td>".$row['date']."</td>
+                            <td>".$tanggal->format('d/m/Y')."</td>
                             <td>".$row['namateam']."</td>
                             <td>
                                 <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah Data</a> 
