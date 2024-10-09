@@ -69,7 +69,6 @@ class TeamMember extends DBParent
         $stmt->execute();
         $res = $stmt->get_result();
         return $res;
-
     }
 
     public function insertTeamMember($arr_col) {
