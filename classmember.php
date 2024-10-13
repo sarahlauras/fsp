@@ -62,5 +62,25 @@
             $stmt->close();
             return $jumlah;
         }
+        public function doLogin($username, $password){
+            $sql = "SELECT * FROM member WHERE username = ?";
+            $stmt = $this->mysqli->prepare($sql);
+        
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if($result->num_rows > 0){
+                $row = $result->fetch_assoc();
+                if(password_verify($password, $row['password'])){
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        
     }
 ?>

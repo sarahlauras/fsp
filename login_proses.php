@@ -7,9 +7,9 @@
             header("Location: member.php");
             exit();
         }else{
-            header("Location: login.php?error=loginfailed ");
+            header("Location: login.php?error=loginfailed");
             exit();
-        }
+        }        
     }else{
         header("Location: login.php");
         exit();
