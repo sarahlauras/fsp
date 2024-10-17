@@ -1,64 +1,64 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Memastikan padding dan margin tidak mempengaruhi ukuran elemen */
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Mengisi tinggi layar */
-    background-color: #f9f0ff; /* Latar belakang lilac */
+    min-height: 100vh;
+    background-color: #f9f0ff;
 }
 
 .welcome-text {
-    font-size: 36px; /* Ukuran font untuk teks sambutan */
-    color: #4b3c92; /* Warna ungu tua */
-    text-align: center; /* Pusatkan teks */
-    margin-bottom: 10px; /* Ruang bawah */
+    font-size: 36px;
+    color: #4b3c92;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .bold {
-    font-weight: bold; /* Membuat teks menjadi bold */
+    font-weight: bold;
 }
 
 .subtitle {
-    font-size: 24px; /* Ukuran font untuk subjudul */
-    color: #727272; /* Warna abu-abu untuk subjudul */
-    margin-bottom: 20px; /* Ruang bawah */
+    font-size: 24px;
+    color: #727272;
+    margin-bottom: 20px;
 }
 
 nav {
-    margin-top: 20px; /* Ruang atas untuk navigasi */
+    margin-top: 20px;
 }
 
 .menuItems {
-    list-style: none; /* Menghapus bullet */
-    padding: 0; /* Menghapus padding */
-    display: flex; /* Menggunakan flexbox untuk horizontal */
-    flex-wrap: wrap; /* Memungkinkan item membungkus jika terlalu banyak */
-    justify-content: center; /* Pusatkan item di tengah */
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .menuItems li {
-    margin: 10px; /* Ruang antar item */
+    margin: 10px;
 }
 
 .menuItems a {
-    text-decoration: none; /* Menghapus garis bawah */
-    color: #5c4d9f; /* Warna ungu muda */
-    padding: 15px; /* Ruang dalam */
-    display: block; /* Membuat seluruh area tautan dapat diklik */
-    border: 1px solid #5c4d9f; /* Garis batas dengan warna ungu muda */
-    background-color: #fff; /* Latar belakang putih */
-    border-radius: 8px; /* Sudut melengkung untuk kartu */
-    text-align: center; /* Pusatkan teks */
-    width: 150px; /* Lebar kartu */
+    text-decoration: none;
+    color: #5c4d9f;
+    padding: 15px;
+    display: block;
+    border: 1px solid #5c4d9f;
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    width: 150px;
 }
 
 .menuItems a:hover {
-    background-color: #e8e8ff; /* Latar belakang saat hover */
+    background-color: #e8e8ff;
 }
