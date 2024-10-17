@@ -1,5 +1,8 @@
 <?php
     require_once("classteammember.php");
+    session_start();
+    
+    $role = $_SESSION["profile"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +47,7 @@
     </div> 
     <div id="kanan">
         <?php
+        if ($role === 'admin'):
             $team_member = new TeamMember();
             $totaldata = 0;
             $perhalaman = 4;       
@@ -96,5 +100,10 @@
         ?>
     </div> 
     <a href="insertteam_member.php">Add New Team Member</a>
+    <?php
+        else:
+            echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
+        endif; 
+    ?>
 </body>
 </html>

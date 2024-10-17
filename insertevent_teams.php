@@ -124,8 +124,8 @@
             }
         });
 
-        $(document).ready(function() {
-            alert("ready");
-        });
+        //$(document).ready(function() {
+        //    alert("ready");
+        //});
     </script>
 </html>
