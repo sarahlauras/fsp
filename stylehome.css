@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Memastikan padding dan margin tidak mempengaruhi ukuran elemen */
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Mengisi tinggi layar */
+    background-color: #f9f0ff; /* Latar belakang lilac */
+}
+
+div {
+    color: #4b3c92; /* Warna teks ungu tua */
+    text-align: center; /* Teks di tengah */
+}
+
+p {
+    font-size: 48px; /* Ukuran font besar untuk judul */
+    color: #6f42c1; /* Warna teks judul ungu */
+    text-transform: uppercase; /* Mengubah menjadi huruf besar */
+    margin: 20px 0; /* Margin atas dan bawah */
+}
+
+nav {
+    margin-top: 20px; /* Ruang atas untuk navigasi */
+}
+
+.menuItems {
+    list-style: none; /* Menghapus bullet */
+    display: flex;
+    flex-direction: column; /* Menyusun secara vertikal */
+    align-items: center; /* Menyusun di tengah */
+}
+
+.menuItems li {
+    margin: 10px 0; /* Ruang antar item */
+}
+
+.menuItems a {
+    text-decoration: none; /* Menghapus garis bawah */
+    color: #5c4d9f; /* Warna tautan ungu muda */
+}
+
+.menuItems a:hover {
+    color: #4b3c92; /* Warna saat hover ungu tua */
+}
