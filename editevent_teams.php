@@ -20,9 +20,6 @@
     if (isset($_GET["idevent"]) && isset($_GET["idteam"])) {
         $idevent = $_GET["idevent"];
         $idteam = $_GET["idteam"];
-
-        echo "ID EVENT: " . $idevent;
-        echo "ID TEAM: ". $idteam;
     
         $event_team_data = $event_teams->getEventTeamById($idevent, $idteam);
     
