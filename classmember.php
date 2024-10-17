@@ -7,7 +7,7 @@
         }
 
         public function getMember($offset=null, $limit=null) { 
-            $sql = "SELECT * FROM member";
+            $sql = "SELECT * FROM member where profile='member'";
 
             if (!is_null($offset) && !is_null($limit)) {
                 $sql .= " LIMIT ?, ?";

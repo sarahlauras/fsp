@@ -10,41 +10,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Member</title>
-        <style>
-            .text_merah {
-                color: red;
-            }
-
-            #kiri {
-                display: inline-block;
-                width: 200px;
-            }
-
-            #kanan {
-                display: inline-block;
-                min-width: 800px;
-            }
-
-            body {
-                margin-left:auto;
-                margin-right:auto;
-                width: 1200px;
-            }
-        </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h1>DAFTAR TEAM MEMBER</h1>
-    <div id="kiri">
-        <ul>
-            <li><a href="team.php">Daftar Team</a></li>
-            <li><a href="esport_game.php">Daftar Game</a></li>
-            <li><a href="join_proposal.php">Daftar Join Proposal</a></li>
-            <li><a href="esport_event.php">Daftar Event</a></li>
-            <li><a href="eventteams.php">Daftar Event Team</a></li>
-            <li><a href="achievement.php">Daftar Achievement</a></li>
-            <li><a href="member.php">Daftar Member</a></li>
-        </ul>
-    </div> 
     <div id="kanan">
         <?php
         if ($role === 'admin'):

@@ -45,9 +45,10 @@
 
             while($row = $resevent_teams->fetch_assoc()) {
                 $idteam = $teamid->getIdTeamByName($row['team_name']);
+                $formattgl = strftime("%d %B %Y", strtotime($row['event_date']));
                 echo "<tr>
                         <td>" . $row['event_name'] . "</td>
-                        <td>" . $row['event_date'] . "</td>
+                        <td>" . $formattgl . "</td>
                         <td>" . $row['team_name'] . "</td>
                         <td>" . $row['game_name'] . "</td>
                         <td>

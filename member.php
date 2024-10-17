@@ -20,6 +20,11 @@ $role = $_SESSION["profile"];
             $totaldata = 0;
             $perhalaman = 4;
             $currenthalaman = 1;
+            
+            if(isset($_GET['offset'])) { 
+                $offset = $_GET['offset']; 
+                $currenthalaman = ($_GET['offset']/$perhalaman)+1;
+            } else { $offset = 0; }
 
             $res = $member->getMember($offset, $perhalaman);
             $totaldata = $member->getTotalData();

@@ -55,15 +55,13 @@
                 }
 
                 while($row = $res->fetch_assoc()) {
-                    $formatrilis = strftime("%d %B %Y", strtotime($row['date']));
-                    $format_serial = "";
-                    $tanggal = new DateTime($row['date']);
+                    $formattgl = strftime("%d %B %Y", strtotime($row['date']));
 
                     if ($role === 'admin') {
                         echo "<tr>
                             <td>".$row['name']."</td>
                             <td>".$row['description']."</td>
-                            <td>".$tanggal->format('d/m/Y')."</td>
+                            <td>".$formattgl."</td>
                             <td>".$row['namateam']."</td>
                             <td>
                                 <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah Data</a> 

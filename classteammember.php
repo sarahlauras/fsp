@@ -55,7 +55,7 @@ class TeamMember extends DBParent
     }
 
     public function getMember(){
-        $sql = "SELECT idmember, fname FROM member";
+        $sql = "SELECT idmember, fname FROM member WHERE profile ='member'";
         $stmt = $this->mysqli->prepare($sql);
         $stmt->execute();
         $res = $stmt->get_result();
