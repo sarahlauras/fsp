@@ -59,8 +59,7 @@
         
         echo "</table>";
 
-        // paging
-        //echo "<div>Total Data: ".$totaldata."</div>";
+        
         echo "<a href='eventteams.php?offset=0'>First</a>";
         
         for($i = 1; $i <= $jumlahhalaman; $i++) {
@@ -77,7 +76,9 @@
         else {
             echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
         }
+        if ($role == 'admin') {
+            echo "<a href='insertevent_teams.php?'>Insert Data</a>";
+        }
     ?>  
-<a href='insertevent_teams.php?'>Insert Data</a>
 </body>
 </html>
