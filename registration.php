@@ -2,8 +2,6 @@
     <head>
         <body>
             <form action="registration_proses.php" method="post">
-                <label>Member ID</label>
-                <input type="text" name="idmember"><br><br>
 
                 <label>First Name</label>
                 <input type="text" name="fname"><br><br>
@@ -15,10 +13,10 @@
                 <input type="text" name="username"><br><br>
 
                 <label>Password</label>
-                <input type="text" name="password"><br><br>
+                <input type="password" name="password"><br><br>
 
                 <label>Re-Password</label>
-                <input type="text" name="repassword"><br><br>
+                <input type="password" name="repassword"><br><br>
 
                 <label>Profile</label> 
                 <select id="profile" name="profile">

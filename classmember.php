@@ -34,11 +34,11 @@
         }
 
         public function insertMember($arr_col) {
-            $sql = "INSERT INTO member(idmember, fname, lname, username, password, profile) 
-                    VALUES (?,?,?,?,?,?)";
+            $sql = "INSERT INTO member(fname, lname, username, password, profile) 
+                    VALUES (?,?,?,?,?)";
             $stmt = $this->mysqli->prepare($sql);
             $hash_password = password_hash($arr_col['password'], PASSWORD_DEFAULT);
-            $stmt->bind_param("isssss", $arr_col['idmember'], $arr_col['fname'], $arr_col['lname'], 
+            $stmt->bind_param("sssss", $arr_col['fname'], $arr_col['lname'], 
                               $arr_col['username'], $hash_password, $arr_col['profile']);
             $stmt->execute();
     

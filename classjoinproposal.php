@@ -6,38 +6,54 @@
             parent::__construct();
         }
 
-        public function getJoinProposal($id = null, $offset = null, $limit = null) {
-            $sql = "SELECT * 
+        public function getJoinProposal($username = null, $id = null, $offset = null, $limit = null) {
+            $sql = "SELECT jp.*, m.fname, t.name 
                     FROM join_proposal jp 
                     INNER JOIN member m ON jp.idmember = m.idmember 
                     INNER JOIN team t ON jp.idteam = t.idteam";
-            if (!is_null($id)) {
+        
+            if (!is_null($username)) {
+                $sql .= " WHERE m.username = ?";
+            } elseif (!is_null($id)) {
                 $sql .= " WHERE jp.idjoin_proposal = ?";
             }
+        
             if (!is_null($offset) && !is_null($limit)) {
                 $sql .= " LIMIT ?, ?";
             }
+        
             $stmt = $this->mysqli->prepare($sql);
         
-            if (!is_null($id) && !is_null($offset) && !is_null($limit)) {
+            if (!is_null($username) && !is_null($offset) && !is_null($limit)) {
+                $stmt->bind_param('sii', $username, $offset, $limit);
+            } elseif (!is_null($username)) {
+                $stmt->bind_param('s', $username);
+            } elseif (!is_null($id) && !is_null($offset) && !is_null($limit)) {
                 $stmt->bind_param('iii', $id, $offset, $limit);
             } elseif (!is_null($id)) {
                 $stmt->bind_param('i', $id);
             } elseif (!is_null($offset) && !is_null($limit)) {
                 $stmt->bind_param('ii', $offset, $limit);
             }
+        
             $stmt->execute();
             $res = $stmt->get_result();
             return $res;
         }
 
-        public function getTotalData(){
-            $res = $this->getJoinProposal(null,null,null);
+        public function getTotalData($username = null) {
+            if (is_null($username)) {
+                // Ambil semua join proposal
+                $res = $this->getJoinProposal(null, null, null, null);
+            } else {
+                // Ambil join proposal untuk member tertentu
+                $res = $this->getJoinProposal($username, null, null, null);
+            }
+            
             return $res->num_rows;
         }
-
         public function getMember(){
-            $sql = "SELECT idmember, fname FROM member";
+            $sql = "SELECT idmember, fname FROM member WHERE profile = 'member'";
             $stmt = $this->mysqli->prepare($sql);
             $stmt->execute();
             $res = $stmt->get_result();
