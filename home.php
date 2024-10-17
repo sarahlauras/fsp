@@ -37,6 +37,9 @@ $role = $_SESSION["profile"];
             <?php endif; ?>
         </ul>
     </nav>
+    <div>
+        <a href="logout.php" class="logout-button">Logout</a>
+    </div>
 </body>
 
 </html>

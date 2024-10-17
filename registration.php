@@ -1,31 +1,36 @@
-<html>
-    <head>
-        <body>
-            <form action="registration_proses.php" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" type="text/css" href="loginregis.css"> 
+</head>
+<body>
+    <form action="registration_proses.php" method="post">
 
-                <label>First Name</label>
-                <input type="text" name="fname"><br><br>
+        <label>First Name</label>
+        <input type="text" name="fname" required>
 
-                <label>Last Name</label>
-                <input type="text" name="lname"><br><br>
+        <label>Last Name</label>
+        <input type="text" name="lname" required>
 
-                <label>Username </label>
-                <input type="text" name="username"><br><br>
+        <label>Username</label>
+        <input type="text" name="username" required>
 
-                <label>Password</label>
-                <input type="password" name="password"><br><br>
+        <label>Password</label>
+        <input type="password" name="password" required>
 
-                <label>Re-Password</label>
-                <input type="password" name="repassword"><br><br>
+        <label>Re-Password</label>
+        <input type="password" name="repassword" required>
 
-                <label>Profile</label> 
-                <select id="profile" name="profile">
-                    <option value="admin">Admin</option>
-                    <option value="member">Member</option>
-                </select><br><br>
+        <label>Profile</label> 
+        <select id="profile" name="profile" required>
+            <option value="admin">Admin</option>
+            <option value="member">Member</option>
+        </select>
 
-                <input type="submit" value="Submit" name="btnSubmit"><br><br>
-            </form>
-        </body>
-    </head>
+        <input type="submit" value="Submit" name="btnSubmit">
+    </form>
+</body>
 </html>

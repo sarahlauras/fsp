@@ -47,14 +47,13 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #DDA0DD; /* Plum */
+    background-color: #DDA0DD; 
 }
 
 tr:hover {
-    background-color: #C3B1E1; /* Light Purple */
+    background-color: #C3B1E1; 
 }
 
-/* Link dengan nuansa ungu */
 a {
     text-decoration: none;
     color: #8A2BE2;
@@ -89,19 +88,19 @@ a:hover {
 }
 
 .pagination strong {
-    color: #FF69B4; /* Hot Pink */
+    color: #FF69B4; 
     padding: 8px 12px;
 }
 
-/* Footer */
+
 footer {
     text-align: center;
     margin-top: 20px;
-    color: #6A5ACD; /* Slate Blue */
+    color: #6A5ACD; 
     font-size: 0.9rem;
 }
 
-/* Tombol dan Link Tambah Member */
+
 a.button {
     display: inline-block;
     padding: 10px 20px;
