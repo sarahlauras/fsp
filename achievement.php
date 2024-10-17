@@ -1,5 +1,8 @@
 <?php
     require_once("classachievement.php");
+    session_start();
+
+    $role = $_SESSION["profile"];
 ?>
 <html>
     <head>
@@ -40,16 +43,17 @@
             </ul>
         </div>
         <div id="kanan">
-            <?php 
+            <?php
+            if($role === 'admin'):
                 $achievement = new Achievement();
                 $totaldata = 0;
                 $perhalaman = 4;       
                 $currenthalaman = 1;
 
-                if(isset($_GET['offset'])) { 
-                    $offset = $_GET['offset']; 
-                    $currenthalaman = ($_GET['offset']/$perhalaman)+1;
-                } else { $offset = 0; }
+                // if(isset($_GET['offset'])) { 
+                //     $offset = $_GET['offset']; 
+                //     $currenthalaman = ($_GET['offset']/$perhalaman)+1;
+                // } else { $offset = 0; }
                 
                 $res = $achievement->getAchievement($offset, $perhalaman);
                 $totaldata = $achievement->getTotalData();
@@ -98,6 +102,11 @@
                 echo "<a href='achievement.php?offset=".$lastOffset."'>Last</a><br><br>";
             ?>
             <a href='addachievement.php'>Insert Achievement</a>
+            <?php 
+                else:
+                    echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
+                endif; 
+            ?>
         </div>    
     </body>
 </html>

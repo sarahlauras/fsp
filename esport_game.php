@@ -1,3 +1,9 @@
+<?php
+    require_once("classgame.php");
+    session_start();
+    
+    $role = $_SESSION["profile"];
+?>
 <html>
     <head>
         <title>E-Sport Game</title>
@@ -38,6 +44,7 @@
         </div>
         <div id="kanan">
             <?php 
+            if ($role === 'admin'):
             $mysqli = new mysqli("localhost", "root","","esport");
             if($mysqli -> connect_errno) {
                 echo "Koneksi database gagal: " . $mysqli->connect_error;
@@ -72,5 +79,10 @@
             ?>
 
         <a href='esport_insertgame.php'>Insert Game</a>
+        <?php 
+            else:
+                echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
+            endif; 
+            ?>
         </body>
 </html>
