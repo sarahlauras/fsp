@@ -14,14 +14,24 @@
             $stmt->execute();
             return $this->mysqli->insert_id;
         }
-
-        public function getAllGame() {
-            $stmt = $this->mysqli->prepare("SELECT * FROM game");
+        public function getTotalData(){
+            $res = $this->getAllGame();
+            return $res->num_rows;
+        }
+        public function getAllGame($offset = null, $limit = null) { 
+            $sql = "SELECT * FROM game";
+            if (!is_null($offset) && !is_null($limit)) {
+                $sql .= " LIMIT ? OFFSET ?";
+            }
+            $stmt = $this->mysqli->prepare($sql);
+            if (!is_null($offset) && !is_null($limit)) {
+                $stmt->bind_param("ii", $limit, $offset);
+            }
             $stmt->execute();
             $result = $stmt->get_result();
             return $result;
         }
-
+        
         public function getGameById($idgame) {
             $stmt = $this->mysqli->prepare("SELECT * FROM game WHERE idgame=?");
             $stmt->bind_param("i", $idgame);
