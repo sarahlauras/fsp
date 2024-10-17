@@ -4,7 +4,7 @@
     if(isset($_POST['btnLogin'])){
         $member = new Member();
         if($member->doLogin($_POST["username"], $_POST["password"])){
-            header("Location: member.php");
+            header("Location: home.php");
             exit();
         }else{
             header("Location: login.php?error=loginfailed");

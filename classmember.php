@@ -63,6 +63,7 @@
             return $jumlah;
         }
         public function doLogin($username, $password){
+            session_start();
             $sql = "SELECT * FROM member WHERE username = ?";
             $stmt = $this->mysqli->prepare($sql);
         
@@ -73,6 +74,9 @@
             if($result->num_rows > 0){
                 $row = $result->fetch_assoc();
                 if(password_verify($password, $row['password'])){
+                    $_SESSION['idmember']=$row['idmember'];
+                    $_SESSION['username'] = $row['username'];
+                    $_SESSION['profile'] = $row['profile'];
                     return true;
                 } else {
                     return false;
