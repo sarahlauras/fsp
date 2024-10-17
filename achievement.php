@@ -1,6 +1,10 @@
 <?php
     require_once("classachievement.php");
     session_start();
+    if (!isset($_SESSION["username"])) {
+        header("Location: login.php");
+        exit();
+    }
 
     $role = $_SESSION["profile"];
 ?>
@@ -22,18 +26,24 @@
                     $currenthalaman = ($_GET['offset']/$perhalaman)+1;
                 } else { $offset = 0; }
                 
-                $res = $achievement->getAchievement($offset, $perhalaman);
-                $totaldata = $achievement->getTotalData();
-
+                if ($role == 'admin') {
+                    $res = $achievement->getAchievement($offset, $perhalaman);
+                    $totaldata = $achievement->getTotalData();
+                } else {
+                    $username = $_SESSION['username'];
+                    $res = $achievement->getAchievement($offset, $perhalaman);
+                    $totaldata = $achievement->getTotalData();
+                }
                 $jumlahhalaman = ceil($totaldata/$perhalaman);
 
                 echo "<table border='1'>";
-                if ($role =='member') {
+                if ($role =='admin') {
                     echo "<tr>
                         <th>Name</th>
                         <th>Description</th> 
                         <th>Date</th>
                         <th>Team</th>
+                        <th colspan ='4'>Aksi</th>
                     </tr>";
                 } else {
                     echo "<tr>
@@ -41,7 +51,6 @@
                         <th>Description</th> 
                         <th>Date</th>
                         <th>Team</th>
-                        <th colspan ='4'>Aksi</th>
                      </tr>";
                 }
 
@@ -50,15 +59,7 @@
                     $format_serial = "";
                     $tanggal = new DateTime($row['date']);
 
-                    if ($role === 'member') {
-                        echo "<tr>
-                            <td>".$row['name']."</td>
-                            <td>".$row['description']."</td>
-                            <td>".$tanggal->format('d/m/Y')."</td>
-                            <td>".$row['namateam']."</td>
-                        </tr>";
-                    }
-                    else {
+                    if ($role === 'admin') {
                         echo "<tr>
                             <td>".$row['name']."</td>
                             <td>".$row['description']."</td>
@@ -68,6 +69,14 @@
                                 <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah Data</a> 
                                 <a href='deleteachievement.php?idachievement=".$row['idachievement']."'>Hapus Data</a>
                             </td>
+                        </tr>";
+                    }
+                    else {
+                        echo "<tr>
+                            <td>".$row['name']."</td>
+                            <td>".$row['description']."</td>
+                            <td>".$tanggal->format('d/m/Y')."</td>
+                            <td>".$row['namateam']."</td>
                         </tr>";
                     }
                 }
