@@ -12,13 +12,13 @@ class Achievement extends DBParent {
                 INNER JOIN team t ON a.idteam = t.idteam";
         
         if (!is_null($member)) {
-            $sql .= " INNER JOIN user_team ut ON ut.idteam = t.idteam 
-                      WHERE ut.userid = ?";
+            $sql .= " INNER JOIN team_members ut ON ut.idteam = t.idteam 
+                      WHERE ut.idmember= ?";
         }
 
         $stmt = $this->mysqli->prepare($sql);
         if (!is_null($member)) {
-            $stmt->bind_param("i", $userid);
+            $stmt->bind_param("i", $member);
         }
 
         $stmt->execute();
@@ -44,14 +44,15 @@ class Achievement extends DBParent {
         return $res;
     }
 
-    public function getAchievement($offset = null, $limit = null, $userid = null) {
+    public function getAchievement($offset = null, $limit = null, $member = null) {
         $sql = "SELECT a.*, t.name AS 'namateam' 
                 FROM achievement a 
                 INNER JOIN team t ON a.idteam = t.idteam";
  
-        if (!is_null($userid)) {
-            $sql .= " INNER JOIN user_team ut ON ut.idteam = t.idteam 
-                      WHERE ut.userid = ?";
+        if (!is_null($member)) {
+            $sql .= " INNER JOIN team_members
+             ut ON ut.idteam = t.idteam 
+                      WHERE ut.idmember = ?";
         }
         if (!is_null($offset) && !is_null($limit)) {
             $sql .= " LIMIT ?, ?";
@@ -59,10 +60,10 @@ class Achievement extends DBParent {
 
         $stmt = $this->mysqli->prepare($sql);
 
-        if (!is_null($userid) && !is_null($offset) && !is_null($limit)) {
-            $stmt->bind_param('iii', $userid, $offset, $limit);
-        } elseif (!is_null($userid)) {
-            $stmt->bind_param('i', $userid);
+        if (!is_null($member) && !is_null($offset) && !is_null($limit)) {
+            $stmt->bind_param('iii', $member, $offset, $limit);
+        } elseif (!is_null($member)) {
+            $stmt->bind_param('i', $member);
         } elseif (!is_null($offset) && !is_null($limit)) {
             $stmt->bind_param('ii', $offset, $limit);
         }
