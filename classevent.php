@@ -21,15 +21,14 @@ class Event extends DBParent
     public function getAllEvent($username = null, $offset = null, $limit = null)
     {
         // SQL dasar
-        $sql = "SELECT e.*, m.username  
-            FROM event e 
-            INNER JOIN event_teams et ON e.idevent = et.idevent
-            INNER JOIN team t ON et.idteam = t.idteam 
-            INNER JOIN join_proposal jp ON t.idteam = jp.idteam 
-            INNER JOIN member m ON jp.idmember = m.idmember";
+        $sql = "SELECT * FROM event";
 
         if (!is_null($username)) {
-            $sql .= " WHERE m.username = ?";
+            $sql = "SELECT e.*, m.username
+            FROM event e INNER JOIN event_teams et ON e.idevent = et.idevent
+            INNER JOIN team t ON et.idteam = t.idteam 
+            INNER JOIN join_proposal jp ON t.idteam = jp.idteam 
+            INNER JOIN member m ON jp.idmember = m.idmember WHERE status = 'approved' AND m.username = ?";
         }
 
         if (!is_null($offset) && !is_null($limit)) {
