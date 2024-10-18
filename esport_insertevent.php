@@ -4,6 +4,7 @@
 </head>
 <body>
     <?php
+        echo "<a href='esport_event.php'>Back</a>";
         require_once 'classevent.php';
         $event = new Event();
 

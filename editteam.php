@@ -10,6 +10,8 @@
         require_once 'classteam.php';
         $team = new Team();
 
+        echo "<a href='team.php'>Back</a>";
+
         if(isset($_GET["result"])){
             if($_GET["result"] == "success"){
                 //melihat di url nya apakah ada result dan bernilai succes?

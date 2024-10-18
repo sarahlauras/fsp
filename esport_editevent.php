@@ -4,10 +4,11 @@
 </head>
 <body>
     <?php
-
         require_once 'classevent.php';
         $event = new Event();
         
+        echo "<a href='esport_event.php'>Back</a>";
+
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {
                 echo "Data berhasil ditambahkan.<br><br>";

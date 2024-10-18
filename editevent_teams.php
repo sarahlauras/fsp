@@ -10,6 +10,7 @@
     $resEvent = $event->getAllEvent();
     $resTeam = $team->getAllTeam();
 
+    echo "<a href='eventteams.php'>Back</a>";
 
     if(isset($_GET["result"])) {
         if($_GET["result"] == "success") {

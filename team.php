@@ -9,6 +9,7 @@
 <body> 
     <h1>Team</h1>
     <?php
+        echo "<a href='home.php'>Back</a>";
         session_start();
         $role = $_SESSION["profile"];
         if ($role == 'admin'){

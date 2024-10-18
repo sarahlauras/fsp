@@ -4,6 +4,8 @@
 
     $event = new Event();
     $team = new Team();
+
+    echo "<a href='eventteams.php'>Back</a>";
 ?>
 
 <html>

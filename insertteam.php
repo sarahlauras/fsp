@@ -10,6 +10,8 @@
         require_once 'classteam.php';
         $team = new Team();
 
+        echo "<a href='team.php'>Back</a>";
+
         //akan mereturn saat $_GET ada dan tidak null
         if(isset($_GET["result"])){
             if($_GET["result"] == "success"){

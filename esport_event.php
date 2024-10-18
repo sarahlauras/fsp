@@ -19,7 +19,9 @@ $role = $_SESSION["profile"];
 <body>
 
     <h1>Event</h1>
+    
     <?php
+    echo "<a href='home.php'>Back</a>";
     $event = new Event();
     $totaldata = 0;
     $perhalaman = 4;

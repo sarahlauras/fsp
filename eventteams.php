@@ -13,6 +13,7 @@
 <body>
     <h1>Event Teams</h1>
     <?php 
+        echo "<a href='home.php'>Back</a>";
         $role = $_SESSION["profile"];
         if ($role == 'admin'){
 
