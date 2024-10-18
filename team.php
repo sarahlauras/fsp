@@ -11,7 +11,7 @@
     <?php
         session_start();
         $role = $_SESSION["profile"];
-        if ($role === 'admin'){
+        if ($role == 'admin'){
             require_once 'classteam.php';
             $team = new Team();
             $totaldata = 0;
@@ -35,13 +35,15 @@
             <tr>
                 <th>Name</th>
                 <th>Game</th>
+                <th>Aksi</th>
             </tr>";
             while($row = $resteams->fetch_assoc()){
                 echo "<tr>
                     <td>".$row['name']."</td>
                     <td>".$row['game']."</td>
-                    <td><a href='editteam.php?idteam=".$row['idteam']."'>Ubah Data</a></td>
-                    <td><a href='deleteteam.php?idteam=".$row['idteam']."'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Team ini?\");'>Hapus Data</a></td>
+                    <td>
+                    <a href='editteam.php?idteam=".$row['idteam']."'>Ubah</a>
+                    <a href='deleteteam.php?idteam=".$row['idteam']."'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Team ini?\");'>Hapus</a></td>
                 </tr>";
             }
             echo "</table>";
@@ -63,7 +65,7 @@
         }
     ?>
         <?php 
-        if ($role === 'member'){
+        if ($role == 'member'){
             echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
          }
          else {

@@ -16,7 +16,7 @@
     <h1>DAFTAR TEAM MEMBER</h1>
     <div id="kanan">
         <?php
-        if ($role === 'admin'):
+        if ($role == 'admin'):
             $team_member = new TeamMember();
             $totaldata = 0;
             $perhalaman = 4;       
@@ -39,6 +39,7 @@
                 <th>Team</th>
                 <th>Member</th>
                 <th>Description</th>
+                <th>Aksi</th>
             </tr>";
 
             while($row = $res->fetch_assoc()){
@@ -46,8 +47,10 @@
                     <td>".$row['fname']."</td>
                     <td>".$row['name']."</td>
                     <td>".$row['description']."</td>
-                    <td><a href='editteam_member.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'>Ubah Data</a></td>
-                    <td><a href='deleteteammember.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'>Hapus Data</a></td>
+                    <td>
+                    <a href='editteam_member.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'>Ubah</a>
+                    <a href='deleteteammember.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Team Member ini?\");'>Hapus</a>
+                    </td>
                 </tr>";
             }
             echo "</table>";

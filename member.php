@@ -39,6 +39,7 @@ $role = $_SESSION["profile"];
                                 <th>Username</th>
                                 <th>Profile</th>
                                 <th>Password</th>
+                                <th>Aksi</th>
                             </tr>";
 
                             while ($row = $res->fetch_assoc()) {
@@ -56,8 +57,8 @@ $role = $_SESSION["profile"];
                                 }
                 
                                 echo "<td>
-                                        <a href='editmember.php?idmember=" . $row['idmember'] . "'>Ubah Data</a> 
-                                        <a href='deletemember.php?idmember=" . $row['idmember'] . "'>Hapus Data</a>
+                                        <a href='editmember.php?idmember=" . $row['idmember'] . "'>Ubah</a> 
+                                        <a href='deletemember.php?idmember=" . $row['idmember'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Member ini?\");'>Hapus</a>
                                       </td>
                                       </tr>";
                             }

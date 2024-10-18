@@ -45,27 +45,39 @@ $role = $_SESSION["profile"];
         }
         $jumlahhalaman = ceil($totaldata / $perhalaman);
 
-
         echo "<table border = '1'>";
-        echo "
+
+        if($role == "admin") {
+            echo "
+            <tr>
+                <th>Member</th>
+                <th>Team</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>";
+            while ($row = $res->fetch_assoc()) {
+                echo "<tr>
+                        <td>" . $row['fname'] . "</td>
+                        <td>" . $row['name'] . "</td>
+                        <td>" . $row['description'] . "</td>
+                        <td>" . $row['status'] . "</td>
+                        <td>
+                            <a href='editjoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'>Ubah</a>
+                            <a href='deletejoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Join Proposal ini?\");'>Hapus</a>
+                        </td>
+                    <tr>";
+            } 
+        }
+        else {
+            echo "
             <tr>
                 <th>Member</th>
                 <th>Team</th>
                 <th>Description</th>
                 <th>Status</th>
             </tr>";
-
-        while ($row = $res->fetch_assoc()) {
-            if ($role == "admin") {
-                echo "<tr>
-                        <td>" . $row['fname'] . "</td>
-                        <td>" . $row['name'] . "</td>
-                        <td>" . $row['description'] . "</td>
-                        <td>" . $row['status'] . "</td>
-                        <td><a href='editjoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'>Ubah Data</a></td>
-                        <td><a href='deletejoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'>Hapus Data</a></td>
-                    <tr>";
-            } else {
+            while ($row = $res->fetch_assoc()) {
                 echo "<tr>
                     <td>" . $row['fname'] . "</td>
                     <td>" . $row['name'] . "</td>

@@ -12,7 +12,7 @@
     <body>
     <h1>Game</h1>
     <?php 
-        if ($role === 'admin'):
+        if ($role == 'admin'):
             require_once 'classgame.php';
             $game = new Game();
             $totaldata = 0;

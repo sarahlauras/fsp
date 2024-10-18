@@ -14,7 +14,7 @@
     <h1>Event Teams</h1>
     <?php 
         $role = $_SESSION["profile"];
-        if ($role === 'admin'){
+        if ($role == 'admin'){
 
             $event_teams = new EventTeams();
             $totaldata = 0;
@@ -52,8 +52,8 @@
                         <td>" . $row['team_name'] . "</td>
                         <td>" . $row['game_name'] . "</td>
                         <td>
-                            <a href='editevent_teams.php?idevent=" . $row['idevent'] . "&idteam=" . $idteam . "'>Edit</a> 
-                            <a href='deleteevent_teams.php?idevent=". $row['idevent'] . "&idteam=" . $idteam . "'>Delete</a>
+                            <a href='editevent_teams.php?idevent=" . $row['idevent'] . "&idteam=" . $idteam . "'>Ubah</a> 
+                            <a href='deleteevent_teams.php?idevent=". $row['idevent'] . "&idteam=" . $idteam . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Event Teams ini?\");'>Hapus</a>
                         </td>
                     </tr>";
             }

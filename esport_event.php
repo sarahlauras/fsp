@@ -45,16 +45,16 @@ $role = $_SESSION["profile"];
     echo "<table border='1'>";
     if ($role == 'member') {
         echo "<tr>
-                        <th>Nama</th>
+                        <th>Nama Event</th>
                         <th>Tgl. Event</th>
                         <th>Deskripsi</th>
                     </tr>";
     } else {
         echo "<tr>
-                        <th>Nama</th>
+                        <th>Nama Event</th>
                         <th>Tgl. Event</th>
                         <th>Deskripsi</th>
-                        <th colspan='3'>Aksi</th>
+                        <th>Aksi</th>
                     </tr>";
     }
 
@@ -63,7 +63,7 @@ $role = $_SESSION["profile"];
         $formatrilis = strftime("%d %B %Y", strtotime($row['date']));
         $format_serial = "";
 
-        if ($role === 'member') {
+        if ($role == 'member') {
             echo "<tr>
                         <td>" . $row['name'] . "</td>
                         <td>" . $formatrilis . "</td>
@@ -74,9 +74,11 @@ $role = $_SESSION["profile"];
                         <td>" . $row['name'] . "</td>
                         <td>" . $formatrilis . "</td>
                         <td>" . $row['description'] . "</td>
-                        <td><a href='esport_editevent.php?idevent=" . $row['idevent'] . "'>Ubah Data</a></td>
-                <td><a href='esport_deleteevent.php?idevent=" . $row['idevent'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus event ini?\");'>Hapus Data</a></td>
-                     </tr>";
+                        <td>
+                        <a href='esport_editevent.php?idevent=" . $row['idevent'] . "'>Ubah</a>
+                        <a href='esport_deleteevent.php?idevent=" . $row['idevent'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus event ini?\");'>Delete</a>
+                        </td>
+                 </tr>";
         }
     }
 
