@@ -15,8 +15,9 @@ $role = $_SESSION["profile"];
     <h1>DAFTAR MEMBER</h1>
     <div id="kanan">
         <?php
-        if ($role === 'admin'):
-            $member = new Member();
+        $member = new Member();
+        if ($role == 'admin'):
+            
             $totaldata = 0;
             $perhalaman = 4;
             $currenthalaman = 1;
@@ -72,7 +73,26 @@ $role = $_SESSION["profile"];
             <a href='insertmember.php'>Insert Member</a>
             <?php
         else:
-            echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
+            $username = $_SESSION['username'];
+            $res = $member->getMemberById(null, $username);
+            echo "<table border='1'>";
+            echo "<tr>
+                                <th>First Name</th>
+                                <th>Last Name</th> 
+                                <th>Username</th>
+                                <th>Profile</th>
+                            </tr>";
+
+            while ($row = $res->fetch_assoc()) {
+                echo "<tr>
+                            <td>" . $row['fname'] . "</td>
+                            <td>" . $row['lname'] . "</td>
+                            <td>" . $row['username'] . "</td>
+                            <td>" . $row['profile'] . "</td>
+                        </tr>";
+            
+            }
+            echo "</table>";
         endif;
         ?>
     </div>

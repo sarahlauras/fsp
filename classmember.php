@@ -6,14 +6,22 @@
             parent::__construct();
         }
 
-        public function getMember($offset=null, $limit=null) { 
-            $sql = "SELECT * FROM member where profile='member'";
-
+        public function getMember($offset=null, $limit=null, $profile = null) { 
+            $sql = "SELECT * FROM member";
+            if(!is_null($profile)) {
+                $sql .= "WHERE profile=?";
+            }
             if (!is_null($offset) && !is_null($limit)) {
                 $sql .= " LIMIT ?, ?";
             }
             $stmt = $this->mysqli->prepare($sql);
-            if (!is_null($offset) && !is_null($limit)) {
+            if (!is_null($profile) && !is_null($offset) && !is_null($limit)) {
+                $stmt->bind_param('sii', $offset, $limit);
+            }
+            elseif (!is_null($profile)) {
+                $stmt->bind_param('s', $profile);
+            }
+            elseif (!is_null($offset) &&!is_null($limit)) {
                 $stmt->bind_param('ii', $offset, $limit);
             }
             $stmt->execute();
@@ -21,9 +29,16 @@
             return $res;
         }
 
-        public function getMemberById($id) {
-            $stmt = $this->mysqli->prepare("SELECT * FROM member WHERE idmember=?");
-            $stmt->bind_param("i", $id);
+        public function getMemberById($id=null, $username = null) {
+            if(!is_null($id)) {
+                $stmt = $this->mysqli->prepare("SELECT * FROM member WHERE idmember=?");
+                $stmt->bind_param("i", $id);
+            }
+            elseif (!is_null($username)) {
+                $stmt = $this->mysqli->prepare("SELECT * FROM member WHERE username=?");
+                $stmt->bind_param("s", $username);
+            }
+
             $stmt->execute();
             return $stmt->get_result(); 
         }
