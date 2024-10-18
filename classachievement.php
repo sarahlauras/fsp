@@ -12,8 +12,8 @@ class Achievement extends DBParent {
                 INNER JOIN team t ON a.idteam = t.idteam";
         
         if (!is_null($member)) {
-            $sql .= " INNER JOIN join_proposal jp ON jp.idteam = t.idteam 
-                        INNER JOIN member m ON jp.idmember = m.idmember WHERE status = 'approved' AND m.idmember = ?";
+            $sql .= " INNER JOIN team_members ut ON ut.idteam = t.idteam 
+                        WHERE ut.idmember = ?";
         }
 
         $stmt = $this->mysqli->prepare($sql);
