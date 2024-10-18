@@ -24,15 +24,9 @@
         <label for="username">Username: </label>
         <input type="text" id="username" name="username"><br><br>
         <label for="password">Password: </label>
-        <input type="text" id="password" name="password"><br><br>
+        <input type="password" id="password" name="password"><br><br>
         <label>Re-Password</label>
-        <input type="text" name="repassword"><br><br>
-
-        <label>Profile</label>
-        <select id="profile" name="profile">
-            <option value="admin">Admin</option>
-            <option value="member">Member</option>
-        </select><br><br>
+        <input type="password" name="repassword"><br><br>
         
         <input type="submit" value="Submit" name="btnSubmit">
     </form>

@@ -27,7 +27,7 @@
                 $currenthalaman = ($_GET['offset']/$perhalaman)+1;
             } else { $offset = 0; }
 
-            $res = $team_member->getTeamMembers(null,null,null,null);
+            $res = $team_member->getTeamMembers(null,null,$offset,$perhalaman);
             $totaldata = $team_member ->getTotalData();
 
             $jumlahhalaman = ceil($totaldata/$perhalaman);
