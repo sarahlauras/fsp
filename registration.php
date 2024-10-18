@@ -24,12 +24,6 @@
         <label>Re-Password</label>
         <input type="password" name="repassword" required>
 
-        <label>Profile</label> 
-        <select id="profile" name="profile" required>
-            <option value="admin">Admin</option>
-            <option value="member">Member</option>
-        </select>
-
         <input type="submit" value="Submit" name="btnSubmit">
     </form>
 </body>

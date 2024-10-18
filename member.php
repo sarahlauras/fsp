@@ -38,20 +38,29 @@ $role = $_SESSION["profile"];
                                 <th>Last Name</th> 
                                 <th>Username</th>
                                 <th>Profile</th>
+                                <th>Password</th>
                             </tr>";
 
-            while ($row = $res->fetch_assoc()) {
-                echo "<tr>
-                            <td>" . $row['fname'] . "</td>
-                            <td>" . $row['lname'] . "</td>
-                            <td>" . $row['username'] . "</td>
-                            <td>" . $row['profile'] . "</td>
-                            <td>
-                                <a href='editmember.php?idmember=" . $row['idmember'] . "'>Ubah Data</a> 
-                                <a href='deletemember.php?idmember=" . $row['idmember'] . "'>Hapus Data</a>
-                            </td>
-                        </tr>";
-            }
+                            while ($row = $res->fetch_assoc()) {
+                                echo "<tr>
+                                        <td>" . $row['fname'] . "</td>
+                                        <td>" . $row['lname'] . "</td>
+                                        <td>" . $row['username'] . "</td>
+                                        <td>" . $row['profile'] . "</td>";
+                
+                                // Tampilkan password hanya jika profile = 'admin'
+                                if ($row['profile'] == 'admin') {
+                                    echo "<td>" . $row['password'] . "</td>";
+                                } else {
+                                    echo "<td>-</td>"; // Kosongkan atau tampilkan simbol
+                                }
+                
+                                echo "<td>
+                                        <a href='editmember.php?idmember=" . $row['idmember'] . "'>Ubah Data</a> 
+                                        <a href='deletemember.php?idmember=" . $row['idmember'] . "'>Hapus Data</a>
+                                      </td>
+                                      </tr>";
+                            }
 
             echo "</table>";
 
@@ -73,26 +82,28 @@ $role = $_SESSION["profile"];
             <a href='insertmember.php'>Insert Member</a>
             <?php
         else:
-            $username = $_SESSION['username'];
-            $res = $member->getMemberById(null, $username);
-            echo "<table border='1'>";
-            echo "<tr>
-                                <th>First Name</th>
-                                <th>Last Name</th> 
-                                <th>Username</th>
-                                <th>Profile</th>
-                            </tr>";
+        //     $username = $_SESSION['username'];
+        //     $res = $member->getMemberById(null, $username);
+        //     echo "<table border='1'>";
+        //     echo "<tr>
+        //                         <th>First Name</th>
+        //                         <th>Last Name</th> 
+        //                         <th>Username</th>
+        //                         <th>Profile</th>
+        //                     </tr>";
 
-            while ($row = $res->fetch_assoc()) {
-                echo "<tr>
-                            <td>" . $row['fname'] . "</td>
-                            <td>" . $row['lname'] . "</td>
-                            <td>" . $row['username'] . "</td>
-                            <td>" . $row['profile'] . "</td>
-                        </tr>";
+        //     while ($row = $res->fetch_assoc()) {
+        //         echo "<tr>
+        //                     <td>" . $row['fname'] . "</td>
+        //                     <td>" . $row['lname'] . "</td>
+        //                     <td>" . $row['username'] . "</td>
+        //                     <td>" . $row['profile'] . "</td>
+        //                 </tr>";
             
-            }
-            echo "</table>";
+        //     }
+        //     echo "</table>";
+            $username = $_SESSION['username'];    
+            echo "Anda tidak memiliki hak akses";
         endif;
         ?>
     </div>

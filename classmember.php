@@ -50,11 +50,11 @@
 
         public function insertMember($arr_col) {
             $sql = "INSERT INTO member(fname, lname, username, password, profile) 
-                    VALUES (?,?,?,?,?)";
+                    VALUES (?,?,?,?,'member')";
             $stmt = $this->mysqli->prepare($sql);
             $hash_password = password_hash($arr_col['password'], PASSWORD_DEFAULT);
-            $stmt->bind_param("sssss", $arr_col['fname'], $arr_col['lname'], 
-                              $arr_col['username'], $hash_password, $arr_col['profile']);
+            $stmt->bind_param("ssss", $arr_col['fname'], $arr_col['lname'], 
+                              $arr_col['username'], $hash_password);
             $stmt->execute();
     
             return $this->mysqli->affected_rows;
@@ -86,18 +86,24 @@
             $stmt->execute();
             $result = $stmt->get_result();
         
-            if($result->num_rows > 0){
+            if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                if(password_verify($password, $row['password'])){
-                    $_SESSION['idmember']=$row['idmember'];
-                    $_SESSION['username'] = $row['username'];
-                    $_SESSION['profile'] = $row['profile'];
-                    return true;
+        
+                if ($row['profile'] === 'admin') {
+                    if ($password === $row['password']) {
+                        $_SESSION['idmember'] = $row['idmember'];
+                        $_SESSION['username'] = $row['username'];
+                        $_SESSION['profile'] = $row['profile'];
+                        return true;
+                    }
                 } else {
-                    return false;
+                    if (password_verify($password, $row['password'])) {
+                        $_SESSION['idmember'] = $row['idmember'];
+                        $_SESSION['username'] = $row['username'];
+                        $_SESSION['profile'] = $row['profile'];
+                        return true;
+                    }
                 }
-            } else {
-                return false;
             }
         }
         
