@@ -17,6 +17,7 @@
     <body>
         <h1>Achievement</h1>
             <?php
+                echo "<a href='home.php'>Back</a>";
                 $achievement = new Achievement();
                 $totaldata = 0;
                 $perhalaman = 4;       

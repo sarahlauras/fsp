@@ -12,6 +12,7 @@
     <body>
     <h1>Game</h1>
     <?php 
+        echo "<a href='home.php'>Back</a>";
         if ($role == 'admin'):
             require_once 'classgame.php';
             $game = new Game();
