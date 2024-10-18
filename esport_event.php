@@ -50,7 +50,8 @@ $role = $_SESSION["profile"];
                         <th>Deskripsi</th>
                     </tr>";
     } else {
-        echo "<tr>
+        echo "<tr>  
+                        <th>Nama Team</th>
                         <th>Nama Event</th>
                         <th>Tgl. Event</th>
                         <th>Deskripsi</th>
@@ -71,6 +72,7 @@ $role = $_SESSION["profile"];
                     </tr>";
         } else {
             echo "<tr>
+                        <td>" . $row['team_name'] . "</td>
                         <td>" . $row['name'] . "</td>
                         <td>" . $formatrilis . "</td>
                         <td>" . $row['description'] . "</td>
