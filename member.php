@@ -15,6 +15,7 @@ $role = $_SESSION["profile"];
     <h1>DAFTAR MEMBER</h1>
     <div id="kanan">
         <?php
+        echo "<a href='home.php'>Back</a>";
         $member = new Member();
         if ($role == 'admin'):
             

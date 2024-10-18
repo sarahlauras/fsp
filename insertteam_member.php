@@ -7,6 +7,7 @@
 </head>
 <body>
     <?php
+        echo "<a href='team_member.php'>Back</a>";
         require_once 'classteammember.php';
         $team_member = new TeamMember();
 

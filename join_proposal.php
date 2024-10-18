@@ -22,6 +22,7 @@ $role = $_SESSION["profile"];
     <h1>DAFTAR JOIN PROPOSAL</h1>
     <div id="kanan">
         <?php
+        echo "<a href='home.php'>Back</a>";
         $joinproposal = new JoinProposal();
         $totaldata = 0;
         $perhalaman = 4;

@@ -6,6 +6,7 @@
 
 <body>
     <?php
+    echo "<a href='member.php'>Back</a>";
     require_once 'classmember.php';
     $member = new Member();
 

@@ -17,6 +17,7 @@ $role = $_SESSION["profile"];
 
 <body>
     <?php
+    echo "<a href='join_proposal.php'>Back</a>";
     require_once 'classjoinproposal.php';
     $joinproposal = new JoinProposal();
 

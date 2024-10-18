@@ -16,6 +16,7 @@
     <h1>DAFTAR TEAM MEMBER</h1>
     <div id="kanan">
         <?php
+        echo "<a href='home.php'>Back</a>";
         if ($role == 'admin'):
             $team_member = new TeamMember();
             $totaldata = 0;
