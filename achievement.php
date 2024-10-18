@@ -7,7 +7,7 @@
     }
 
     $role = $_SESSION["profile"];
-    $userid = $_SESSION["userid"]; 
+    $member = $_SESSION["idmember"]; 
 ?>
 <html>
     <head>
@@ -33,8 +33,8 @@
                     $res = $achievement->getAchievement($offset, $perhalaman);
                     $totaldata = $achievement->getTotalData();
                 } else {
-                    $res = $achievement->getAchievement($offset, $perhalaman, $userid);
-                    $totaldata = $achievement->getTotalData($userid);
+                    $res = $achievement->getAchievement($offset, $perhalaman, $member);
+                    $totaldata = $achievement->getTotalData($member);
                 }
 
                 $jumlahhalaman = ceil($totaldata / $perhalaman);

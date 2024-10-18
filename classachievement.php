@@ -7,17 +7,17 @@ class Achievement extends DBParent {
     }
 
     
-    public function getTotalData($userid = null) {
+    public function getTotalData($member = null) {
         $sql = "SELECT COUNT(*) AS total FROM achievement a 
                 INNER JOIN team t ON a.idteam = t.idteam";
         
-        if (!is_null($userid)) {
+        if (!is_null($member)) {
             $sql .= " INNER JOIN user_team ut ON ut.idteam = t.idteam 
                       WHERE ut.userid = ?";
         }
 
         $stmt = $this->mysqli->prepare($sql);
-        if (!is_null($userid)) {
+        if (!is_null($member)) {
             $stmt->bind_param("i", $userid);
         }
 
