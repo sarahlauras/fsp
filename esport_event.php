@@ -34,7 +34,7 @@ $role = $_SESSION["profile"];
 
     if ($role == "admin") {
         $res = $event->getAllEvent(null, $offset, $perhalaman);  // Username = null
-        $totaldata = $event->getTotalData(null);
+        $totaldata = $event->getTotalData();
     } else {
         $username = $_SESSION['username'];
         $res = $event->getAllEvent($username, $offset, $perhalaman);
@@ -99,7 +99,7 @@ $role = $_SESSION["profile"];
     echo "<a href='esport_event.php?offset=" . $lastOffset . "'>Last</a><br><br>";
 
     if ($role == 'admin') {
-        echo "<a href='esport_insertevent.php?'>Insert Data</a>";
+        echo "<a href='esport_insertevent.php?'>Insert Event</a>";
     }
     ?>
 </body>

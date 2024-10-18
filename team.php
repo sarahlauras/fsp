@@ -69,7 +69,7 @@
             echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
          }
          else {
-            echo "<a href='insertteam.php'>Add New Team</a>";
+            echo "<a href='insertteam.php'>Insert New Team</a>";
          } 
         ?>
 </body>

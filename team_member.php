@@ -71,7 +71,7 @@
             echo "<a href='team_member.php?offset=".$lastOffset."'>Last</a><br><br>";
         ?>
     </div> 
-    <a href="insertteam_member.php">Add New Team Member</a>
+    <a href="insertteam_member.php">Insert New Team Member</a>
     <?php
         else:
             echo "<p class='text_merah'>Anda tidak memiliki akses</p>";

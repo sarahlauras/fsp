@@ -100,7 +100,7 @@
                 echo "<a href='achievement.php?offset=".$lastOffset."'>Last</a><br><br>";
                 
                 if ($role == 'admin') {
-                    echo "<a href='addachievement.php?'>Insert Data</a>";
+                    echo "<a href='addachievement.php?'>Insert Achievement</a>";
                 }
             ?> 
     </body>

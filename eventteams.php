@@ -78,7 +78,7 @@
             echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
         }
         if ($role == 'admin') {
-            echo "<a href='insertevent_teams.php?'>Insert Data</a>";
+            echo "<a href='insertevent_teams.php?'>Insert Event Teams</a>";
         }
     ?>  
 </body>
