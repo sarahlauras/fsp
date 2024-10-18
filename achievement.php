@@ -46,7 +46,7 @@
                         <th>Description</th> 
                         <th>Date</th>
                         <th>Team</th>
-                        <th colspan='4'>Aksi</th>
+                        <th>Aksi</th>
                     </tr>";
                 } else {
                     echo "<tr>
@@ -67,8 +67,8 @@
                             <td>".$formattgl."</td>
                             <td>".$row['namateam']."</td>
                             <td>
-                                <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah Data</a> 
-                                <a href='deleteachievement.php?idachievement=".$row['idachievement']."'>Hapus Data</a>
+                                <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah</a> 
+                                <a href='deleteachievement.php?idachievement=".$row['idachievement']."' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Achievement ini?\");' >Hapus</a>
                             </td>
                         </tr>";
                     } else {

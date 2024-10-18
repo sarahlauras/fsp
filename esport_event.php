@@ -76,7 +76,7 @@ $role = $_SESSION["profile"];
                         <td>" . $row['description'] . "</td>
                         <td>
                         <a href='esport_editevent.php?idevent=" . $row['idevent'] . "'>Ubah</a>
-                        <a href='esport_deleteevent.php?idevent=" . $row['idevent'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus event ini?\");'>Delete</a>
+                        <a href='esport_deleteevent.php?idevent=" . $row['idevent'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus event ini?\");'>Hapus</a>
                         </td>
                  </tr>";
         }

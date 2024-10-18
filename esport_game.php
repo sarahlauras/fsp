@@ -41,8 +41,8 @@
                 <td>".$row['name']."</td>
                 <td>".$row['description']."</td>
                 <td>
-                    <a href='esport_editgame.php?idgame=".$row['idgame']."'>Ubah Data</a>
-                    <a href='esport_deletegame.php?idgame=".$row['idgame']."'>Hapus Data</a>
+                    <a href='esport_editgame.php?idgame=".$row['idgame']."'>Ubah</a>
+                    <a href='esport_deletegame.php?idgame=".$row['idgame']."'>Hapus</a>
                 </td>
             </tr>";
         }
