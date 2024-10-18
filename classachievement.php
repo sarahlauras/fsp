@@ -67,7 +67,6 @@ class Achievement extends DBParent {
         } elseif (!is_null($offset) && !is_null($limit)) {
             $stmt->bind_param('ii', $offset, $limit);
         }
-
         $stmt->execute();
         return $stmt->get_result();
     }
