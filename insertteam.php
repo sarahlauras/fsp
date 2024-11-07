@@ -41,6 +41,8 @@
                     echo "<option value='".$row['idgame']."'>".$row['name']."</option>";
                 }
                 ?>
+            </select><br><br>
+            <label for="image">Upload Team Image (JPG only)</label>
             <input type="submit" value="Submit" name="btnSubmit">
         </form>
 </body>
