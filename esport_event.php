@@ -7,6 +7,7 @@ if (!isset($_SESSION["username"])) {
 }
 
 $role = $_SESSION["profile"];
+$member = $_SESSION["idmember"]; 
 ?>
 
 <html>
@@ -22,6 +23,7 @@ $role = $_SESSION["profile"];
     
     <?php
     echo "<a href='home.php'>Back</a>";
+    echo "<br>";
     $event = new Event();
     $totaldata = 0;
     $perhalaman = 4;
@@ -42,6 +44,22 @@ $role = $_SESSION["profile"];
         $res = $event->getAllEvent($username, $offset, $perhalaman);
         $totaldata = $event->getTotalData($username);
     }
+    $res = $event->getUserTeams($member);
+    ?>
+    <form method="POST" action="submit_event.php">
+        <label for="team">Pilih Team: </label>
+        <select name="team" id="team">
+            <option value="" disabled selected>Pilih Team</option>
+            <?php
+                    while($row = $res->fetch_assoc()) {
+                        echo "<option value=".$row['idteam'].">"
+                            .$row['name']."</option>";
+                    }
+            ?>
+        </select>  
+        <input type="button" id="btnsubmit" value="Pilih"/>              
+    
+    <?php
     $jumlahhalaman = ceil($totaldata / $perhalaman);
 
     echo "<table border='1'>";
@@ -59,7 +77,6 @@ $role = $_SESSION["profile"];
                         <th>Aksi</th>
                     </tr>";
     }
-
 
     while ($row = $res->fetch_assoc()) {
         $formatrilis = strftime("%d %B %Y", strtotime($row['date']));

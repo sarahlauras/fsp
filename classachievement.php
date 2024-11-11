@@ -44,6 +44,18 @@ class Achievement extends DBParent {
         return $res;
     }
 
+    public function getUserTeams($idmember) {
+        $sql = "SELECT t.idteam, t.name FROM team t
+                INNER JOIN team_members tm 
+                ON t.idteam = tm.idteam
+                WHERE tm.idmember =?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        return $res;
+    }
+
     public function getAchievement($offset = null, $limit = null, $member = null) {
         $sql = "SELECT a.*, t.name AS 'namateam' 
                 FROM achievement a 
@@ -77,6 +89,19 @@ class Achievement extends DBParent {
         $stmt->execute();
         return $stmt->get_result();
     }
+
+    public function getAchievementByTeam($idteam) {
+        $sql = "SELECT a.name, a.date, a.description, t.name as namateam, a.idachievement
+                FROM achievement a
+                INNER JOIN team t ON a.idteam = t.idteam
+                WHERE t.idteam = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("i", $idteam);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        return $res;
+    }
+    
     public function editAchievement($name, $description, $date, $idteam, $idachievement) {
         $stmt = $this->mysqli->prepare(
             "UPDATE achievement SET name = ?, description = ?, date = ?, idteam = ?

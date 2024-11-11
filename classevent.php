@@ -49,6 +49,18 @@ class Event extends DBParent
         return $result;
     }
 
+    public function getUserTeams($idmember) {
+        $sql = "SELECT t.idteam, t.name FROM team t
+                INNER JOIN team_members tm 
+                ON t.idteam = tm.idteam
+                WHERE tm.idmember =?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        return $res;
+    }
+
 
     public function getTotalData($username = null)
     {
