@@ -16,31 +16,34 @@
             $namegame = $_POST['name'];
             $poster = $_FILES['poster'];
 
-            $posterName = $namegame . ".jpg";
+            $file_extension = pathinfo($poster['name'], PATHINFO_EXTENSION);
+            if ($file_extension != 'jpg') {
+                echo "Hanya menerima file .jpg";
+                exit();
+            }
             $target_dir = "teams/";
+            $posterName = ''; 
+            $arr_col = [
+                'idgame' => $idgame,
+                'name' => $namegame,
+                'poster' => $posterName
+            ];
 
-            if (isset($idgame, $namegame)) {
-                if (move_uploaded_file($_FILES['poster']['tmp_name'], $target_dir . $posterName)) {
-                    // Data yang akan disimpan ke database
-                    $arr_col = [
-                        'idgame' => $idgame,
-                        'name' => $namegame,
-                        'poster' => $posterName
-                    ];
+            $last_id = $team->insertTeam($arr_col);
 
-                    $last_id = $team->insertTeam($arr_col);
+            if ($last_id) {
+                $posterName = $last_id . ".jpg"; 
 
-                    if ($last_id) {
-                        header("Location: team.php?result=success");
-                        exit();
-                    } else {
-                        echo "Error saat menyimpan data.";
-                    }
+                if (move_uploaded_file($poster['tmp_name'], $target_dir . $posterName)) {
+                    $team->updatePoster($last_id, $posterName);
+
+                    header("Location: insertteam.php?result=success");
+                    exit();
                 } else {
                     echo "Gagal mengupload file.";
                 }
             } else {
-                echo "Data idgame atau namegame tidak lengkap.";
+                echo "Error saat menyimpan data.";
             }
         }
     ?>

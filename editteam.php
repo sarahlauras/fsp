@@ -42,7 +42,9 @@
                 }
                 $stmt_game->close();
             ?>
-        </select>
+        </select><br><br>
+        <label for="image">Edit Team Image (JPG only)</label>
+        <input type="file" name="poster" id="poster"/> <br><br>
 
         <input type="hidden" name="idteam" value="<?php echo $row['idteam']; ?>">
         <input type="submit" value="Submit" name="btnSubmit">

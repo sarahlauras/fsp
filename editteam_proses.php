@@ -15,6 +15,7 @@
             $name = $_POST['name'];
             $game = $_POST['game'];
             $idteam = $_POST['idteam'];
+            $poster = $_FILES['poster'];
             
             $jumlah = $team->editTeam($name, $game, $idteam);
         }

@@ -7,12 +7,20 @@
         }
 
         public function insertTeam($arr_col) { //insert
-            $sql = "INSERT INTO team (idgame, name, poster)
-            VALUES (?,?,?)";
+            $sql = "INSERT INTO team (idgame, name)
+            VALUES (?,?)";
             $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param("iss", $arr_col['idgame'], $arr_col['name'], $arr_col['poster']);
+            $stmt->bind_param("is", $arr_col['idgame'], $arr_col['name']);
             $stmt->execute();
             return $this->mysqli->insert_id;
+        }
+
+        public function updatePoster($posterName, $idteam) { //upload poster
+            $sql = "UPDATE team SET poster = ? WHERE idteam = ?";
+            $stmt = $this->mysqli->prepare($sql);
+            $stmt->bind_param("si", $posterName, $idteam);
+            $stmt->execute();
+            $stmt->close();
         }
 
         public function getAllTeam($offset=null, $limit=null) { //tampil
@@ -56,7 +64,7 @@
             return $stmt->get_result(); // Mengembalikan hasil query
         }
 
-        public function editEvent($name, $game, $idteam) {
+        public function editTeam($name, $game, $idteam) {
             $stmt = $this->mysqli->prepare(
                 "UPDATE team SET name=?, idgame=? WHERE idteam=?");
             $stmt->bind_param("sii", $name, $game, $idteam);
