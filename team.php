@@ -40,7 +40,9 @@
             </tr>";
             while($row = $resteams->fetch_assoc()){
                 echo "<tr>
-                    <td>".$row['name']."</td>
+                    <td>".$row['name']."<br>
+                        <img src='teams/" . $row['poster'] . "' alt='" . $row['name'] . ".jpg". " Poster' width='100' height='100'>
+                    </td>
                     <td>".$row['game']."</td>
                     <td>
                     <a href='editteam.php?idteam=".$row['idteam']."'>Ubah</a>

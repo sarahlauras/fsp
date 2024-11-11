@@ -7,16 +7,16 @@
         }
 
         public function insertTeam($arr_col) { //insert
-            $sql = "INSERT INTO team (idgame, name)
-            VALUES (?,?)";
+            $sql = "INSERT INTO team (idgame, name, poster)
+            VALUES (?,?,?)";
             $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param("is", $arr_col['idgame'], $arr_col['name']);
+            $stmt->bind_param("iss", $arr_col['idgame'], $arr_col['name'], $arr_col['poster']);
             $stmt->execute();
             return $this->mysqli->insert_id;
         }
 
         public function getAllTeam($offset=null, $limit=null) { //tampil
-            $sql = "SELECT t.idteam, t.name, g.name as game FROM team t INNER JOIN game g ON t.idgame = g.idgame";
+            $sql = "SELECT t.idteam, t.name, t.poster, g.name as game FROM team t INNER JOIN game g ON t.idgame = g.idgame";
             if (!is_null($offset) && !is_null($limit)) {
                 $sql .= " LIMIT ? OFFSET ?";
             }

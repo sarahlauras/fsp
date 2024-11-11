@@ -43,6 +43,8 @@
                 ?>
             </select><br><br>
             <label for="image">Upload Team Image (JPG only)</label>
+            <input type="file" name="poster" id="poster"/> <br><br>
+            
             <input type="submit" value="Submit" name="btnSubmit">
         </form>
 </body>
