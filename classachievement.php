@@ -6,18 +6,27 @@ class Achievement extends DBParent {
         parent::__construct();
     }
 
-    public function getTotalData($member = null) {
+    public function getTotalData($member = null, $idteam = null) {
         $sql = "SELECT COUNT(*) AS total FROM achievement a 
                 INNER JOIN team t ON a.idteam = t.idteam";
         
         if (!is_null($member)) {
             $sql .= " INNER JOIN team_members ut ON ut.idteam = t.idteam 
                         WHERE ut.idmember = ?";
+            if (!is_null($idteam)) {
+                $sql .= " AND t.idteam = ?";
+            }
+        } elseif (!is_null($idteam)) {
+            $sql .= " WHERE t.idteam = ?";
         }
 
         $stmt = $this->mysqli->prepare($sql);
-        if (!is_null($member)) {
+        if (!is_null($member) && !is_null($idteam)) {
+            $stmt->bind_param("ii", $member, $idteam);
+        } elseif (!is_null($member)) {
             $stmt->bind_param("i", $member);
+        } elseif (!is_null($idteam)) {
+            $stmt->bind_param("i", $idteam);
         }
 
         $stmt->execute();
@@ -89,26 +98,44 @@ class Achievement extends DBParent {
         return $stmt->get_result();
     }
 
-    public function getAchievementByTeam($idteam) {
+    public function getAchievementByTeam($idteam, $offset = null, $limit = null) {
         $sql = "SELECT a.name, a.date, a.description, t.name as namateam, a.idachievement
                 FROM achievement a
                 INNER JOIN team t ON a.idteam = t.idteam
                 WHERE t.idteam = ?";
+
+        if (!is_null($offset) && !is_null($limit)) {
+            $sql .= " LIMIT ?, ?";
+        }
         $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param("i", $idteam);
+
+        if (!is_null($offset) && !is_null($limit)) {
+            $stmt->bind_param('iii', $idteam, $offset, $limit);
+        }
+        else {
+            $stmt->bind_param("i", $idteam);
+        }
         $stmt->execute();
         $res = $stmt->get_result();
         return $res;
     }
 
-    public function getAchievementApprovedProposal($idmember) {
+    public function getAchievementApprovedProposal($idmember, $offset = null, $limit = null) {
         $sql = "SELECT a.idachievement, a.name, a.description, a.date, t.name AS namateam 
                 FROM achievement a 
                 INNER JOIN team t ON a.idteam = t.idteam 
                 INNER JOIN join_proposal jp ON jp.idteam = t.idteam 
-                WHERE jp.idmember = ? AND jp.status = 'approved';";
+                WHERE jp.idmember = ? AND jp.status = 'approved'";
+        if (!is_null($offset) && !is_null($limit)) {
+            $sql .= " LIMIT ?, ?";
+        }
         $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param("i", $idmember);
+        if (!is_null($offset) && !is_null($limit)) {
+            $stmt->bind_param('iii', $idmember, $offset, $limit);
+        }
+        else {
+            $stmt->bind_param("i", $idmember);
+        }
         $stmt->execute();
         $res = $stmt->get_result();
         return $res;

@@ -1,6 +1,8 @@
 <?php
     require_once("classachievement.php");
 
+    $offset = $_POST["offset"];
+    $perhalaman = 4;
     $achievement = new Achievement();
     $userRole = $_POST["role"];
 
@@ -19,12 +21,12 @@
     }
 
     if ($selected_team) {
-        $achievement = $achievement->getAchievementByTeam($selected_team, $member_id);
+        $achievement = $achievement->getAchievementByTeam($selected_team, $offset, $perhalaman);
     } else {
         if ($userRole == "admin") {
-            $achievement = $achievement->getAchievement();
+            $achievement = $achievement->getAchievement($offset, $perhalaman);
         } elseif ($userRole == "member") {
-            $achievement = $achievement->getAchievementApprovedProposal($member_id);
+            $achievement = $achievement->getAchievementApprovedProposal($member_id, $offset, $perhalaman);
         }
     }
     

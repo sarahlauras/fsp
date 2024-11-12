@@ -30,78 +30,79 @@
                 } else { 
                     $offset = 0; 
                 }
-                
-                // if ($role == 'admin') {
-                //     $res = $achievement->getAchievement($offset, $perhalaman);
-                //     $totaldata = $achievement->getTotalData();
-                // } else {
-                //     $res = $achievement->getAchievement($offset, $perhalaman, $member);
-                //     $totaldata = $achievement->getTotalData($member);
-                // }
+
                 if($role == 'member') {
                     $res = $achievement->getUserTeams($member);
                 }
                 else {
                     $res = $achievement->getTeam($offset, $perhalaman);
-                    $totaldata = $achievement->getTotalData();
                 }
                 
+                echo "<form method='GET' action='achievement.php'>";
                 echo "<label for='team'>Pilih Team: </label>";
-                echo "<select name='team' id='team'>";
+                echo "<select name='idteam' id='team'>";
                 echo "<option value='' disabled selected>Pilih Team</option>";
                 while($row = $res->fetch_assoc()) {
-                    echo "<option value=".$row['idteam'].">"
-                    .$row['name']."</option>";
+                    $selected = "";
+                    if (isset($_GET['idteam']) && $_GET['idteam'] == $row['idteam']) {
+                        $selected = "selected";
+                    }
+                    echo "<option value='".$row['idteam']."' $selected>".$row['name']."</option>";
                 }
                 echo "</select>";
-                echo "<input type='button' id='btnsubmit' value='Pilih'/>";
+                echo "<input type='submit' value='Pilih'/>";
+                echo "</form>";
 
-                echo "<div id='eventData'></div>";
-                
-                // echo "<table border='1' id='eventTable'>";
-                // echo "<tr>
-                //     <th>Name</th>
-                //     <th>Description</th> 
-                //     <th>Date</th>
-                //     <th>Team</th>";
-                // if ($role == 'admin') {
-                //     echo "<th>Aksi</th>";
-                // }
-                // echo "</tr>";
-            
-                //     echo "</table>";
-            ?>
-
-                <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-                    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
-                    crossorigin="anonymous"></script>
-
-                <script>
-                    var userRole = "<?php echo $role; ?>";
-                    var member_id = "<?php echo $member; ?>";
-                    function loadAll() {
-                        $.post('backend_achievement.php', {role:userRole, idmember:member_id})
-                        .done(function(data) {
-                                $('#eventData').html(data)
-                        });
+                if (isset($_GET["idteam"])) {
+                    $selected = $_GET["idteam"];
+                    if($role == 'member') {
+                        $member= null;
+                        $totaldata = $achievement->getTotalData($member, $selected);
                     }
-
-                    $(document).ready(function() {
-                        loadAll();
-
-                        $('#btnsubmit').click(function(){
-                            var selected_team = $('#team').val()
-                            if(selected_team) {
-                            $.post('backend_achievement.php', {idteam: selected_team, role:userRole, idmember:member_id})
-                            .done(function(data) {
-                                $('#eventData').html(data)
-                            })
-                        } else {
-                            alert('Pilih team dulu')
+                    else {
+                        $totaldata = $achievement->getTotalData($selected);
+                    }
+                    $achievements = $achievement->getAchievementByTeam($selected, $offset, $perhalaman);
+                } else {
+                    if ($role == "admin") {
+                        $totaldata = $achievement->getTotalData(); 
+                        $achievements = $achievement->getAchievement($offset, $perhalaman);
+                    } elseif ($role == "member") {
+                        $totaldata = $achievement->getTotalData($member);
+                        $achievements = $achievement->getAchievementApprovedProposal($member, $offset, $perhalaman);
+                    }
+                }
+                
+                echo "<table border ='1'>";
+                echo "<table border='1' id='eventTable'>";
+                echo "<tr>
+                    <th>Name</th>
+                    <th>Description</th> 
+                    <th>Date</th>
+                    <th>Team</th>";
+                    if ($role == 'admin') {
+                        echo "<th>Aksi</th>";
+                    }
+                    echo "</tr>";
+                        while($row = $achievements->fetch_assoc()) {
+                            $formattgl = strftime("%d %B %Y", strtotime($row['date']));
+                            echo "<tr>
+                                <td>".$row['name']."</td>
+                                <td>".$row['description']."</td>
+                                <td>".$formattgl."</td>
+                                <td>".$row['namateam']."</td>";
+                            if ($role == 'admin') {
+                                echo "<td>
+                                <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah</a> 
+                                <a href='deleteachievement.php?idachievement=".$row['idachievement']."' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Achievement ini?\");' >Hapus</a>
+                                </td>";
+                            }
+                            echo "</tr>";
                         }
-                        });
-                    });
-                </script>
+                    
+                echo "</table>";
+            
+            ?>
 
                 <?php
                 
@@ -115,16 +116,26 @@
                     if ($currenthalaman == $i) {                
                         echo "<strong style='color:red'>$i</strong>";
                     } else {
-                        echo "<a href='achievement.php?offset=".$off."'>".$i."</a> ";
+                        if (isset($_GET["idteam"])) {
+                            echo "<a href='achievement.php?offset=".$off."&idteam=".$selected."'>".$i."</a> ";
+                        } else {
+                            echo "<a href='achievement.php?offset=".$off."'>".$i."</a> ";
+                        }
                     }
                 }
 
                 $lastOffset = ($jumlahhalaman - 1) * $perhalaman;
-                echo "<a href='achievement.php?offset=".$lastOffset."'>Last</a><br><br>";
-                
+                if (isset($_GET["idteam"])) {
+                    echo "<a href='achievement.php?offset=".$lastOffset."&idteam=".$selected."'>Last</a><br><br>";
+                } else {
+                    echo "<a href='achievement.php?offset=".$lastOffset."'>Last</a><br><br>";
+                }
                 if ($role == 'admin') {
                     echo "<a href='addachievement.php?'>Insert Achievement</a>";
                 }
-            ?> 
+            ?>
+            <br>
+            <br>
+            
     </body>
 </html>
