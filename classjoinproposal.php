@@ -98,5 +98,16 @@
             $stmt->close();
             return $jumlah;
         }
+
+        public function getApprovedTeams($idmember) {
+            $sql = "SELECT jp.idteam, t.name 
+                    FROM join_proposal jp
+                    INNER JOIN team t ON jp.idteam = t.idteam
+                    WHERE jp.idmember = ? AND jp.status = 'approved'";
+            $stmt = $this->mysqli->prepare($sql);
+            $stmt->bind_param("i", $idmember);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
     }
 ?>

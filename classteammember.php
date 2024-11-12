@@ -8,6 +8,17 @@ class TeamMember extends DBParent
         parent::__construct();
     }
 
+    public function getTeamMembersByTeam($idteam) {
+        $sql = "SELECT m.fname 
+                FROM team_members tm
+                INNER JOIN member m ON tm.idmember = m.idmember
+                WHERE tm.idteam = ?";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("i", $idteam);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     public function getTeamMembers($idmember = null, $idteam = null, $offset = null, $limit = null) {
         $sql = "SELECT tm.*, m.*, t.* FROM team_members tm INNER JOIN member m ON tm.idmember = m.idmember
                 INNER JOIN team t ON tm.idteam = t.idteam";

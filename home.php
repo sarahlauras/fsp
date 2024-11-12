@@ -27,6 +27,7 @@ $role = $_SESSION["profile"];
             <li><a href='join_proposal.php'>Join Proposal</a></li>
             <li><a href='achievement.php'>Achievement</a></li>
             <li><a href='esport_event.php'>Event</a></li>
+            <li><a href='myteam.php'>My Team</a></li>
 
             <?php if ($role === 'admin'): ?>
                 <li><a href='member.php'>Member</a></li>
