@@ -55,12 +55,12 @@
 
                 if (isset($_GET["idteam"])) {
                     $selected = $_GET["idteam"];
-                    if($role == 'member') {
+                    if($role == 'admin') {
                         $member= null;
                         $totaldata = $achievement->getTotalData($member, $selected);
                     }
                     else {
-                        $totaldata = $achievement->getTotalData($selected);
+                        $totaldata = $achievement->getTotalData($member, $selected);
                     }
                     $achievements = $achievement->getAchievementByTeam($selected, $offset, $perhalaman);
                 } else {
@@ -108,7 +108,7 @@
                 
                 // Paging
                 $jumlahhalaman = ceil($totaldata / $perhalaman);
-                //echo "<div>Total Data: ".$totaldata."</div>";
+                echo "<div>Total Data: ".$totaldata."</div>";
                 echo "<a href='achievement.php?offset=0'>First</a>";
                 
                 for ($i = 1; $i <= $jumlahhalaman; $i++) {
