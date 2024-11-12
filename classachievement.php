@@ -6,7 +6,6 @@ class Achievement extends DBParent {
         parent::__construct();
     }
 
-    
     public function getTotalData($member = null) {
         $sql = "SELECT COUNT(*) AS total FROM achievement a 
                 INNER JOIN team t ON a.idteam = t.idteam";
@@ -97,6 +96,19 @@ class Achievement extends DBParent {
                 WHERE t.idteam = ?";
         $stmt = $this->mysqli->prepare($sql);
         $stmt->bind_param("i", $idteam);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        return $res;
+    }
+
+    public function getAchievementApprovedProposal($idmember) {
+        $sql = "SELECT a.idachievement, a.name, a.description, a.date, t.name AS namateam 
+                FROM achievement a 
+                INNER JOIN team t ON a.idteam = t.idteam 
+                INNER JOIN join_proposal jp ON jp.idteam = t.idteam 
+                WHERE jp.idmember = ? AND jp.status = 'approved';";
+        $stmt = $this->mysqli->prepare($sql);
+        $stmt->bind_param("i", $idmember);
         $stmt->execute();
         $res = $stmt->get_result();
         return $res;
