@@ -1,6 +1,6 @@
 <?php
-require_once("JoinProposal.php");
-require_once("TeamMember.php");
+require_once("classjoinproposal.php");
+require_once("classteammember.php");
 session_start();
 
 if (!isset($_SESSION["username"])) {
