@@ -15,16 +15,8 @@
             return $this->mysqli->insert_id;
         }
 
-        public function updatePoster($posterName, $idteam) { //upload poster
-            $sql = "UPDATE team SET poster = ? WHERE idteam = ?";
-            $stmt = $this->mysqli->prepare($sql);
-            $stmt->bind_param("si", $posterName, $idteam);
-            $stmt->execute();
-            $stmt->close();
-        }
-
         public function getAllTeam($offset=null, $limit=null) { //tampil
-            $sql = "SELECT t.idteam, t.name, t.poster, g.name as game FROM team t INNER JOIN game g ON t.idgame = g.idgame";
+            $sql = "SELECT t.idteam, t.name, g.name as game FROM team t INNER JOIN game g ON t.idgame = g.idgame";
             if (!is_null($offset) && !is_null($limit)) {
                 $sql .= " LIMIT ? OFFSET ?";
             }

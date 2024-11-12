@@ -35,8 +35,6 @@
                 $posterName = $last_id . ".jpg"; 
 
                 if (move_uploaded_file($poster['tmp_name'], $target_dir . $posterName)) {
-                    $team->updatePoster($last_id, $posterName);
-
                     header("Location: insertteam.php?result=success");
                     exit();
                 } else {

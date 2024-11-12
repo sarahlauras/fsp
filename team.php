@@ -41,7 +41,7 @@
             while($row = $resteams->fetch_assoc()){
                 echo "<tr>
                     <td>".$row['name']."<br>
-                        <img src='teams/" . $row['poster'] . "' alt='" . $row['idteam'] . ".jpg". " Poster' width='100' height='100'>
+                        <img src='teams/" . $row['idteam'] . ".jpg' alt='" . $row['name'] . " Poster' width='100' height='100'>
                     </td>
                     <td>".$row['game']."</td>
                     <td>
