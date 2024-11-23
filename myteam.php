@@ -47,8 +47,12 @@ $approvedTeams = $joinProposal->getApprovedTeams($idmember);
             echo "<tr><th>Name</th></tr>";
 
             while ($member = $teamMembers->fetch_assoc()) {
-                echo "<tr><td>" . $member['fname'] . "</td></tr>";
-            }
+                $sedangLogin = "";
+                if ($member['idmember'] == $idmember) {
+                    $sedangLogin = " (saya)";
+                }
+                echo "<tr><td>" . $member['fname'] . $sedangLogin . "</td></tr>";
+            }            
 
             echo "</table>";
         }

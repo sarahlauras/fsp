@@ -9,7 +9,7 @@ class TeamMember extends DBParent
     }
 
     public function getTeamMembersByTeam($idteam) {
-        $sql = "SELECT m.fname 
+        $sql = "SELECT m.fname, m.idmember
                 FROM team_members tm
                 INNER JOIN member m ON tm.idmember = m.idmember
                 WHERE tm.idteam = ?";
