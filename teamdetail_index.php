@@ -8,7 +8,7 @@
 </head>
 <body>
     <a href="index.php">back</a>
-    <h1>Game Details</h1>
+    <h1>Team Details</h1>
     <?php
     require_once 'classteam.php';
 
