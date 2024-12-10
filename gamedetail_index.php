@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Detail</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="gamedetail.css">
 </head>
 <body>
     <?php
@@ -31,7 +31,9 @@
         if ($resteams->num_rows > 0) {
             echo "<ul>";
             while ($teamRow = $resteams->fetch_assoc()) {
+                echo "<div class='team-card'>";
                 echo "<li>" . $teamRow['name'] . "</li>";
+                echo "</div>";
             }
             echo "</ul>";
         } else {
