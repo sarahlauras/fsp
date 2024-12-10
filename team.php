@@ -47,12 +47,12 @@
             echo "<tr>
                     <td>" . $row['name'] . "<br>
                     <img src='teams/" . $teamId . ".jpg' alt='" . $row['name'] . " Poster' width='100' height='100'>
-                    <form id='frmData' enctype='multipart/form-data'>
-                        <input type='hidden' name='idteam' value='" . $teamId . "'>
+                    <form id='frmData<?php echo $teamId; ?>' enctype='multipart/form-data'>
+                        <input type='hidden' name='idteam' value='<?php echo $teamId; ?>'>
                         <input type='file' name='photo' accept='image/jpg'>
                         <br>
-                        <button type='button' id='btnupload' data-teamid='" . $teamId . "'>Upload</button>
-                        </form>
+                        <button type='button' class='btnupload' data-teamid='<?php echo $teamId; ?>'>Upload</button>
+                    </form>
                     </td>
                     <td>" . $row['game'] . "</td>
                     <td>
@@ -86,13 +86,14 @@
         echo "<a href='insertteam.php'>Insert New Team</a>";
     }
     ?>
-    
+
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
-    $("body").on("click", "#btnupload", function () {
-        var formData = new FormData($("#frmData")[0]); // Ambil FormData dari form dengan id frmData
+    $("body").on("click", ".btnupload", function () {
+        var teamId = $(this).data("teamid");
+        var formData = new FormData($("#frmData" + teamId)[0]); // Ambil FormData dari form dengan ID yang sesuai dengan idteam
 
         $.ajax({
             url: 'uploadgambar.php',
@@ -104,11 +105,12 @@
             enctype: 'multipart/form-data',
             processData: false,
             success: function (response) {
-                alert(response); 
-                location.reload(); 
+                alert(response);
+                location.reload();
             }
         });
     });
+
 </script>
 
 

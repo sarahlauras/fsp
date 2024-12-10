@@ -8,6 +8,7 @@
 </head>
 <body>
     <form action="login_proses.php" method="post">
+    <a href="index.php">Back</a>
         <label>Username</label>
         <input type="text" name="username" required>
 
