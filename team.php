@@ -28,14 +28,13 @@
             $offset = 0;
         }
 
-        // $res = $event_teams->getAllTeam(null,null);
         $totaldata = $team->getTotalData();
         $resteams = $team->getAllTeam($offset, $perhalaman);
 
         $jumlahhalaman = ceil($totaldata / $perhalaman);
 
-        //BUAT TABEL
-        echo "<table border = '1'>";
+        // BUAT TABEL
+        echo "<table border='1'>";
         echo "
             <tr>
                 <th>Name</th>
@@ -47,24 +46,22 @@
             echo "<tr>
                     <td>" . $row['name'] . "<br>
                     <img src='teams/" . $teamId . ".jpg' alt='" . $row['name'] . " Poster' width='100' height='100'>
-                    <form id='frmData<?php echo $teamId; ?>' enctype='multipart/form-data'>
-                        <input type='hidden' name='idteam' value='<?php echo $teamId; ?>'>
+                    <form id='frmData{$teamId}' enctype='multipart/form-data'>
+                        <input type='hidden' name='idteam' value='{$teamId}'>
                         <input type='file' name='photo' accept='image/jpg'>
                         <br>
-                        <button type='button' class='btnupload' data-teamid='<?php echo $teamId; ?>'>Upload</button>
+                        <button type='button' class='btnupload' data-teamid='{$teamId}'>Upload</button>
                     </form>
                     </td>
                     <td>" . $row['game'] . "</td>
                     <td>
                     <a href='editteam.php?idteam=" . $row['idteam'] . "'>Ubah</a>
-                    <a href='deleteteam.php?idteam=" . $row['idteam'] . "'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Team ini?\");'>Hapus</a></td>
-                    <input type='hidden' name='idteam' value='<?php echo $teamId; ?>'>
+                    <a href='deleteteam.php?idteam=" . $row['idteam'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Team ini?\");'>Hapus</a></td>
                 </tr>";
         }
         echo "</table>";
 
-        // paging
-        //echo "<div>Total Data: ".$totaldata."</div>";
+        // PAGING
         echo "<a href='team.php?offset=0'>First</a>";
 
         for ($i = 1; $i <= $jumlahhalaman; $i++) {
@@ -105,13 +102,16 @@
             enctype: 'multipart/form-data',
             processData: false,
             success: function (response) {
+                console.log(response); // Debug log
                 alert(response);
                 location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error("Kesalahan AJAX:", error);
+                alert("Upload gagal!");
             }
         });
     });
-
 </script>
-
 
 </html>

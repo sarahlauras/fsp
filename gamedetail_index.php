@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="gamedetail.css">
 </head>
 <body>
-    <?php
+    <a href="index.php">back</a>
+    <h1>Game Details</h1>
+    <?php       
     require_once 'classgame.php';
 
     $game = new Game();
