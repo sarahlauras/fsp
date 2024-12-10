@@ -61,7 +61,7 @@
 
         //menampilkan data team apa saja per game
         public function gameDetailTeam($namagame){
-            $stmt = $this->mysqli->prepare("SELECT t.name from team t inner join 
+            $stmt = $this->mysqli->prepare("SELECT t.name, t.idteam from team t inner join 
                                                    game g on t.idgame = g.idgame where g.name = ?");
             $stmt->bind_param("s", $namagame);
             $stmt->execute();

@@ -11,7 +11,6 @@
     <h1>Game Details</h1>
     <?php       
     require_once 'classgame.php';
-
     $game = new Game();
 
     $totaldata = $game->getTotalData();
@@ -31,13 +30,17 @@
         echo "<p><strong>Teams:</strong></p>";
         $resteams = $game->gameDetailTeam($gameRow['name']);
         if ($resteams->num_rows > 0) {
-            echo "<ul>";
+            echo "<div class='team-list'>";
             while ($teamRow = $resteams->fetch_assoc()) {
+                $teamId = $teamRow['idteam'];
                 echo "<div class='team-card'>";
-                echo "<li>" . $teamRow['name'] . "</li>";
-                echo "</div>";
+                echo "<img src='teams/" . $teamId . ".jpg' alt='" . $teamRow['name'] . " Poster'>";
+                echo "<div class='team-info'>";
+                echo "<h4>" . $teamRow['name'] . "</h4>";
+                echo "</div>"; // penutup team-info
+                echo "</div>"; // penutup team-card
             }
-            echo "</ul>";
+            echo "</div>"; // penutup team-list
         } else {
             echo "<p>No teams available.</p>";
         }

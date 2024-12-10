@@ -22,28 +22,31 @@ h1{
 
 /* Style untuk list team dalam card */
 .team-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Jarak antar card */
     margin-top: 10px;
+    justify-content: flex-start; /* Menyusun ke kiri */
 }
 
 /* Style untuk card tiap team */
 .team-card {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    margin: 10px 0;
     border: 1px solid #8A2BE2;
     border-radius: 8px;
-    background-color: #E6E6FA; /* Warna lembut untuk team card */
+    background-color: #E6E6FA;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    gap: 10px;
+    width: 200px; /* Lebar tetap untuk card */
 }
 
 /* Style untuk gambar di team card */
 .team-card img {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
+    border-radius: 50%; /* Membuat gambar bulat */
 }
 
 /* Detail team dalam card */
@@ -111,4 +114,20 @@ h1{
 .pagination strong {
     color: #FF69B4; /* Warna pink untuk halaman aktif */
     padding: 8px 12px;
+}
+
+.team-info h4 {
+    margin: 0;
+    font-size: 1em;
+    color: #4B0082;
+}
+
+@media screen and (max-width: 768px) {
+    .team-list {
+        justify-content: center; /* Susun di tengah untuk layar kecil */
+    }
+
+    .team-card {
+        width: 100%; /* Lebar penuh pada layar kecil */
+    }
 }
