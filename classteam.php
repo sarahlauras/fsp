@@ -74,5 +74,35 @@
             $stmt->close();
             return $jumlah;
         }
+
+        //menampilkan data member apa saja per team
+        public function memberDetailTeam($namateam){
+            $stmt = $this->mysqli->prepare("SELECT m.fname, m.lname from member m inner join 
+                                                   team_members tm on tm.idmember = m.idmember inner join team t on t.idteam = tm.idteam 
+                                                   where t.name = ?");
+            $stmt->bind_param("s", $namateam);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+
+        //menampilkan event apa saja per team
+        public function teamDetailEvent($namateam) {
+            $stmt = $this->mysqli->prepare("SELECT e.name, e.date from event e inner join 
+                                                   event_teams et on et.idevent = e.idevent inner join
+                                                   team t on t.idteam = et.idteam
+                                                   where t.name = ? ");
+            $stmt->bind_param("s", $namateam);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+
+        //menampilkan achievement apa saja per team
+        public function teamDetailAchievement($namateam) {
+            $stmt = $this->mysqli->prepare( "SELECT a.name from achievement a inner join 
+                                                    team t on t.idteam = a.idteam where t.name = ?");
+            $stmt->bind_param("s", $namateam);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
     }
 ?>
