@@ -1,10 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* style.css */
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -15,7 +9,7 @@ body {
     margin: 20px auto;
     line-height: 1.6;
 }
- 
+
 h1 {
     text-align: center;
     color: #8A2BE2; 
@@ -23,35 +17,36 @@ h1 {
     font-weight: 600;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background-color: #D8BFD8; 
+.game-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* memberikan jarak antar card */
+}
+
+.game-card {
+    border: 1px solid #8A2BE2;
+    padding: 15px;
+    margin: 15px 0;
     border-radius: 8px;
-    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(33.333% - 20px); /* memastikan card tidak terlalu lebar */
+    box-sizing: border-box;
 }
 
-td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #9370DB;
+.game-card-content {
+    padding: 15px; /* memberikan padding pada konten card */
 }
 
-th {
-    background-color: #8A2BE2;
-    color: white;
-    font-weight: 600;
-    text-align: center;
-    padding: 12px;
+ul {
+    padding-left: 20px;
 }
 
-tr:nth-child(even) {
-    background-color: #DDA0DD; 
+li {
+    list-style-type: none;
 }
 
-tr:hover {
-    background-color: #C3B1E1; 
+p {
+    margin: 10px 0;
 }
 
 a {
@@ -65,7 +60,6 @@ a {
 a:hover {
     color: #9370DB;
 }
-
 
 .pagination {
     text-align: center;
@@ -90,27 +84,4 @@ a:hover {
 .pagination strong {
     color: #FF69B4; 
     padding: 8px 12px;
-}
-
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-    color: #6A5ACD; 
-    font-size: 0.9rem;
-}
-
-
-a.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #8A2BE2;
-    color: white;
-    border-radius: 4px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-
-a.button:hover {
-    background-color: #6A5ACD;
 }

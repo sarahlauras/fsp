@@ -58,6 +58,26 @@
             $stmt->close();
             return $jumlah;
         }
-    } 
 
+        //menampilkan data team apa saja per game
+        public function gameDetailTeam($namagame){
+            $stmt = $this->mysqli->prepare("SELECT t.name from team t inner join 
+                                                   game g on t.idgame = g.idgame where g.name = ?");
+            $stmt->bind_param("s", $namagame);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+        
+        //menampilkan data team apa saja per game
+        public function gameDetailEvent($namagame){
+            $stmt = $this->mysqli->prepare("SELECT e.name, e.date FROM event e 
+                                                    JOIN event_teams et ON e.idevent = et.idevent
+                                                    JOIN team t ON et.idteam = t.idteam 
+                                                    inner join game g on g.idgame = t.idgame
+                                                    WHERE g.name = ?");
+            $stmt->bind_param("s", $namagame);
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+    } 
 ?>
