@@ -39,12 +39,15 @@
 
         echo "<table border='1'>";
         echo "<tr>
+        <th>Profile</th>
         <th>Nama Tim</th>
         <th>Nama Game</th>
         </tr>";
 
         while($row = $res->fetch_assoc()) {
+            $teamId = $row['idteam'];
             echo "<tr>
+            <td><img src='teams/" . $teamId . ".jpg' alt='" . $row['name'] . " Poster' width='100' height='100'></td>
             <td>".$row['name']."</td>
             <td>".$row['game']."</td>
             </tr>";
