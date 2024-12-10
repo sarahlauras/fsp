@@ -14,6 +14,7 @@
     <header>
         <h1>Home</h1>
         <a href="gamedetail_index.php">Game Detail</a>
+        <a href="teamdetail_index.php">Team Detail</a>
         <a href="login.php" class="btnactive">Login</a>
     </header>
     <h1>Selamat Datang di</h1>
