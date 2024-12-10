@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Informatics</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -34,6 +34,7 @@
             display: flex;
             align-items: center;
             padding: 15px;
+            margin-bottom: 60px;
         }
         header h1 {
             font-size: 32px;
@@ -47,9 +48,16 @@
             font-weight: bold;
             margin-left: 20px;
         }
-        h1 {
-            font-size: 32px;
+        h3 {
+            font-size: 20px;
             margin: 0;
+            text-align: center;
+        }
+        p {
+            width: 80%;
+            margin: 20px auto;
+            text-align: justify;
+            margin-bottom: 40px;
         }
         table {
             width: 80%;
@@ -99,6 +107,14 @@
         a.button:hover {
             background-color: #6A5ACD;
         }
+
+        a.btnactive {
+            background-color: white;
+            border: 2px solid #8e44ad;
+            color: #8e44ad;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
         
         /* .pagination a {
             display: inline-block;
@@ -124,11 +140,13 @@
 <body>
     <header>
         <h1>Home</h1>
-        <a href="login.php">Login</a>
-        <a href="">Game Detail</a>
+        <a href="gamedetail_index.php">Game Detail</a>
         <a href="">Team Detail</a>
+        <a href="login.php" class="btnactive">Login</a>
     </header>
-    <h1>Daftar Tim</h1>
+    <h1>Selamat Datang Di Club Informatics</h1>
+    <p>Di sini Anda dapat melihat daftar tim yang terdaftar bersama dengan game yang mereka mainkan. Setiap tim akan saling berkompetisi dalam berbagai game populer seperti Mobile Legends, PUBG, Valorant, dan lainnya. Bergabunglah dengan salah satu tim dan ikutilah keseruan kompetisinya!</p>
+    <h3>Daftar Tim</h3>
     <?php 
         $team = new Team();
         $totaldata = 0;
