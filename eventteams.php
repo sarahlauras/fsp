@@ -35,6 +35,7 @@
             $jumlahhalaman = ceil($totaldata/$perhalaman);
 
             echo "<table border='1'>";
+            echo "<thead>";
             echo "<tr>
                     <th>Event Name</th>
                     <th>Event Date</th> 
@@ -42,17 +43,17 @@
                     <th>Game Name</th>
                     <th>Aksi</th>
                 </tr>";
-            
+            echo "</thead>";
 
             while($row = $resevent_teams->fetch_assoc()) {
                 $idteam = $teamid->getIdTeamByName($row['team_name']);
                 $formattgl = strftime("%d %B %Y", strtotime($row['event_date']));
                 echo "<tr>
-                        <td>" . $row['event_name'] . "</td>
-                        <td>" . $formattgl . "</td>
-                        <td>" . $row['team_name'] . "</td>
-                        <td>" . $row['game_name'] . "</td>
-                        <td>
+                        <td data-label='Event Name'>" . $row['event_name'] . "</td>
+                        <td data-label='Event Date'>" . $formattgl . "</td>
+                        <td data-label='Team Name'>" . $row['team_name'] . "</td>
+                        <td data-label='Game Name'>" . $row['game_name'] . "</td>
+                        <td data-label='Aksi'>
                             <a href='editevent_teams.php?idevent=" . $row['idevent'] . "&idteam=" . $idteam . "'>Ubah</a> 
                             <a href='deleteevent_teams.php?idevent=". $row['idevent'] . "&idteam=" . $idteam . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Event Teams ini?\");'>Hapus</a>
                         </td>
