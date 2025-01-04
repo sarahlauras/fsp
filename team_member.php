@@ -35,20 +35,22 @@
 
             //BUAT TABEL
             echo "<table border = '1'>";
+            echo "<thead>";
             echo "
             <tr>
-                <th>Team</th>
+                <th>Team Name</th>
                 <th>Member</th>
                 <th>Description</th>
                 <th>Aksi</th>
             </tr>";
+            echo "</thead>";
 
             while($row = $res->fetch_assoc()){
                 echo "<tr>
-                    <td>".$row['fname']."</td>
-                    <td>".$row['name']."</td>
-                    <td>".$row['description']."</td>
-                    <td>
+                    <td data-label='Team Name'>".$row['fname']."</td>
+                    <td data-label='Member'>".$row['name']."</td>
+                    <td data-label='Description'>".$row['description']."</td>
+                    <td data-label='Aksi'>
                     <a href='editteam_member.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'>Ubah</a>
                     <a href='deleteteammember.php?idteam=".$row['idteam']."&idmember=".$row['idmember']."'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Team Member ini?\");'>Hapus</a>
                     </td>

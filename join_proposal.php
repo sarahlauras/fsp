@@ -47,7 +47,7 @@ $role = $_SESSION["profile"];
         $jumlahhalaman = ceil($totaldata / $perhalaman);
 
         echo "<table border = '1'>";
-
+        echo "<thead>";
         if($role == "admin") {
             echo "
             <tr>
@@ -57,13 +57,14 @@ $role = $_SESSION["profile"];
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>";
+        echo "</thead>";
             while ($row = $res->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . $row['fname'] . "</td>
-                        <td>" . $row['name'] . "</td>
-                        <td>" . $row['description'] . "</td>
-                        <td>" . $row['status'] . "</td>
-                        <td>
+                        <td data-label='Member'>" . $row['fname'] . "</td>
+                        <td data-label='Team'>" . $row['name'] . "</td>
+                        <td data-label='Description'>" . $row['description'] . "</td>
+                        <td data-label='Status'>" . $row['status'] . "</td>
+                        <td data-label='Aksi'>
                             <a href='editjoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'>Ubah</a>
                             <a href='deletejoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Join Proposal ini?\");'>Hapus</a>
                         </td>

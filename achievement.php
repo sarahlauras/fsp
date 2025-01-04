@@ -73,32 +73,33 @@
                     }
                 }
                 
-                echo "<table border ='1'>";
                 echo "<table border='1' id='eventTable'>";
-                echo "<tr>
-                    <th>Name</th>
-                    <th>Description</th> 
-                    <th>Date</th>
-                    <th>Team</th>";
-                    if ($role == 'admin') {
-                        echo "<th>Aksi</th>";
-                    }
-                    echo "</tr>";
-                        while($row = $achievements->fetch_assoc()) {
-                            $formattgl = strftime("%d %B %Y", strtotime($row['date']));
-                            echo "<tr>
-                                <td>".$row['name']."</td>
-                                <td>".$row['description']."</td>
-                                <td>".$formattgl."</td>
-                                <td>".$row['namateam']."</td>";
-                            if ($role == 'admin') {
-                                echo "<td>
-                                <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah</a> 
-                                <a href='deleteachievement.php?idachievement=".$row['idachievement']."' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Achievement ini?\");' >Hapus</a>
-                                </td>";
-                            }
-                            echo "</tr>";
+                echo "<thead>";
+                    echo "<tr>
+                        <th>Achievement Name</th>
+                        <th>Description</th> 
+                        <th>Date</th>
+                        <th>Team</th>";
+                        if ($role == 'admin') {
+                            echo "<th>Aksi</th>";
                         }
+                    echo "</tr>";
+                echo "</thead>";
+                    while($row = $achievements->fetch_assoc()) {
+                        $formattgl = strftime("%d %B %Y", strtotime($row['date']));
+                        echo "<tr>
+                            <td data-label='Achievement Name'>".$row['name']."</td>
+                            <td data-label='Description'>".$row['description']."</td>
+                            <td data-label='Date'>".$formattgl."</td>
+                            <td data-label='Team'>".$row['namateam']."</td>";
+                        if ($role == 'admin') {
+                            echo "<td data-label='Aksi'>
+                            <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah</a> 
+                            <a href='deleteachievement.php?idachievement=".$row['idachievement']."' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Achievement ini?\");' >Hapus</a>
+                                </td>";
+                        }
+                        echo "</tr>";
+                    }
                     
                 echo "</table>";
             

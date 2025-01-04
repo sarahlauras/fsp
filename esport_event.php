@@ -100,22 +100,24 @@
         <?php
 
         echo "<table border='1'>";
-        if ($role == 'member') {
-            echo "<tr>
-                            <th>Nama Event</th>
-                            <th>Tgl. Event</th>
-                            <th>Deskripsi</th>
-                            <th>Team</th>
-                        </tr>";
-        } else {
-            echo "<tr>  
-                            <th>Nama Event</th>
-                            <th>Tgl. Event</th>
-                            <th>Deskripsi</th>
-                            <th>Team</th>
-                            <th>Aksi</th>
-                        </tr>";
-        }
+        echo "<thead>";
+            if ($role == 'member') {
+                echo "<tr>
+                                <th>Nama Event</th>
+                                <th>Tgl. Event</th>
+                                <th>Deskripsi</th>
+                                <th>Team</th>
+                            </tr>";
+            } else {
+                echo "<tr>  
+                                <th>Nama Event</th>
+                                <th>Tgl. Event</th>
+                                <th>Deskripsi</th>
+                                <th>Team</th>
+                                <th>Aksi</th>
+                            </tr>";
+            }
+        echo "</thead>";
 
         while ($row = $events->fetch_assoc()) {
             $formatrilis = strftime("%d %B %Y", strtotime($row['date']));
@@ -123,18 +125,18 @@
 
             if ($role == 'member') {
                 echo "<tr>
-                            <td>" . $row['name'] . "</td>
-                            <td>" . $formatrilis . "</td>
-                            <td>" . $row['description'] . "</td>
-                            <td>" . $row['namateam'] . "</td>
+                            <td data-label='Nama Event'>" . $row['name'] . "</td>
+                            <td data-label='Tgl. Event'>" . $formatrilis . "</td>
+                            <td data-label='Deskripsi'>" . $row['description'] . "</td>
+                            <td data-label='Nama Team'>" . $row['namateam'] . "</td>
                         </tr>";
             } else {
                 echo "<tr>
-                            <td>" . $row['name'] . "</td>
-                            <td>" . $formatrilis . "</td>
-                            <td>" . $row['description'] . "</td>
-                            <td>" . $row['namateam'] . "</td>
-                            <td>
+                            <td data-label='Nama Event'>" . $row['name'] . "</td>
+                            <td data-label='Tgl. Event'>" . $formatrilis . "</td>
+                            <td data-label='Deskripsi'>" . $row['description'] . "</td>
+                            <td data-label='Nama Team'>" . $row['namateam'] . "</td>
+                            <td data-label='Aksi'>
                             <a href='esport_editevent.php?idevent=" . $row['idevent'] . "'>Ubah</a>
                             <a href='esport_deleteevent.php?idevent=" . $row['idevent'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus event ini?\");'>Hapus</a>
                             </td>

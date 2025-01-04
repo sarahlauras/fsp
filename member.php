@@ -34,35 +34,37 @@ $role = $_SESSION["profile"];
             $jumlahhalaman = ceil($totaldata / $perhalaman);
 
             echo "<table border='1'>";
+            echo "<thead>";
             echo "<tr>
-                                <th>First Name</th>
-                                <th>Last Name</th> 
-                                <th>Username</th>
-                                <th>Profile</th>
-                                <th>Password</th>
-                                <th>Aksi</th>
-                            </tr>";
+                    <th>First Name</th>
+                    <th>Last Name</th> 
+                    <th>Username</th>
+                    <th>Profile</th>
+                    <th>Password</th>
+                    <th>Aksi</th>
+                </tr>";
+            echo "</thead>";
 
-                            while ($row = $res->fetch_assoc()) {
-                                echo "<tr>
-                                        <td>" . $row['fname'] . "</td>
-                                        <td>" . $row['lname'] . "</td>
-                                        <td>" . $row['username'] . "</td>
-                                        <td>" . $row['profile'] . "</td>";
+            while ($row = $res->fetch_assoc()) {
+                echo "<tr>
+                    <td data-label='First Name'>" . $row['fname'] . "</td>
+                    <td data-label='Last Name'>" . $row['lname'] . "</td>
+                    <td data-label='Username'>" . $row['username'] . "</td>
+                    <td data-label='Profile'>" . $row['profile'] . "</td>";
                 
-                                // Tampilkan password hanya jika profile = 'admin'
-                                if ($row['profile'] == 'admin') {
-                                    echo "<td>" . $row['password'] . "</td>";
-                                } else {
-                                    echo "<td>-</td>"; // Kosongkan atau tampilkan simbol
-                                }
+                    // Tampilkan password hanya jika profile = 'admin'
+                    if ($row['profile'] == 'admin') {
+                        echo "<td data-label='Password'>" . $row['password'] . "</td>";
+                    } else {
+                        echo "<td data-label='Password'>-</td>"; // Kosongkan atau tampilkan simbol
+                    }
                 
-                                echo "<td>
-                                        <a href='editmember.php?idmember=" . $row['idmember'] . "'>Ubah</a> 
-                                        <a href='deletemember.php?idmember=" . $row['idmember'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Member ini?\");'>Hapus</a>
-                                      </td>
-                                      </tr>";
-                            }
+                    echo "<td data-label='Aksi'>
+                        <a href='editmember.php?idmember=" . $row['idmember'] . "'>Ubah</a> 
+                        <a href='deletemember.php?idmember=" . $row['idmember'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Member ini?\");'>Hapus</a>
+                        </td>
+                    </tr>";
+                }
 
             echo "</table>";
 

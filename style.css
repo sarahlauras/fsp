@@ -77,3 +77,38 @@ a.button {
 a.button:hover {
     background-color: #6A5ACD;
 }
+
+@media (max-width: 600px) { 
+    table {
+        border: none;
+    }
+    thead{
+        display: none;
+    }
+    tr {
+        display: block;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        gap: 10px;
+        border: none;
+        text-align: left;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: black;
+        flex: 1;
+    }
+
+    td:last-child {
+        padding-bottom: 0; 
+    }
+}

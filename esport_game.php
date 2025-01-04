@@ -31,11 +31,13 @@
             $jumlahhalaman = ceil($totaldata/$perhalaman);
 
             echo "<table border='1'>";
-            echo "<tr>
-                <th>Nama</th>
-                <th>Deskripsi</th>
-                <th colspan='2'>Aksi</th>
-            </tr>";
+            echo "<thead>";
+                echo "<tr>
+                    <th>Nama</th>
+                    <th>Deskripsi</th>
+                    <th colspan='2'>Aksi</th>
+                </tr>";
+            echo "</thead>";
 
         while($row = $res->fetch_assoc()) {
             echo "<tr>
