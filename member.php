@@ -15,7 +15,7 @@ $role = $_SESSION["profile"];
     <h1>DAFTAR MEMBER</h1>
     <div id="kanan">
         <?php
-        echo "<a href='home.php'>Back</a>";
+        echo "<a class='btnPagination' href='home.php'>Back</a>";
         $member = new Member();
         if ($role == 'admin'):
             
@@ -41,74 +41,60 @@ $role = $_SESSION["profile"];
                     <th>Username</th>
                     <th>Profile</th>
                     <th>Password</th>
-                    <th>Aksi</th>
+                    <th>Action</th>
                 </tr>";
             echo "</thead>";
 
             while ($row = $res->fetch_assoc()) {
                 echo "<tr>
-                    <td data-label='First Name'>" . $row['fname'] . "</td>
-                    <td data-label='Last Name'>" . $row['lname'] . "</td>
-                    <td data-label='Username'>" . $row['username'] . "</td>
-                    <td data-label='Profile'>" . $row['profile'] . "</td>";
+                    <td><span class='label'>First Name: </span>" . $row['fname'] . "</td>
+                    <td><span class='label'>Last Name:  </span>" . $row['lname'] . "</td>
+                    <td><span class='label'>Username: </span>". $row['username'] . "</td>
+                    <td><span class='label'>Profile: </span>" . $row['profile'] . "</td>";
                 
                     // Tampilkan password hanya jika profile = 'admin'
                     if ($row['profile'] == 'admin') {
-                        echo "<td data-label='Password'>" . $row['password'] . "</td>";
+                        echo "<td><span class='label'>Password: </span>" . $row['password'] . "</td>";
                     } else {
-                        echo "<td data-label='Password'>-</td>"; // Kosongkan atau tampilkan simbol
+                        echo "<td><span class='label'>Password: </span>-</td>"; // Kosongkan atau tampilkan simbol
                     }
                 
-                    echo "<td data-label='Aksi'>
-                        <a href='editmember.php?idmember=" . $row['idmember'] . "'>Ubah</a> 
-                        <a href='deletemember.php?idmember=" . $row['idmember'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Member ini?\");'>Hapus</a>
-                        </td>
+                    echo "<td><span class='label'>Action: </span>
+                    <div class='action'>
+                    <a href='esport_editmember.php?idmember=".$row['idmember']."'>Change</a>
+                    <a href='esport_deletemember.php?idmember=".$row['idmember']."' onclick='return confirm(\"Are you sure you want to delete?\");' >Delete</a>
+                    </div>
+                    </td>
                     </tr>";
                 }
 
             echo "</table>";
 
             // paging
+            echo "<div class='pagination'>";
             //echo "<div>Total Data: " . $totaldata . "</div>";
             echo "<a href='member.php?offset=0'>First</a>";
 
             for ($i = 1; $i <= $jumlahhalaman; $i++) {
                 $off = ($i - 1) * $perhalaman;
                 if ($currenthalaman == $i) {
-                    echo "<strong style='color:#DDA0DD'>$i</strong></a>";
+                    echo "<strong style='color:red'>$i</strong></a>";
                 } else {
                     echo "<a href='member.php?offset=" . $off . "'>" . $i . "</a> ";
                 }
             }
             $lastOffset = ($jumlahhalaman - 1) * $perhalaman;
             echo "<a href='member.php?offset=" . $lastOffset . "'>Last</a><br><br>";
+            
+            echo "<a href='insertmember.php'>Insert Member</a>";
+            echo "</div>";
             ?>
-            <a href='insertmember.php'>Insert Member</a>
             <?php
         else:
-        //     $username = $_SESSION['username'];
-        //     $res = $member->getMemberById(null, $username);
-        //     echo "<table border='1'>";
-        //     echo "<tr>
-        //                         <th>First Name</th>
-        //                         <th>Last Name</th> 
-        //                         <th>Username</th>
-        //                         <th>Profile</th>
-        //                     </tr>";
-
-        //     while ($row = $res->fetch_assoc()) {
-        //         echo "<tr>
-        //                     <td>" . $row['fname'] . "</td>
-        //                     <td>" . $row['lname'] . "</td>
-        //                     <td>" . $row['username'] . "</td>
-        //                     <td>" . $row['profile'] . "</td>
-        //                 </tr>";
-            
-        //     }
-        //     echo "</table>";
             $username = $_SESSION['username'];    
-            echo "Anda tidak memiliki hak akses";
+            echo "You not have an access";
         endif;
+        
         ?>
     </div>
 </body>

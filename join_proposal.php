@@ -22,7 +22,7 @@ $role = $_SESSION["profile"];
     <h1>DAFTAR JOIN PROPOSAL</h1>
     <div id="kanan">
         <?php
-        echo "<a href='home.php'>Back</a>";
+        echo "<a class='btnPagination' href='home.php'>Back</a>";
         $joinproposal = new JoinProposal();
         $totaldata = 0;
         $perhalaman = 4;
@@ -34,7 +34,6 @@ $role = $_SESSION["profile"];
         } else {
             $offset = 0;
         }
-
 
         if ($role == "admin") {
             $res = $joinproposal->getJoinProposal(null, null, $offset, $perhalaman);
@@ -55,18 +54,20 @@ $role = $_SESSION["profile"];
                 <th>Team</th>
                 <th>Description</th>
                 <th>Status</th>
-                <th>Aksi</th>
+                <th>Action</th>
             </tr>";
         echo "</thead>";
             while ($row = $res->fetch_assoc()) {
                 echo "<tr>
-                        <td data-label='Member'>" . $row['fname'] . "</td>
-                        <td data-label='Team'>" . $row['name'] . "</td>
-                        <td data-label='Description'>" . $row['description'] . "</td>
-                        <td data-label='Status'>" . $row['status'] . "</td>
-                        <td data-label='Aksi'>
-                            <a href='editjoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'>Ubah</a>
-                            <a href='deletejoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'onclick='return confirm(\"Apakah Anda yakin ingin menghapus Join Proposal ini?\");'>Hapus</a>
+                        <td><span class='label'>Member: </span>". $row['fname'] . "</td>
+                        <td><span class='label'>Team: </span>" . $row['name'] . "</td>
+                        <td><span class='label'>Description:</span>" . $row['description'] . "</td>
+                        <td><span class='label'>Status: </span>" . $row['status'] . "</td>
+                        <td><span class='label'>Action: </span>
+                        <div class='action'>
+                            <a href='editjoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'>Change</a>
+                            <a href='deletejoin_proposal.php?idjoin_proposal=" . $row['idjoin_proposal'] . "'onclick='return confirm(\"Are you sure you want to delete?\");'>Delete</a>
+                        </div>
                         </td>
                     <tr>";
             } 
@@ -81,16 +82,16 @@ $role = $_SESSION["profile"];
             </tr>";
             while ($row = $res->fetch_assoc()) {
                 echo "<tr>
-                    <td>" . $row['fname'] . "</td>
-                    <td>" . $row['name'] . "</td>
-                    <td>" . $row['description'] . "</td>
-                    <td>" . $row['status'] . "</td>
+                    <td><span class='label'>Member: </span>". $row['fname'] . "</td>
+                        <td><span class='label'>Team: </span>" . $row['name'] . "</td>
+                        <td><span class='label'>Description:</span>" . $row['description'] . "</td>
+                        <td><span class='label'>Status: </span>" . $row['status'] . "</td>
                     <tr>";
             }
         }
         echo "</table>";
 
-
+        echo "<div class='pagination'>";
         //echo "<div>Total Data: " . $totaldata . "</div>";
         echo "<a href='join_proposal.php?offset=0'>First</a>";
 
@@ -104,9 +105,11 @@ $role = $_SESSION["profile"];
         }
         $lastOffset = ($jumlahhalaman - 1) * $perhalaman;
         echo "<a href='join_proposal.php?offset=" . $lastOffset . "'>Last</a><br><br>";
+        echo "<a href='insertjoin_proposal.php'>Ajukan Join Proposal</a>";
+        echo "</div>";
         ?>
     </div>
-    <a href="insertjoin_proposal.php">Ajukan Join Proposal</a>
+    
 </body>
 
 </html>

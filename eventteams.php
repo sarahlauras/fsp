@@ -13,7 +13,7 @@
 <body>
     <h1>Event Teams</h1>
     <?php 
-        echo "<a href='home.php'>Back</a>";
+        echo "<a class='btnPagination' href='home.php'>Back</a>";
         $role = $_SESSION["profile"];
         if ($role == 'admin'){
 
@@ -41,7 +41,7 @@
                     <th>Event Date</th> 
                     <th>Team Name</th>
                     <th>Game Name</th>
-                    <th>Aksi</th>
+                    <th>Action</th>
                 </tr>";
             echo "</thead>";
 
@@ -49,20 +49,22 @@
                 $idteam = $teamid->getIdTeamByName($row['team_name']);
                 $formattgl = strftime("%d %B %Y", strtotime($row['event_date']));
                 echo "<tr>
-                        <td data-label='Event Name'>" . $row['event_name'] . "</td>
-                        <td data-label='Event Date'>" . $formattgl . "</td>
-                        <td data-label='Team Name'>" . $row['team_name'] . "</td>
-                        <td data-label='Game Name'>" . $row['game_name'] . "</td>
-                        <td data-label='Aksi'>
-                            <a href='editevent_teams.php?idevent=" . $row['idevent'] . "&idteam=" . $idteam . "'>Ubah</a> 
-                            <a href='deleteevent_teams.php?idevent=". $row['idevent'] . "&idteam=" . $idteam . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Event Teams ini?\");'>Hapus</a>
+                        <td><span class='label'>Event Name: </span>" . $row['event_name'] . "</td>
+                        <td><span class='label'>Event Date: </span>" . $formattgl . "</td>
+                        <td><span class='label'>Team Name:</span>". $row['team_name'] . "</td>
+                        <td><span class='label'>Game Name: </span>" . $row['game_name'] . "</td>
+                        <td><span class='label'>Action:</span>
+                        <div class='action'>
+                            <a href='editevent_teams.php?idevent=" . $row['idevent'] . "&idteam=" . $idteam . "'>Change</a> 
+                            <a href='deleteevent_teams.php?idevent=". $row['idevent'] . "&idteam=" . $idteam . "' onclick='return confirm(\"Are you sure you want to delete?\");'>Delete</a>
+                        </div>
                         </td>
                     </tr>";
             }
         
         echo "</table>";
 
-        
+        echo "<div class='pagination'>";
         echo "<a href='eventteams.php?offset=0'>First</a>";
         
         for($i = 1; $i <= $jumlahhalaman; $i++) {
@@ -77,11 +79,12 @@
         echo "<a href='eventteams.php?offset=".$lastOffset."'>Last</a><br><br>";
         }
         else {
-            echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
+            echo "<p class='text_merah'>You not have an access</p>";
         }
         if ($role == 'admin') {
             echo "<a href='insertevent_teams.php?'>Insert Event Teams</a>";
         }
+        echo "</div>";
     ?>  
 </body>
 </html>

@@ -12,7 +12,7 @@
     <body>
     <h1>Game</h1>
     <?php 
-        echo "<a href='home.php'>Back</a>";
+        echo "<a class='btnPagination' href='home.php'>Back</a>";
         if ($role == 'admin'):
             require_once 'classgame.php';
             $game = new Game();
@@ -33,42 +33,47 @@
             echo "<table border='1'>";
             echo "<thead>";
                 echo "<tr>
-                    <th>Nama</th>
-                    <th>Deskripsi</th>
-                    <th colspan='2'>Aksi</th>
+                    <th>Game Name</th>
+                    <th>Description</th>
+                    <th colspan='2'>Action</th>
                 </tr>";
             echo "</thead>";
 
         while($row = $res->fetch_assoc()) {
             echo "<tr>
-                <td>".$row['name']."</td>
-                <td>".$row['description']."</td>
-                <td>
-                    <a href='esport_editgame.php?idgame=".$row['idgame']."'>Ubah</a>
-                    <a href='esport_deletegame.php?idgame=".$row['idgame']."'>Hapus</a>
+                <td><span class='label'>Game Name: </span>". $row['name']."</td>
+                <td><span class='label'>Description: </span>". $row['description']."</td>
+                <td><span class='label'>Action: </span>
+                <div class='action'>
+                    <a href='esport_editgame.php?idgame=". $row['idgame']."'>Change</a>
+                    <a href='esport_deletegame.php?idgame=". $row['idgame']."' onclick='return confirm(\"Are you sure you want to delete?\");' >Delete</a>
+                </div>
                 </td>
             </tr>";
         }
 
         echo "</table>";
+        echo "<div class='pagination'>";
         echo "<a href='esport_game.php?offset=0'>First</a>";
 
             for ($i = 1; $i <= $jumlahhalaman; $i++) {
                 $off = ($i - 1) * $perhalaman;
                 if ($currenthalaman == $i) {
-                    echo "<strong style='color:#DDA0DD'>$i</strong></a>";
+                    echo "<strong style='color:red'>$i</strong></a>";
                 } else {
                     echo "<a href='esport_game.php?offset=" . $off . "'>" . $i . "</a> ";
                 }
             }
             $lastOffset = ($jumlahhalaman - 1) * $perhalaman;
             echo "<a href='esport_game.php?offset=" . $lastOffset . "'>Last</a><br><br>";
+            echo "<a href='esport_insertgame.php'>Insert Game</a>";
+            echo "</div>";
             ?>
-            <a href='esport_insertgame.php'>Insert Game</a>
             <?php 
         else:
-            echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
+            echo "<p class='text_merah'>You not have an access</p>";
         endif; 
+        
         ?>
     </body>
 </html>

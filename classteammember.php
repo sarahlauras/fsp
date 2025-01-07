@@ -61,7 +61,7 @@ class TeamMember extends DBParent
     }
     
     public function getTotalData(){
-        $res = $this->getTeamMembers(null,null,null,null);
+        $res = $this->getTeamMembers();
         return $res->num_rows;
     }
 

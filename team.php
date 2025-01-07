@@ -11,7 +11,7 @@
 <body>
     <h1>Team</h1>
     <?php
-    echo "<a href='home.php'>Back</a>";
+    echo "<a class='btnPagination' href='home.php'>Back</a>";
     session_start();
     $role = $_SESSION["profile"];
     if ($role == 'admin') {
@@ -35,33 +35,41 @@
 
         // BUAT TABEL
         echo "<table border='1'>";
+        echo "<thead>";
         echo "
             <tr>
                 <th>Name</th>
+                <th>Image</th>
                 <th>Game</th>
-                <th>Aksi</th>
+                <th>Action</th>
             </tr>";
+        echo "</thead>";
         while ($row = $resteams->fetch_assoc()) {
             $teamId = $row['idteam'];
             echo "<tr>
-                    <td>" . $row['name'] . "<br>
-                    <img src='teams/" . $teamId . ".jpg' alt='" . $row['name'] . " Poster' width='100' height='100'>
+                    <td><span class='label'>Name: </span>". $row['name'] . "<br>
+                    <td><span class='label'>Image: </span><img src='teams/" . $teamId . ".jpg' alt='" . $row['name'] . " Poster' width='100' height='100'>
+                    
                     <form id='frmData{$teamId}' enctype='multipart/form-data'>
                         <input type='hidden' name='idteam' value='{$teamId}'>
                         <input type='file' name='photo' accept='image/jpg'>
                         <br>
                         <button type='button' class='btnupload' data-teamid='{$teamId}'>Upload</button>
                     </form>
+                    
                     </td>
-                    <td>" . $row['game'] . "</td>
-                    <td>
-                    <a href='editteam.php?idteam=" . $row['idteam'] . "'>Ubah</a>
-                    <a href='deleteteam.php?idteam=" . $row['idteam'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Team ini?\");'>Hapus</a></td>
+                    <td><span class='label'>Game: </span>" . $row['game'] . "</td>
+                    <td><span class='label'>Action: </span>
+                    <div class='action'>
+                    <a href='editteam.php?idteam=" . $row['idteam'] . "'>Change</a>
+                    <a href='deleteteam.php?idteam=" . $row['idteam'] . "' onclick='return confirm(\"Are you sure you want to delete?\");'>Delete</a></td>
+                    </div>
                 </tr>";
         }
         echo "</table>";
 
         // PAGING
+        echo "<div class='pagination'>";
         echo "<a href='team.php?offset=0'>First</a>";
 
         for ($i = 1; $i <= $jumlahhalaman; $i++) {
@@ -75,13 +83,12 @@
         $lastOffset = ($jumlahhalaman - 1) * $perhalaman;
         echo "<a href='team.php?offset=" . $lastOffset . "'>Last</a><br><br>";
     }
-    ?>
-    <?php
     if ($role == 'member') {
-        echo "<p class='text_merah'>Anda tidak memiliki akses</p>";
+        echo "<p class='text_merah'>You not have an access</p>";
     } else {
         echo "<a href='insertteam.php'>Insert New Team</a>";
     }
+    echo "</div>";
     ?>
 
 </body>

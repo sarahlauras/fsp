@@ -5,6 +5,20 @@
     box-sizing: border-box;
 }
 
+.label{
+    display: none;
+}
+
+a.btnPagination{
+    background-color: white;
+    border: 2px solid #8e44ad;
+    color: #8e44ad;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: inline-flex;
+    margin-bottom: 10px;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 20px auto;
@@ -53,18 +67,30 @@ a {
     color: #9370DB;
 }
 
+
 .pagination {
     text-align: center;
     margin-top: 20px;
     color: #FF69B4; 
     padding: 8px 12px;
 }
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    background-color: #9370DB;
+    color: white;
+    border-radius: 4px;
+}
+
 footer {
     text-align: center;
     margin-top: 20px;
     color: #6A5ACD; 
     font-size: 0.9rem;
 }
+
 a.button {
     display: inline-block;
     padding: 10px 20px;
@@ -74,9 +100,7 @@ a.button {
     margin-top: 10px;
     transition: background-color 0.3s ease;
 }
-a.button:hover {
-    background-color: #6A5ACD;
-}
+
 
 @media (max-width: 600px) { 
     table {
@@ -93,22 +117,23 @@ a.button:hover {
     }
 
     td {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
+        display: grid;
+        grid-template-columns: 150px auto;
+        align-items: center;
+        padding: 5px;
         gap: 10px;
-        border: none;
-        text-align: left;
+        border:  none;
+        margin-left: 10px;
     }
 
-    td::before {
-        content: attr(data-label);
+    .label{
+        display: block;
         font-weight: bold;
-        color: black;
-        flex: 1;
+        margin-bottom: 0;
     }
 
-    td:last-child {
-        padding-bottom: 0; 
+    .action {
+        display: flex;
+        gap: 10px;
     }
 }

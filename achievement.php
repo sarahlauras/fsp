@@ -17,7 +17,7 @@
     <body>
         <h1>Achievement</h1>
             <?php
-                echo "<a href='home.php'>Back</a>";
+                echo "<a class='btnPagination' href='home.php'>Back</a>";
                 echo "<br>";
                 $achievement = new Achievement();
                 $totaldata = 0;
@@ -39,9 +39,9 @@
                 }
                 
                 echo "<form method='GET' action='achievement.php'>";
-                echo "<label for='team'>Pilih Team: </label>";
+                echo "<label for='team'>Choose Team: </label>";
                 echo "<select name='idteam' id='team'>";
-                echo "<option value='' disabled selected>Pilih Team</option>";
+                echo "<option value='' disabled selected>Choose Team</option>";
                 while($row = $res->fetch_assoc()) {
                     $selected = "";
                     if (isset($_GET['idteam']) && $_GET['idteam'] == $row['idteam']) {
@@ -81,35 +81,34 @@
                         <th>Date</th>
                         <th>Team</th>";
                         if ($role == 'admin') {
-                            echo "<th>Aksi</th>";
+                            echo "<th>Action</th>";
                         }
                     echo "</tr>";
                 echo "</thead>";
                     while($row = $achievements->fetch_assoc()) {
                         $formattgl = strftime("%d %B %Y", strtotime($row['date']));
                         echo "<tr>
-                            <td data-label='Achievement Name'>".$row['name']."</td>
-                            <td data-label='Description'>".$row['description']."</td>
-                            <td data-label='Date'>".$formattgl."</td>
-                            <td data-label='Team'>".$row['namateam']."</td>";
+                            <td><span class='label'>Achievement Name: </span>" .$row['name']."</td>
+                            <td><span class='label'>Description: </span>" .$row['description']."</td>
+                            <td><span class='label'>Date:</span>" .$formattgl."</td>
+                            <td><span class='label'>Team: </span>" .$row['namateam']."</td>";
                         if ($role == 'admin') {
-                            echo "<td data-label='Aksi'>
-                            <a href='editachievement.php?idachievement=".$row['idachievement']."'>Ubah</a> 
-                            <a href='deleteachievement.php?idachievement=".$row['idachievement']."' onclick='return confirm(\"Apakah Anda yakin ingin menghapus Achievement ini?\");' >Hapus</a>
-                                </td>";
+                            echo "<td><span class='label'>Action:</span> 
+                            <div class='action'>
+                            <a href='editachievement.php?idachievement=".$row['idachievement']."'>Change</a> 
+                            <a href='deleteachievement.php?idachievement=".$row['idachievement']."' onclick='return confirm(\"Are you sure you want to delete?\");' >Delete</a>
+                            </div>
+                            </td>";
                         }
                         echo "</tr>";
                     }
                     
                 echo "</table>";
             
-            ?>
-
-                <?php
-                
                 // Paging
+                echo "<div class='pagination'>";
                 $jumlahhalaman = ceil($totaldata / $perhalaman);
-                echo "<div>Total Data: ".$totaldata."</div>";
+                // echo "<div>Total Data: ".$totaldata."</div>";
                 echo "<a href='achievement.php?offset=0'>First</a>";
                 
                 for ($i = 1; $i <= $jumlahhalaman; $i++) {
@@ -134,6 +133,7 @@
                 if ($role == 'admin') {
                     echo "<a href='addachievement.php?'>Insert Achievement</a>";
                 }
+                echo "</div>";
             ?>
             <br>
             <br>

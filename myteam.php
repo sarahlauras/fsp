@@ -23,7 +23,7 @@ $approvedTeams = $joinProposal->getApprovedTeams($idmember);
 </head>
 <body>
     <h1>My Teams</h1>
-    <a href="home.php">Back</a><br><br>
+    <a class='btnPagination' href="home.php">Back</a><br><br>
 
     <?php if ($approvedTeams->num_rows > 0): ?>
         <form method="POST" action="">
@@ -41,20 +41,45 @@ $approvedTeams = $joinProposal->getApprovedTeams($idmember);
         <?php
         if (isset($_POST['team'])) {
             $idteam = $_POST['team'];
+            $totaldata = 0;
+            $perhalaman = 4;       
+            $currenthalaman = 1;
             $teamMembers = $teamMember->getTeamMembersByTeam($idteam);
-            echo "<h2>Members of Team</h2>";
+            $totaldata = $teamMember ->getTotalData();
+            $jumlahhalaman = ceil($totaldata/$perhalaman);
+
+            // echo "<h2>Members of Team</h2>";
             echo "<table border='1'>";
-            echo "<tr><th>Name</th></tr>";
+            echo "<thead>";
+            echo "<tr>
+                <th>Name</th>
+            </tr>";
+            echo "</thead>";
 
             while ($member = $teamMembers->fetch_assoc()) {
                 $sedangLogin = "";
                 if ($member['idmember'] == $idmember) {
                     $sedangLogin = " (saya)";
                 }
-                echo "<tr><td>" . $member['fname'] . $sedangLogin . "</td></tr>";
+                echo "<tr>
+                    <td><span class='label'>Name: </span>" . $member['fname'] . $sedangLogin . "</td></tr>";
             }            
 
             echo "</table>";
+            echo "<div class='pagination'>";
+            echo "<a href='myteam.php?offset=0'>First</a>";
+
+            for ($i = 1; $i <= $jumlahhalaman; $i++) {
+                $off = ($i - 1) * $perhalaman;
+                if ($currenthalaman == $i) {
+                    echo "<strong style='color:red'>$i</strong></a>";
+                } else {
+                    echo "<a href='myteam.php?offset=" . $off . "'>" . $i . "</a> ";
+                }
+            }
+            $lastOffset = ($jumlahhalaman - 1) * $perhalaman;
+            echo "<a href='myteam.php?offset=" . $lastOffset . "'>Last</a><br><br>";
+            echo "</div>";
         }
         ?>
     <?php else: ?>

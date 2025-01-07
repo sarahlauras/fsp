@@ -22,7 +22,7 @@
         <h1>Event</h1>
         
         <?php
-        echo "<a href='home.php'>Back</a>";
+        echo "<a class='btnPagination' href='home.php'>Back</a>";
         echo "<br>";
         $event = new Event();
         $totaldata = 0;
@@ -36,14 +36,6 @@
             $offset = 0;
         }
 
-        // if ($role == "admin") {
-        //     $res = $event->getAllEvent(null, $offset, $perhalaman);  // Username = null
-        //     $totaldata = $event->getTotalData();
-        // } else {
-        //     $username = $_SESSION['username'];
-        //     $res = $event->getAllEvent($username, $offset, $perhalaman);
-        //     $totaldata = $event->getTotalData($username);
-        // }
 
         if($role == 'member') {
             $res = $event->getUserTeams($member);
@@ -51,20 +43,11 @@
         else {
             $res = $event->getTeam($offset, $perhalaman);
         }
-        //$res = $event->getUserTeams($member);
-        ?>
-        <!-- <form method="POST" action="submit_event.php">
-            <label for="team">Pilih Team: </label>
-            <select name="team" id="team">
-                <option value="" disabled selected>Pilih Team</option>
-            </select>  
-            <input type="button" id="btnsubmit" value="Pilih"/>               -->
-        
-            <?php
+         
             echo "<form method='GET' action='esport_event.php'>";
-            echo "<label for='team'>Pilih Team: </label>";
+            echo "<label for='team'>Choose Team: </label>";
             echo "<select name='idteam' id='team'>";
-            echo "<option value='' disabled selected>Pilih Team</option>";
+            echo "<option value='' disabled selected>Choose Team</option>";
             while($row = $res->fetch_assoc()) {
                 $selected = "";
                 if (isset($_GET['idteam']) && $_GET['idteam'] == $row['idteam']) {
@@ -103,18 +86,18 @@
         echo "<thead>";
             if ($role == 'member') {
                 echo "<tr>
-                                <th>Nama Event</th>
-                                <th>Tgl. Event</th>
-                                <th>Deskripsi</th>
+                                <th>Event Name</th>
+                                <th>Event Date</th>
+                                <th>Description</th>
                                 <th>Team</th>
                             </tr>";
             } else {
                 echo "<tr>  
-                                <th>Nama Event</th>
-                                <th>Tgl. Event</th>
-                                <th>Deskripsi</th>
+                                <th>Event Name</th>
+                                <th>Event Date</th>
+                                <th>Description</th>
                                 <th>Team</th>
-                                <th>Aksi</th>
+                                <th>Action</th>
                             </tr>";
             }
         echo "</thead>";
@@ -125,20 +108,22 @@
 
             if ($role == 'member') {
                 echo "<tr>
-                            <td data-label='Nama Event'>" . $row['name'] . "</td>
-                            <td data-label='Tgl. Event'>" . $formatrilis . "</td>
-                            <td data-label='Deskripsi'>" . $row['description'] . "</td>
-                            <td data-label='Nama Team'>" . $row['namateam'] . "</td>
+                            <td><span class='label'>Event Name: </span>" . $row['name'] . "</td>
+                            <td><span class='label'>Event Date: </span>" . $formatrilis . "</td>
+                            <td><span class='label'>Description: </span>"  . $row['description'] . "</td>
+                            <td><span class='label'>Team: </span>" . $row['namateam'] . "</td>
                         </tr>";
             } else {
                 echo "<tr>
-                            <td data-label='Nama Event'>" . $row['name'] . "</td>
-                            <td data-label='Tgl. Event'>" . $formatrilis . "</td>
-                            <td data-label='Deskripsi'>" . $row['description'] . "</td>
-                            <td data-label='Nama Team'>" . $row['namateam'] . "</td>
-                            <td data-label='Aksi'>
-                            <a href='esport_editevent.php?idevent=" . $row['idevent'] . "'>Ubah</a>
-                            <a href='esport_deleteevent.php?idevent=" . $row['idevent'] . "' onclick='return confirm(\"Apakah Anda yakin ingin menghapus event ini?\");'>Hapus</a>
+                            <td><span class='label'>Event Name: </span>"  . $row['name'] . "</td>
+                            <td><span class='label'>Event Date:</span>"  . $formatrilis . "</td>
+                            <td><span class='label'>Description:</span>"  . $row['description'] . "</td>
+                            <td><span class='label'>Team: </span>"  . $row['namateam'] . "</td>
+                            <td><span class='label'>Action:</span>
+                            <div class='action'>
+                            <a href='esport_editevent.php?idevent=" . $row['idevent'] . "'>Change</a>
+                            <a href='esport_deleteevent.php?idevent=" . $row['idevent'] . "' onclick='return confirm(\"Are you sure you want to delete?\");'>Delete</a>
+                            </div>
                             </td>
                     </tr>";
             }
@@ -146,8 +131,9 @@
 
         echo "</table>";
         // paging
+        echo "<div class='pagination'>";
         $jumlahhalaman = ceil($totaldata / $perhalaman);
-        echo "<div>Total Data: ".$totaldata."</div>";
+        // echo "<div>Total Data: ".$totaldata."</div>";
         echo "<a href='esport_event.php?offset=0'>First</a>";
 
         for ($i = 1; $i <= $jumlahhalaman; $i++) {
@@ -172,6 +158,8 @@
         if ($role == 'admin') {
             echo "<a href='esport_insertevent.php?'>Insert Event</a>";
         }
+
+        echo "</div>";
         ?>
     </body>
 
