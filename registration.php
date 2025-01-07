@@ -25,6 +25,8 @@
         <input type="password" name="repassword" required>
 
         <input type="submit" value="Submit" name="btnSubmit">
+
+        <a href="login.php">Login</a>
     </form>
 </body>
 </html>
