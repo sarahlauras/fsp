@@ -1,11 +1,14 @@
 <html>
     <head>
         <title>Insert Game</title>
+        <link rel="stylesheet" type="text/css" href="sarahstyle.css">
 </head>
 <body>
     <?php
         require_once 'classgame.php';
         $game = new Game();
+
+        echo "<a href='esport_game.php'>Back</a>";
 
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {

@@ -1,12 +1,15 @@
 <html>
     <head>
         <title>Edit Game</title>
+        <link rel="stylesheet" type="text/css" href="sarahstyle.css">
 </head>
 <body>
     <?php
         require_once 'classgame.php';
         $game = new Game();
         
+        echo "<a href='team.php'>Back</a>";
+
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {
                 echo "Data berhasil ditambahkan.<br><br>";

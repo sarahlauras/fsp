@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Edit Achievement</title>
+    <link rel="stylesheet" type="text/css" href="sarahstyle.css">
 </head>
 <body>
     <?php

@@ -38,6 +38,7 @@
 <html>
     <head>
     <title>Event Teams</title>
+    <link rel="stylesheet" type="text/css" href="sarahstyle.css">
     </head>
     
     <body>

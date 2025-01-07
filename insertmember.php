@@ -2,6 +2,7 @@
 
 <head>
     <title>Insert Member</title>
+    <link rel="stylesheet" type="text/css" href="sarahstyle.css">
 </head>
 
 <body>

@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Insert Event</title>
+        <link rel="stylesheet" type="text/css" href="sarahstyle.css">
 </head>
 <body>
     <?php

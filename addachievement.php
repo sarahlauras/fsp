@@ -1,11 +1,14 @@
 <html>
     <head>
         <title>Insert Achievement</title>
+        <link rel="stylesheet" type="text/css" href="sarahstyle.css">
 </head>
 <body>
     <?php
         require_once 'classachievement.php';
         $achievement = new Achievement();
+
+        echo "<a href='achievement.php'>Back</a>";
 
         if(isset($_GET["result"])) {    
             if($_GET["result"] == "success") {
