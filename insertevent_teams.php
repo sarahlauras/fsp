@@ -11,35 +11,9 @@
 <html>
     <head>
     <title>Event Teams</title>
+    <link rel="stylesheet" type="text/css" href="sarahstyle_inserteventteams.css">
     </head>
-    <style>
-         table, th, td {
-                border: 1px solid #ddd;
-                border-collapse: collapse;
-        }
-
-        table {
-            width: 500px;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            color: #333;
-        }
-        th {
-                background-color: #0044cc; 
-                color: #fff; 
-                padding: 12px 15px;
-                text-align: left;
-                border-bottom: 2px solid #0033aa; 
-            }
-
-            td {
-                background-color: #f9f9f9; 
-                padding: 12px 15px;
-                border-bottom: 1px solid #ddd; 
-            }
-    </style>
+    
     <body>
         <form method="post" action="insertevent_teams_proses.php">
             <label for="event">Pilih Event dan Team</label>
