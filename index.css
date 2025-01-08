@@ -1,103 +1,199 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #E6E6FA; 
-            color: #4B0082; 
-            margin: 0px auto;
-            padding: 0;
-            line-height: 1.6;
-        }
-        body h1 {
-            text-align: center;
-        }
-        header {
-            background-color: #8A2BE2;
-            color: white;
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            margin-bottom: 60px;
-        }
-        header h1 {
-            font-size: 32px;
-            margin: 0;
-            flex-grow: 1;
-            text-align: left;
-        }
-        header a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 20px;
-        }
-        h3 {
-            font-size: 20px;
-            margin: 0;
-            text-align: center;
-        }
-        p {
-            width: 80%;
-            margin: 20px auto;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin: 20px auto;
-            background-color: #D8BFD8; 
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-        td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #9370DB;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        th {
-            background-color: #8A2BE2;
-            color: white;
-            font-weight: 600;
-            text-align: center;
-            padding: 12px;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #E6E6FA; 
+    color: #4B0082; 
+    margin: 0 auto;
+    padding: 0;
+    line-height: 1.6;
+}
 
-        tr:nth-child(even) {
-            background-color: #DDA0DD; 
-        }
+body h1 {
+    text-align: center;
+}
 
-        a.button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #8A2BE2;
-            color: white;
-            border-radius: 4px;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
-        }
+header {
+    background-color: #8A2BE2;
+    color: white;
+    display: flex;
+    flex-wrap: wrap; /* Membuat header responsif */
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 30px;
+}
 
-        a.button:hover {
-            background-color: #6A5ACD;
-        }
+header h1 {
+    font-size: 24px;
+    margin: 0;
+    flex-grow: 1;
+    text-align: left;
+}
 
-        a.btnactive {
-            background-color: white;
-            border: 2px solid #8e44ad;
-            color: #8e44ad;
-            border-radius: 5px;
-            padding: 10px 20px;
-        }
-    
+header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px;
+    padding: 8px 12px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+header a:hover {
+    background-color: #6A5ACD;
+    border-radius: 5px;
+}
+
+header a.btnactive {
+    background-color: white;
+    color: #8A2BE2;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 8px 12px;
+}
+
+h3 {
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+p {
+    width: 90%;
+    margin: 20px auto;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 16px;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #D8BFD8; 
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+td {
+    text-align: left;
+    border-bottom: 1px solid #9370DB;
+}
+
+th {
+    background-color: #8A2BE2;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #DDA0DD; 
+}
+
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8A2BE2;
+    color: white;
+    border-radius: 4px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+a.button:hover {
+    background-color: #6A5ACD;
+}
+
+/* Pagination container */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 20px auto;
+}
+
+.pagination a, .pagination strong {
+    padding: 8px 12px;
+    color: #4B0082;
+    text-decoration: none;
+    border: 1px solid #8A2BE2;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background-color: #8A2BE2;
+    color: white;
+}
+
+.pagination strong {
+    background-color: #E6E6FA;
+    color: #8A2BE2;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column; /* Header berubah menjadi vertikal */
+        align-items: flex-start;
+    }
+
+    header a {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    p {
+        width: 95%;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    header a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+}

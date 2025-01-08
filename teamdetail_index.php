@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Detail</title>
-    <link rel="stylesheet" type="text/css" href="styleteam.css">
+    <link rel="stylesheet" type="text/css" href="teamdetail_index.css">
 </head>
 <body>
     <a href="index.php">back</a>
@@ -15,7 +15,7 @@
     $team = new Team();
 
     $totaldata = $team->getTotalData();
-    $perhalaman = 4;
+    $perhalaman = 6;
     $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 
     $resteams = $team->getAllTeam($offset, $perhalaman);
