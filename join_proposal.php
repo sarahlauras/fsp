@@ -73,6 +73,7 @@ $role = $_SESSION["profile"];
             } 
         }
         else {
+            echo "<thead>";
             echo "
             <tr>
                 <th>Member</th>
@@ -80,6 +81,7 @@ $role = $_SESSION["profile"];
                 <th>Description</th>
                 <th>Status</th>
             </tr>";
+            echo "</thead>";
             while ($row = $res->fetch_assoc()) {
                 echo "<tr>
                     <td><span class='label'>Member: </span>". $row['fname'] . "</td>
