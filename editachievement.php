@@ -8,6 +8,8 @@
         require_once 'classachievement.php';
         $achievement = new Achievement(); 
         
+        echo "<a href='achievement.php'>Back</a>";
+
         if(isset($_GET["result"])) {
             if($_GET["result"] == "success") {
                 echo "Data berhasil ditambahkan.<br><br>";

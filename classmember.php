@@ -59,11 +59,11 @@
     
             return $this->mysqli->affected_rows;
         }
-        public function editMember($fname, $lname, $username, $password, $profile, $idmember) {
+        public function editMember($fname, $lname, $username, $profile, $idmember) {
             $stmt = $this->mysqli->prepare(
-                "UPDATE member SET fname=?, lname=?, username=?, password=?, profile=?
+                "UPDATE member SET fname=?, lname=?, username=?, profile=?
                 WHERE idmember=?");
-            $stmt->bind_param("sssssi", $fname, $lname, $username, $password, $profile, $idmember);
+            $stmt->bind_param("ssssi", $fname, $lname, $username, $profile, $idmember);
             $stmt->execute();
             $jumlah = $stmt->affected_rows;
             $stmt->close();

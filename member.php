@@ -61,8 +61,8 @@ $role = $_SESSION["profile"];
                 
                     echo "<td><span class='label'>Action: </span>
                     <div class='action'>
-                    <a href='esport_editmember.php?idmember=".$row['idmember']."'>Change</a>
-                    <a href='esport_deletemember.php?idmember=".$row['idmember']."' onclick='return confirm(\"Are you sure you want to delete?\");' >Delete</a>
+                    <a href='editmember.php?idmember=".$row['idmember']."'>Change</a>
+                    <a href='deletemember.php?idmember=".$row['idmember']."' onclick='return confirm(\"Are you sure you want to delete?\");' >Delete</a>
                     </div>
                     </td>
                     </tr>";

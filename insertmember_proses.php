@@ -3,14 +3,13 @@
     $member = new Member();
     if(isset($_POST['btnSubmit'])) { 
         extract($_POST);
-        if (isset($fname, $lname, $username, $password, $repassword, $profile)) {
+        if (isset($fname, $lname, $username, $password, $repassword)) {
             $arr_col = [
                 'fname' => $fname,
                 'lname' => $lname,
                 'username' => $username,
                 'password' => $password,
-                'repassword' => $repassword,
-                'profile' => $profile
+                'repassword' => $repassword
                 ];
             $last_id = $member->insertMember($arr_col);
             if ($last_id) {

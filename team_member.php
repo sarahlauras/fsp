@@ -47,8 +47,8 @@
 
             while($row = $res->fetch_assoc()){
                 echo "<tr>
-                    <td><span class='label'>Team Name: </span>".$row['fname']."</td>
-                    <td><span class='label'>Member: </span>".$row['name']."</td>
+                    <td><span class='label'>Team Name: </span>".$row['name']."</td>
+                    <td><span class='label'>Member: </span>".$row['fname']."</td>
                     <td><span class='label'>Description: </span>".$row['description']."</td>
                     <td><span class='label'>Action: </span>
                     <div class='action'>
@@ -63,7 +63,7 @@
             // paging
             echo "<div class='pagination'>";
             // echo "<div>Total Data: ".$totaldata."</div>";
-            echo "<a href='join_proposal.php?offset=0'>First</a>";
+            echo "<a href='team_member.php?offset=0'>First</a>";
             
             for($i = 1; $i <= $jumlahhalaman; $i++) {
                 $off = ($i-1) * $perhalaman;

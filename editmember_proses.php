@@ -4,8 +4,8 @@
 
     if($_POST['btnSubmit']) { 
         extract($_POST);
-        if (isset($fname, $lname, $username, $password, $profile, $idmember)) {
-            $jumlah = $member->editMember($fname, $lname, $username, $password,$profile, $idmember);
+        if (isset($fname, $lname, $username, $profile, $idmember)) {
+            $jumlah = $member->editMember($fname, $lname, $username,$profile, $idmember);
 
             if ($jumlah > 0) {
                 header("Location: editmember.php?idmember=$idmember&result=success");
