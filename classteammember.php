@@ -8,16 +8,35 @@ class TeamMember extends DBParent
         parent::__construct();
     }
 
-    public function getTeamMembersByTeam($idteam) {
+    public function getTeamMembersByTeam($idteam, $offset = null, $limit = null) {
         $sql = "SELECT m.fname, m.idmember
                 FROM team_members tm
                 INNER JOIN member m ON tm.idmember = m.idmember
                 WHERE tm.idteam = ?";
+        
+        // Menambahkan LIMIT dan OFFSET jika ada
+        if (!is_null($offset) && !is_null($limit)) {
+            $sql .= " LIMIT ? OFFSET ?";
+        }
+    
         $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param("i", $idteam);
+        
+        // Jika LIMIT dan OFFSET ada, bind semua parameter
+        if (!is_null($offset) && !is_null($limit)) {
+            $stmt->bind_param("iii", $idteam, $limit, $offset); // 'i' untuk idteam, limit, dan offset
+        } else {
+            $stmt->bind_param("i", $idteam); // hanya bind idteam jika limit dan offset tidak ada
+        }
+    
         $stmt->execute();
         return $stmt->get_result();
     }
+
+    public function getTotalDataByTeam($idteam){
+        $res = $this->getTeamMembersByTeam($idteam);
+        return $res->num_rows;
+    }
+    
 
     public function getTeamMembers($idmember = null, $idteam = null, $offset = null, $limit = null) {
         $sql = "SELECT tm.*, m.*, t.* FROM team_members tm INNER JOIN member m ON tm.idmember = m.idmember

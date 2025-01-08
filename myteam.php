@@ -26,12 +26,12 @@ $approvedTeams = $joinProposal->getApprovedTeams($idmember);
     <a class='btnPagination' href="home.php">Back</a><br><br>
 
     <?php if ($approvedTeams->num_rows > 0): ?>
-        <form method="POST" action="">
-            <label for="team">Pilih Team: </label>
+        <form method="GET" action="">
+            <label for="team">Choose Team: </label>
             <select name="team" id="team" onchange="this.form.submit()">
-                <option value="" disabled selected>Pilih Team</option>
+                <option value="" disabled selected>Choose Team</option>
                 <?php while($team = $approvedTeams->fetch_assoc()): ?>
-                    <option value="<?= $team['idteam'] ?>" <?= (isset($_POST['team']) && $_POST['team'] == $team['idteam']) ? 'selected' : '' ?>>
+                    <option value="<?= $team['idteam'] ?>" <?= (isset($_GET['team']) && $_GET['team'] == $team['idteam']) ? 'selected' : '' ?>>
                         <?= $team['name'] ?>
                     </option>
                 <?php endwhile; ?>
@@ -39,46 +39,56 @@ $approvedTeams = $joinProposal->getApprovedTeams($idmember);
         </form>
 
         <?php
-        if (isset($_POST['team'])) {
-            $idteam = $_POST['team'];
+        if (isset($_GET['team'])) {
+            $idteam = $_GET['team'];
             $totaldata = 0;
             $perhalaman = 4;       
             $currenthalaman = 1;
-            $teamMembers = $teamMember->getTeamMembersByTeam($idteam);
-            $totaldata = $teamMember ->getTotalData();
-            $jumlahhalaman = ceil($totaldata/$perhalaman);
 
-            // echo "<h2>Members of Team</h2>";
+            // Offset untuk pagination
+            if (isset($_GET['offset'])) {
+                $offset = $_GET['offset'];
+                $currenthalaman = ($_GET['offset'] / $perhalaman) + 1;
+            } else {
+                $offset = 0;
+            }
+
+            // Ambil total data anggota tim
+            $totaldata = $teamMember->getTotalDataByTeam($idteam);
+            $teamMembers = $teamMember->getTeamMembersByTeam($idteam, $offset, $perhalaman);
+
+            $jumlahhalaman = ceil($totaldata / $perhalaman);
+
             echo "<table border='1'>";
             echo "<thead>";
-            echo "<tr>
-                <th>Name</th>
-            </tr>";
+            echo "<tr><th>Name</th></tr>";
             echo "</thead>";
 
+            // Menampilkan anggota tim
             while ($member = $teamMembers->fetch_assoc()) {
                 $sedangLogin = "";
                 if ($member['idmember'] == $idmember) {
                     $sedangLogin = " (saya)";
                 }
-                echo "<tr>
-                    <td><span class='label'>Name: </span>" . $member['fname'] . $sedangLogin . "</td></tr>";
-            }            
+                echo "<tr><td>" . $member['fname'] . $sedangLogin . "</td></tr>";
+            }
 
             echo "</table>";
+
+            // Pagination
             echo "<div class='pagination'>";
-            echo "<a href='myteam.php?offset=0'>First</a>";
+            echo "<a href='myteam.php?offset=0&team=" . $_GET['team'] . "'>First</a>";
 
             for ($i = 1; $i <= $jumlahhalaman; $i++) {
                 $off = ($i - 1) * $perhalaman;
                 if ($currenthalaman == $i) {
-                    echo "<strong style='color:red'>$i</strong></a>";
+                    echo "<strong style='color:red'>$i</strong>";
                 } else {
-                    echo "<a href='myteam.php?offset=" . $off . "'>" . $i . "</a> ";
+                    echo "<a href='myteam.php?offset=" . $off . "&team=" . $_GET['team'] . "'>" . $i . "</a> ";
                 }
             }
             $lastOffset = ($jumlahhalaman - 1) * $perhalaman;
-            echo "<a href='myteam.php?offset=" . $lastOffset . "'>Last</a><br><br>";
+            echo "<a href='myteam.php?offset=" . $lastOffset . "&team=" . $_GET['team'] . "'>Last</a><br><br>";
             echo "</div>";
         }
         ?>
